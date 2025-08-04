@@ -102,62 +102,69 @@ const Services: React.FC = () => {
   const processSteps = [
     {
       step: "01",
-      title: "Upload Your Content",
+      title: "Upload Content",
       description: "Upload your research paper, dataset, or any academic content"
     },
     {
       step: "02",
       title: "Fill Metadata",
-      description: "Provide essential information about your research"
+      description: "Provide basic information about your research and authors"
     },
     {
       step: "03",
-      title: "Generate DOI",
-      description: "We create a unique Digital Object Identifier for your content"
+      title: "Review & Submit",
+      description: "Review the information and submit for DOI generation"
     },
     {
       step: "04",
-      title: "Global Access",
-      description: "Your research becomes discoverable worldwide"
+      title: "Get DOI",
+      description: "Receive your unique DOI identifier within minutes"
     }
   ];
 
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-primary-50 via-white to-secondary-50 section-padding">
-        <div className="container-custom">
+      <section className="bg-gradient-to-br from-green-50 via-green-100 to-emerald-50 section-padding relative overflow-hidden">
+        {/* Decorative gradient overlay */}
+        <div className="absolute inset-0 bg-gradient-to-br from-vedra-hunter/10 via-vedra-calpoly/15 to-emerald-400/10 z-0"></div>
+        <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-transparent via-green-200/20 to-transparent z-0"></div>
+        
+        <div className="container-custom relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             className="text-center max-w-4xl mx-auto"
           >
-            <h1 className="text-5xl lg:text-6xl font-bold text-gray-900 mb-6">
-              Our <span className="text-gradient">Services</span>
+            <h1 className="text-5xl lg:text-6xl font-bold text-vedra-night mb-6 font-ibm-plex">
+              DOI Services for <span className="text-gradient">Indian Research</span>
             </h1>
-            <p className="text-xl text-gray-600 leading-relaxed mb-8">
-              Comprehensive DOI indexing solutions for all types of research content. 
-              From individual researchers to large institutions, we have you covered.
+            <p className="text-xl text-vedra-night leading-relaxed mb-8 font-inter">
+              Comprehensive DOI generation and indexing services tailored for Indian researchers, 
+              institutions, and publishers. Make your research globally discoverable.
             </p>
           </motion.div>
         </div>
       </section>
 
-      {/* Service Types Tabs */}
-      <section className="bg-white section-padding">
-        <div className="container-custom">
+      {/* Service Types */}
+      <section className="bg-gradient-to-r from-green-50 via-vedra-floral to-emerald-50 section-padding relative overflow-hidden">
+        {/* Decorative elements */}
+        <div className="absolute inset-0 bg-gradient-to-br from-vedra-hunter/5 via-transparent to-vedra-calpoly/5 z-0"></div>
+        
+        <div className="container-custom relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="text-center mb-12"
+            className="text-center mb-16"
           >
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">
+            <h2 className="text-4xl font-bold text-vedra-night mb-4 font-ibm-plex">
               Choose Your Service Type
             </h2>
-            <p className="text-lg text-gray-600">
-              Select the service that best fits your needs and requirements
+            <p className="text-xl text-vedra-night max-w-3xl mx-auto font-inter">
+              We offer specialized DOI services for different types of users and organizations.
             </p>
           </motion.div>
 
@@ -166,186 +173,45 @@ const Services: React.FC = () => {
               <button
                 key={type.id}
                 onClick={() => setActiveTab(type.id)}
-                className={`flex items-center space-x-3 px-6 py-4 rounded-lg font-medium transition-all duration-200 ${
+                className={`px-6 py-3 rounded-lg font-medium transition-all duration-200 font-inter ${
                   activeTab === type.id
-                    ? 'bg-primary-600 text-white shadow-lg'
-                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                    ? 'bg-gradient-to-r from-vedra-hunter to-vedra-calpoly text-white shadow-lg transform scale-105'
+                    : 'bg-neutral-100 text-neutral-700 hover:bg-neutral-200 hover:shadow-md'
                 }`}
               >
-                {type.icon}
-                <span>{type.title}</span>
+                {type.title}
               </button>
             ))}
           </div>
 
-          {/* Tab Content */}
-          <motion.div
-            key={activeTab}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="bg-gray-50 rounded-2xl p-8"
-          >
-            {activeTab === 'individual' && (
-              <div className="grid lg:grid-cols-2 gap-8 items-center">
-                <div>
-                  <h3 className="text-2xl font-bold text-gray-900 mb-4">
-                    Individual Researcher Services
-                  </h3>
-                  <p className="text-gray-600 mb-6 leading-relaxed">
-                    Perfect for individual researchers, PhD students, and academicians who need 
-                    to make their research discoverable and citable worldwide.
-                  </p>
-                  <ul className="space-y-3">
-                    <li className="flex items-center space-x-3">
-                      <CheckCircle className="w-5 h-5 text-green-500" />
-                      <span>Single DOI generation for research papers</span>
-                    </li>
-                    <li className="flex items-center space-x-3">
-                      <CheckCircle className="w-5 h-5 text-green-500" />
-                      <span>Affordable pricing starting at ₹500</span>
-                    </li>
-                    <li className="flex items-center space-x-3">
-                      <CheckCircle className="w-5 h-5 text-green-500" />
-                      <span>Government-sponsored programs available</span>
-                    </li>
-                    <li className="flex items-center space-x-3">
-                      <CheckCircle className="w-5 h-5 text-green-500" />
-                      <span>Local support in Hindi & English</span>
-                    </li>
-                  </ul>
+          <div className="grid md:grid-cols-3 gap-8">
+            {serviceTypes.map((type, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                className={`card p-6 text-center transition-all duration-200 ${
+                  activeTab === type.id ? 'ring-2 ring-vedra-hunter shadow-xl' : ''
+                }`}
+              >
+                <div className="w-16 h-16 bg-gradient-to-br from-vedra-hunter to-vedra-calpoly rounded-full flex items-center justify-center mx-auto mb-4 text-white/90">
+                  {type.icon}
                 </div>
-                <div className="bg-white rounded-xl p-6 shadow-lg">
-                  <h4 className="font-semibold text-gray-900 mb-4">Quick Start</h4>
-                  <div className="space-y-4">
-                    <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                      <span className="text-sm">Upload Paper</span>
-                      <Upload className="w-4 h-4 text-gray-500" />
-                    </div>
-                    <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                      <span className="text-sm">Fill Details</span>
-                      <FileText className="w-4 h-4 text-gray-500" />
-                    </div>
-                    <div className="flex items-center justify-between p-3 bg-primary-50 rounded-lg border border-primary-200">
-                      <span className="text-sm text-primary-700">Get DOI</span>
-                      <Download className="w-4 h-4 text-primary-600" />
-                    </div>
-                  </div>
-                </div>
-              </div>
-            )}
-
-            {activeTab === 'institution' && (
-              <div className="grid lg:grid-cols-2 gap-8 items-center">
-                <div>
-                  <h3 className="text-2xl font-bold text-gray-900 mb-4">
-                    Institution & University Services
-                  </h3>
-                  <p className="text-gray-600 mb-6 leading-relaxed">
-                    Bulk DOI generation services for universities, research institutions, 
-                    and academic organizations with special pricing and dedicated support.
-                  </p>
-                  <ul className="space-y-3">
-                    <li className="flex items-center space-x-3">
-                      <CheckCircle className="w-5 h-5 text-green-500" />
-                      <span>Bulk DOI generation for dissertations</span>
-                    </li>
-                    <li className="flex items-center space-x-3">
-                      <CheckCircle className="w-5 h-5 text-green-500" />
-                      <span>Consortium membership options</span>
-                    </li>
-                    <li className="flex items-center space-x-3">
-                      <CheckCircle className="w-5 h-5 text-green-500" />
-                      <span>Quarterly billing and invoicing</span>
-                    </li>
-                    <li className="flex items-center space-x-3">
-                      <CheckCircle className="w-5 h-5 text-green-500" />
-                      <span>Dedicated account manager</span>
-                    </li>
-                  </ul>
-                </div>
-                <div className="bg-white rounded-xl p-6 shadow-lg">
-                  <h4 className="font-semibold text-gray-900 mb-4">Institution Benefits</h4>
-                  <div className="space-y-4">
-                    <div className="flex items-center justify-between">
-                      <span className="text-sm">Yearly Fee</span>
-                      <span className="font-semibold">₹60,000</span>
-                    </div>
-                    <div className="flex items-center justify-between">
-                      <span className="text-sm">DOI Fee</span>
-                      <span className="font-semibold">₹50/DOI</span>
-                    </div>
-                    <div className="flex items-center justify-between">
-                      <span className="text-sm">Bulk Discount</span>
-                      <span className="font-semibold text-green-600">Up to 40%</span>
-                    </div>
-                    <div className="flex items-center justify-between">
-                      <span className="text-sm">Support</span>
-                      <span className="font-semibold">24/7</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            )}
-
-            {activeTab === 'publisher' && (
-              <div className="grid lg:grid-cols-2 gap-8 items-center">
-                <div>
-                  <h3 className="text-2xl font-bold text-gray-900 mb-4">
-                    Publisher & Journal Services
-                  </h3>
-                  <p className="text-gray-600 mb-6 leading-relaxed">
-                    Professional DOI services for academic publishers, journals, and 
-                    research organizations with advanced features and API access.
-                  </p>
-                  <ul className="space-y-3">
-                    <li className="flex items-center space-x-3">
-                      <CheckCircle className="w-5 h-5 text-green-500" />
-                      <span>API integration for automated DOI generation</span>
-                    </li>
-                    <li className="flex items-center space-x-3">
-                      <CheckCircle className="w-5 h-5 text-green-500" />
-                      <span>Custom DOI prefixes</span>
-                    </li>
-                    <li className="flex items-center space-x-3">
-                      <CheckCircle className="w-5 h-5 text-green-500" />
-                      <span>Advanced metadata management</span>
-                    </li>
-                    <li className="flex items-center space-x-3">
-                      <CheckCircle className="w-5 h-5 text-green-500" />
-                      <span>White-label solutions available</span>
-                    </li>
-                  </ul>
-                </div>
-                <div className="bg-white rounded-xl p-6 shadow-lg">
-                  <h4 className="font-semibold text-gray-900 mb-4">Publisher Features</h4>
-                  <div className="space-y-4">
-                    <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                      <span className="text-sm">API Access</span>
-                      <span className="text-xs text-green-600">✓ Included</span>
-                    </div>
-                    <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                      <span className="text-sm">Custom Prefix</span>
-                      <span className="text-xs text-green-600">✓ Available</span>
-                    </div>
-                    <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                      <span className="text-sm">Bulk Processing</span>
-                      <span className="text-xs text-green-600">✓ Unlimited</span>
-                    </div>
-                    <div className="flex items-center justify-between p-3 bg-primary-50 rounded-lg border border-primary-200">
-                      <span className="text-sm text-primary-700">Priority Support</span>
-                      <span className="text-xs text-primary-600">✓ 24/7</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            )}
-          </motion.div>
+                <h3 className="text-xl font-semibold text-vedra-night mb-3 font-ibm-plex">
+                  {type.title}
+                </h3>
+                <p className="text-vedra-night leading-relaxed font-inter">
+                  {type.description}
+                </p>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </section>
 
       {/* Content Types */}
-      <section className="bg-gray-50 section-padding">
+      <section className="bg-neutral-50 section-padding">
         <div className="container-custom">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -353,11 +219,11 @@ const Services: React.FC = () => {
             transition={{ duration: 0.8 }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">
-              All Content Types Supported
+            <h2 className="text-4xl font-bold text-vedra-night mb-4 font-ibm-plex">
+              Supported Content Types
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              From research papers to multimedia content, we support all types of academic and research materials.
+            <p className="text-xl text-vedra-night max-w-3xl mx-auto font-inter">
+              We support a wide range of academic and research content for DOI generation.
             </p>
           </motion.div>
 
@@ -370,13 +236,13 @@ const Services: React.FC = () => {
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 className="card p-6 text-center"
               >
-                <div className="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4 text-primary-600">
+                <div className="w-16 h-16 bg-gradient-to-br from-vedra-hunter to-vedra-calpoly rounded-full flex items-center justify-center mx-auto mb-4 text-white/90">
                   {content.icon}
                 </div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-3">
+                <h3 className="text-xl font-semibold text-vedra-night mb-3 font-ibm-plex">
                   {content.title}
                 </h3>
-                <p className="text-gray-600 leading-relaxed">
+                <p className="text-vedra-night leading-relaxed font-inter">
                   {content.description}
                 </p>
               </motion.div>
@@ -386,18 +252,21 @@ const Services: React.FC = () => {
       </section>
 
       {/* Process Section */}
-      <section className="bg-white section-padding">
-        <div className="container-custom">
+      <section className="bg-gradient-to-br from-green-50 via-vedra-floral to-emerald-50 section-padding relative overflow-hidden">
+        {/* Decorative gradient overlay */}
+        <div className="absolute inset-0 bg-gradient-to-br from-vedra-hunter/8 via-transparent to-vedra-calpoly/8 z-0"></div>
+        
+        <div className="container-custom relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">
-              How It Works
+            <h2 className="text-4xl font-bold text-vedra-night mb-4 font-ibm-plex">
+              Simple 4-Step Process
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-xl text-vedra-night max-w-3xl mx-auto font-inter">
               Simple, fast, and secure - get your DOI in just a few steps
             </p>
           </motion.div>
@@ -412,18 +281,18 @@ const Services: React.FC = () => {
                 className="relative"
               >
                 <div className="card p-6 text-center">
-                  <div className="text-3xl font-bold text-gradient mb-4">
+                  <div className="text-3xl font-bold text-gradient mb-4 font-ibm-plex">
                     {step.step}
                   </div>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-3">
+                  <h3 className="text-lg font-semibold text-vedra-night mb-3 font-ibm-plex">
                     {step.title}
                   </h3>
-                  <p className="text-gray-600 text-sm leading-relaxed">
+                  <p className="text-vedra-night text-sm leading-relaxed font-inter">
                     {step.description}
                   </p>
                 </div>
                 {index < processSteps.length - 1 && (
-                  <div className="hidden lg:block absolute top-1/2 -right-4 w-8 h-0.5 bg-primary-200 transform -translate-y-1/2"></div>
+                  <div className="hidden lg:block absolute top-1/2 -right-4 w-8 h-0.5 bg-gradient-to-r from-vedra-hunter to-vedra-calpoly transform -translate-y-1/2 z-0"></div>
                 )}
               </motion.div>
             ))}
@@ -432,7 +301,7 @@ const Services: React.FC = () => {
       </section>
 
       {/* Features Section */}
-      <section className="bg-gray-50 section-padding">
+      <section className="bg-neutral-50 section-padding">
         <div className="container-custom">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -440,10 +309,10 @@ const Services: React.FC = () => {
             transition={{ duration: 0.8 }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">
+            <h2 className="text-4xl font-bold text-vedra-night mb-4 font-ibm-plex">
               Why Choose Our Services?
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-xl text-vedra-night max-w-3xl mx-auto font-inter">
               We provide the best DOI services with features designed specifically for Indian researchers.
             </p>
           </motion.div>
@@ -457,13 +326,13 @@ const Services: React.FC = () => {
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 className="card p-6 text-center"
               >
-                <div className="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4 text-primary-600">
+                <div className="w-16 h-16 bg-gradient-to-br from-vedra-hunter to-vedra-calpoly rounded-full flex items-center justify-center mx-auto mb-4 text-white/90">
                   {feature.icon}
                 </div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-3">
+                <h3 className="text-xl font-semibold text-vedra-night mb-3 font-ibm-plex">
                   {feature.title}
                 </h3>
-                <p className="text-gray-600 leading-relaxed">
+                <p className="text-vedra-night leading-relaxed font-inter">
                   {feature.description}
                 </p>
               </motion.div>
@@ -473,7 +342,7 @@ const Services: React.FC = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="bg-gradient-to-r from-primary-600 to-primary-800 section-padding">
+      <section className="bg-gradient-to-r from-vedra-hunter to-vedra-calpoly section-padding">
         <div className="container-custom text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -481,18 +350,17 @@ const Services: React.FC = () => {
             transition={{ duration: 0.8 }}
             className="max-w-3xl mx-auto"
           >
-            <h2 className="text-4xl font-bold text-white mb-6">
+            <h2 className="text-4xl font-bold text-white/90 mb-6 font-ibm-plex">
               Ready to Get Started?
             </h2>
-            <p className="text-xl text-primary-100 mb-8">
-              Join thousands of researchers who are already using Vedra to make their work globally discoverable.
+            <p className="text-xl text-white/80 mb-8 font-inter">
+              Join thousands of researchers who are already using mVEDRA to make their work globally discoverable.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="bg-white text-primary-600 hover:bg-gray-100 font-semibold py-3 px-8 rounded-lg transition-all duration-200 transform hover:scale-105 inline-flex items-center justify-center">
+              <button className="border-2 border-white text-white hover:bg-white hover:text-vedra-hunter font-semibold py-3 px-8 rounded-lg transition-all duration-200 font-inter">
                 Start Your DOI Journey
-                <ArrowRight className="ml-2 w-5 h-5" />
               </button>
-              <button className="border-2 border-white text-white hover:bg-white hover:text-primary-600 font-semibold py-3 px-8 rounded-lg transition-all duration-200">
+              <button className="border-2 border-white text-white hover:bg-white hover:text-vedra-hunter font-semibold py-3 px-8 rounded-lg transition-all duration-200 font-inter">
                 View Pricing
               </button>
             </div>

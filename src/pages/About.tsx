@@ -41,7 +41,7 @@ const About: React.FC = () => {
     {
       year: "2024",
       title: "Company Founded",
-      description: "Vedra established with the vision to democratize DOI services in India."
+      description: "mVEDRA established with the vision to democratize DOI services in India."
     },
     {
       year: "2024",
@@ -62,26 +62,29 @@ const About: React.FC = () => {
 
   const team = [
     {
-      name: "Dr. Rajesh Kumar",
-      role: "Founder & CEO",
-      description: "Former research director with 15+ years in academic publishing."
+      name: "Ajeant Sharma",
+      role: "CEO",
+      description: "Leading mVEDRA's mission to democratize research indexing in India.",
+      photo: "/ajeant-ceo.jpg"
     },
     {
-      name: "Priya Sharma",
+      name: "Jeet Bhatkar",
       role: "CTO",
-      description: "Technology expert specializing in digital archiving and indexing systems."
+      description: "Technology expert specializing in digital archiving and indexing systems.",
+      photo: "/jeet-cto.jpeg"
     },
     {
-      name: "Amit Patel",
-      role: "Head of Operations",
-      description: "Experienced in managing large-scale academic service operations."
+      name: "Umang Agarwal",
+      role: "CFO",
+      description: "Managing financial operations and strategic partnerships for sustainable growth.",
+      photo: null
     }
   ];
 
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-primary-50 via-white to-secondary-50 section-padding">
+      <section className="bg-gradient-to-br from-primary-50 via-vedra-floral to-secondary-50 section-padding">
         <div className="container-custom">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -89,16 +92,16 @@ const About: React.FC = () => {
             transition={{ duration: 0.8 }}
             className="text-center max-w-4xl mx-auto"
           >
-            <h1 className="text-5xl lg:text-6xl font-bold text-gray-900 mb-6">
-              About <span className="text-gradient">Vedra</span>
+            <h1 className="text-5xl lg:text-6xl font-bold text-vedra-night mb-6 font-ibm-plex">
+              About <span className="text-gradient">mVEDRA</span>
             </h1>
-            <p className="text-xl text-gray-600 leading-relaxed mb-8">
+            <p className="text-xl text-vedra-night leading-relaxed mb-8 font-inter">
               We are on a mission to democratize research indexing in India, making DOI services 
               accessible, affordable, and locally supported for every researcher and institution.
             </p>
-            <div className="flex items-center justify-center space-x-8 text-sm text-gray-600">
+            <div className="flex items-center justify-center space-x-8 text-sm text-neutral-600 font-inter">
               <div className="flex items-center space-x-2">
-                <CheckCircle className="w-5 h-5 text-green-500" />
+                <CheckCircle className="w-5 h-5 text-vedra-calpoly" />
                 <span>Made in India</span>
               </div>
               <div className="flex items-center space-x-2">
@@ -115,7 +118,7 @@ const About: React.FC = () => {
       </section>
 
       {/* Mission & Vision */}
-      <section className="bg-white section-padding">
+      <section className="bg-vedra-floral section-padding">
         <div className="container-custom">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <motion.div
@@ -126,10 +129,10 @@ const About: React.FC = () => {
               <div className="space-y-8">
                 <div>
                   <div className="flex items-center space-x-3 mb-4">
-                    <Target className="w-8 h-8 text-primary-600" />
-                    <h2 className="text-3xl font-bold text-gray-900">Our Mission</h2>
+                    <Target className="w-8 h-8 text-vedra-hunter" />
+                    <h2 className="text-3xl font-bold text-vedra-night font-ibm-plex">Our Mission</h2>
                   </div>
-                  <p className="text-lg text-gray-600 leading-relaxed">
+                  <p className="text-lg text-vedra-night leading-relaxed font-inter">
                     To create an affordable and globally accessible system for indexing and archiving 
                     research data for the Indian population, eliminating the dependency on expensive 
                     foreign vendors while maintaining international standards.
@@ -138,10 +141,10 @@ const About: React.FC = () => {
 
                 <div>
                   <div className="flex items-center space-x-3 mb-4">
-                    <Eye className="w-8 h-8 text-primary-600" />
-                    <h2 className="text-3xl font-bold text-gray-900">Our Vision</h2>
+                    <Eye className="w-8 h-8 text-vedra-hunter" />
+                    <h2 className="text-3xl font-bold text-vedra-night font-ibm-plex">Our Vision</h2>
                   </div>
-                  <p className="text-lg text-gray-600 leading-relaxed">
+                  <p className="text-lg text-vedra-night leading-relaxed font-inter">
                     To become the leading DOI service provider in India, empowering researchers 
                     and institutions to make their work discoverable worldwide while building a 
                     robust ecosystem for Indian academic excellence.
@@ -156,40 +159,40 @@ const About: React.FC = () => {
               transition={{ duration: 0.8, delay: 0.2 }}
               className="relative"
             >
-              <div className="bg-gradient-to-br from-primary-600 to-primary-800 rounded-2xl p-8 text-white">
+              <div className="bg-vedra-hunter rounded-2xl p-8 text-white">
                 <div className="space-y-6">
-                  <h3 className="text-2xl font-bold">The Problem We Solve</h3>
+                  <h3 className="text-2xl font-bold font-ibm-plex">The Problem We Solve</h3>
                   
                   <div className="space-y-4">
                     <div className="flex items-start space-x-3">
                       <div className="w-2 h-2 bg-white rounded-full mt-2 flex-shrink-0"></div>
                       <div>
-                        <h4 className="font-semibold">High Costs</h4>
-                        <p className="text-primary-100 text-sm">Foreign DOI services are expensive and charge in USD</p>
+                        <h4 className="font-semibold font-inter">High Costs</h4>
+                        <p className="text-white/80 text-sm font-inter">Foreign DOI services are expensive and charge in USD</p>
                       </div>
                     </div>
                     
                     <div className="flex items-start space-x-3">
                       <div className="w-2 h-2 bg-white rounded-full mt-2 flex-shrink-0"></div>
                       <div>
-                        <h4 className="font-semibold">Language Barriers</h4>
-                        <p className="text-primary-100 text-sm">Limited support in local languages</p>
+                        <h4 className="font-semibold font-inter">Language Barriers</h4>
+                        <p className="text-white/80 text-sm font-inter">Limited support in local languages</p>
                       </div>
                     </div>
                     
                     <div className="flex items-start space-x-3">
                       <div className="w-2 h-2 bg-white rounded-full mt-2 flex-shrink-0"></div>
                       <div>
-                        <h4 className="font-semibold">Time Zone Issues</h4>
-                        <p className="text-primary-100 text-sm">Customer support in different time zones</p>
+                        <h4 className="font-semibold font-inter">Time Zone Issues</h4>
+                        <p className="text-white/80 text-sm font-inter">Customer support in different time zones</p>
                       </div>
                     </div>
                     
                     <div className="flex items-start space-x-3">
                       <div className="w-2 h-2 bg-white rounded-full mt-2 flex-shrink-0"></div>
                       <div>
-                        <h4 className="font-semibold">Limited Accessibility</h4>
-                        <p className="text-primary-100 text-sm">Only 10,000 out of 50,000 researchers have DOI-compliant research</p>
+                        <h4 className="font-semibold font-inter">Limited Accessibility</h4>
+                        <p className="text-white/80 text-sm font-inter">Only 10,000 out of 50,000 researchers have DOI-compliant research</p>
                       </div>
                     </div>
                   </div>
@@ -201,7 +204,7 @@ const About: React.FC = () => {
       </section>
 
       {/* Values Section */}
-      <section className="bg-gray-50 section-padding">
+      <section className="bg-neutral-50 section-padding">
         <div className="container-custom">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -209,10 +212,10 @@ const About: React.FC = () => {
             transition={{ duration: 0.8 }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">
+            <h2 className="text-4xl font-bold text-vedra-night mb-4 font-ibm-plex">
               Our Core Values
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-xl text-vedra-night max-w-3xl mx-auto font-inter">
               These principles guide everything we do and shape our commitment to the Indian research community.
             </p>
           </motion.div>
@@ -226,13 +229,13 @@ const About: React.FC = () => {
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 className="card p-6 text-center"
               >
-                <div className="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4 text-primary-600">
+                <div className="w-16 h-16 bg-gradient-to-br from-vedra-hunter to-vedra-calpoly rounded-full flex items-center justify-center mx-auto mb-4 text-white/90">
                   {value.icon}
                 </div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-3">
+                <h3 className="text-xl font-semibold text-vedra-night mb-3 font-ibm-plex">
                   {value.title}
                 </h3>
-                <p className="text-gray-600 leading-relaxed">
+                <p className="text-vedra-night leading-relaxed font-inter">
                   {value.description}
                 </p>
               </motion.div>
@@ -242,7 +245,7 @@ const About: React.FC = () => {
       </section>
 
       {/* Journey Section */}
-      <section className="bg-white section-padding">
+      <section className="bg-vedra-floral section-padding">
         <div className="container-custom">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -250,10 +253,10 @@ const About: React.FC = () => {
             transition={{ duration: 0.8 }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">
+            <h2 className="text-4xl font-bold text-vedra-night mb-4 font-ibm-plex">
               Our Journey
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-xl text-vedra-night max-w-3xl mx-auto font-inter">
               From concept to reality, here's how we're building the future of Indian research indexing.
             </p>
           </motion.div>
@@ -268,18 +271,18 @@ const About: React.FC = () => {
                 className="relative"
               >
                 <div className="card p-6 text-center">
-                  <div className="text-2xl font-bold text-gradient mb-3">
+                  <div className="text-2xl font-bold text-gradient mb-3 font-ibm-plex">
                     {milestone.year}
                   </div>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-3">
+                  <h3 className="text-lg font-semibold text-vedra-night mb-3 font-ibm-plex">
                     {milestone.title}
                   </h3>
-                  <p className="text-gray-600 text-sm leading-relaxed">
+                  <p className="text-vedra-night text-sm leading-relaxed font-inter">
                     {milestone.description}
                   </p>
                 </div>
                 {index < milestones.length - 1 && (
-                  <div className="hidden lg:block absolute top-1/2 -right-4 w-8 h-0.5 bg-primary-200 transform -translate-y-1/2"></div>
+                  <div className="hidden lg:block absolute top-1/2 -right-4 w-8 h-0.5 bg-primary-200 transform -translate-y-1/2 z-0"></div>
                 )}
               </motion.div>
             ))}
@@ -288,7 +291,7 @@ const About: React.FC = () => {
       </section>
 
       {/* Team Section */}
-      <section className="bg-gray-50 section-padding">
+      <section className="bg-neutral-50 section-padding">
         <div className="container-custom">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -296,10 +299,10 @@ const About: React.FC = () => {
             transition={{ duration: 0.8 }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">
+            <h2 className="text-4xl font-bold text-vedra-night mb-4 font-ibm-plex">
               Meet Our Team
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-xl text-vedra-night max-w-3xl mx-auto font-inter">
               Passionate individuals dedicated to revolutionizing research indexing in India.
             </p>
           </motion.div>
@@ -313,16 +316,24 @@ const About: React.FC = () => {
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 className="card p-6 text-center"
               >
-                <div className="w-20 h-20 bg-gradient-to-r from-primary-600 to-primary-800 rounded-full mx-auto mb-4 flex items-center justify-center">
-                  <Users className="w-10 h-10 text-white" />
+                <div className="w-20 h-20 bg-vedra-hunter rounded-full mx-auto mb-4 flex items-center justify-center overflow-hidden">
+                  {member.photo ? (
+                    <img 
+                      src={member.photo} 
+                      alt={member.name}
+                      className="w-full h-full object-cover rounded-full"
+                    />
+                  ) : (
+                    <Users className="w-10 h-10 text-white" />
+                  )}
                 </div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                <h3 className="text-xl font-semibold text-vedra-night mb-2 font-ibm-plex">
                   {member.name}
                 </h3>
-                <p className="text-primary-600 font-medium mb-3">
+                <p className="text-vedra-hunter font-medium mb-3 font-inter">
                   {member.role}
                 </p>
-                <p className="text-gray-600 text-sm leading-relaxed">
+                <p className="text-vedra-night text-sm leading-relaxed font-inter">
                   {member.description}
                 </p>
               </motion.div>
@@ -332,7 +343,7 @@ const About: React.FC = () => {
       </section>
 
       {/* Impact Section */}
-      <section className="bg-gradient-to-r from-primary-600 to-primary-800 section-padding">
+      <section className="bg-gradient-to-r from-vedra-hunter to-vedra-calpoly section-padding">
         <div className="container-custom text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -340,30 +351,30 @@ const About: React.FC = () => {
             transition={{ duration: 0.8 }}
             className="max-w-4xl mx-auto"
           >
-            <h2 className="text-4xl font-bold text-white mb-6">
+            <h2 className="text-4xl font-bold text-white/90 mb-6 font-ibm-plex">
               Our Impact on Indian Research
             </h2>
-            <p className="text-xl text-primary-100 mb-12">
+            <p className="text-xl text-white/80 mb-12 font-inter">
               We're committed to transforming the landscape of research indexing in India, 
               making it more accessible, affordable, and globally connected.
             </p>
             
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
               <div className="text-center">
-                <div className="text-3xl lg:text-4xl font-bold text-white mb-2">₹2.5L+</div>
-                <div className="text-primary-100">Cost Savings</div>
+                <div className="text-3xl lg:text-4xl font-bold text-white/90 mb-2 font-ibm-plex">₹2.5L+</div>
+                <div className="text-white/70 font-inter">Cost Savings</div>
               </div>
               <div className="text-center">
-                <div className="text-3xl lg:text-4xl font-bold text-white mb-2">1000+</div>
-                <div className="text-primary-100">Researchers Served</div>
+                <div className="text-3xl lg:text-4xl font-bold text-white/90 mb-2 font-ibm-plex">1000+</div>
+                <div className="text-white/70 font-inter">Researchers Served</div>
               </div>
               <div className="text-center">
-                <div className="text-3xl lg:text-4xl font-bold text-white mb-2">50+</div>
-                <div className="text-primary-100">Institutions</div>
+                <div className="text-3xl lg:text-4xl font-bold text-white/90 mb-2 font-ibm-plex">50+</div>
+                <div className="text-white/70 font-inter">Institutions</div>
               </div>
               <div className="text-center">
-                <div className="text-3xl lg:text-4xl font-bold text-white mb-2">98%</div>
-                <div className="text-primary-100">Satisfaction Rate</div>
+                <div className="text-3xl lg:text-4xl font-bold text-white/90 mb-2 font-ibm-plex">98%</div>
+                <div className="text-white/70 font-inter">Satisfaction Rate</div>
               </div>
             </div>
           </motion.div>

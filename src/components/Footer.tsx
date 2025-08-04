@@ -4,29 +4,23 @@ import { BookOpen, Mail, Phone, MapPin, Twitter, Linkedin, Facebook } from 'luci
 
 const Footer: React.FC = () => {
   return (
-    <footer className="bg-gray-900 text-white">
+    <footer className="bg-vedra-night text-vedra-floral text-white/90">
       <div className="container-custom section-padding">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Company Info */}
           <div className="space-y-4">
-            <Link to="/" className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-gradient-to-r from-primary-600 to-primary-800 rounded-lg flex items-center justify-center">
-                <BookOpen className="w-5 h-5 text-white" />
-              </div>
-              <span className="text-xl font-bold">Vedra</span>
-            </Link>
-            <p className="text-gray-400 text-sm leading-relaxed">
+            <p className="text-vedra-floral text-white/90 text-sm leading-relaxed font-inter">
               Empowering Indian researchers with affordable and globally accessible DOI indexing solutions. 
               Making research discoverable worldwide.
             </p>
             <div className="flex space-x-4">
-              <a href="#" className="text-gray-400 hover:text-primary-400 transition-colors">
+              <a href="#" className="text-vedra-floral text-white/90 hover:text-vedra-silver transition-colors">
                 <Twitter className="w-5 h-5" />
               </a>
-              <a href="#" className="text-gray-400 hover:text-primary-400 transition-colors">
+              <a href="#" className="text-vedra-floral text-white/90 hover:text-vedra-silver transition-colors">
                 <Linkedin className="w-5 h-5" />
               </a>
-              <a href="#" className="text-gray-400 hover:text-primary-400 transition-colors">
+              <a href="#" className="text-vedra-floral text-white/90 hover:text-vedra-silver transition-colors">
                 <Facebook className="w-5 h-5" />
               </a>
             </div>
@@ -34,25 +28,25 @@ const Footer: React.FC = () => {
 
           {/* Quick Links */}
           <div className="space-y-4">
-            <h3 className="text-lg font-semibold">Quick Links</h3>
+            <h3 className="text-lg font-semibold font-ibm-plex text-white/90">Quick Links</h3>
             <ul className="space-y-2">
               <li>
-                <Link to="/about" className="text-gray-400 hover:text-white transition-colors">
+                <Link to="/about" className="text-vedra-floral text-white/90 hover:text-vedra-silver transition-colors font-inter">
                   About Us
                 </Link>
               </li>
               <li>
-                <Link to="/services" className="text-gray-400 hover:text-white transition-colors">
+                <Link to="/services" className="text-vedra-floral text-white/90 hover:text-vedra-silver transition-colors font-inter">
                   Services
                 </Link>
               </li>
               <li>
-                <Link to="/pricing" className="text-gray-400 hover:text-white transition-colors">
+                <Link to="/pricing" className="text-vedra-floral text-white/90 hover:text-vedra-silver transition-colors font-inter">
                   Pricing
                 </Link>
               </li>
               <li>
-                <Link to="/contact" className="text-gray-400 hover:text-white transition-colors">
+                <Link to="/contact" className="text-vedra-floral text-white/90 hover:text-vedra-silver transition-colors font-inter">
                   Contact
                 </Link>
               </li>
@@ -61,25 +55,25 @@ const Footer: React.FC = () => {
 
           {/* Services */}
           <div className="space-y-4">
-            <h3 className="text-lg font-semibold">Services</h3>
+            <h3 className="text-lg font-semibold font-ibm-plex text-white/90">Services</h3>
             <ul className="space-y-2">
               <li>
-                <Link to="/services" className="text-gray-400 hover:text-white transition-colors">
+                <Link to="/services" className="text-vedra-floral text-white/90 hover:text-vedra-silver transition-colors font-inter">
                   DOI Generation
                 </Link>
               </li>
               <li>
-                <Link to="/services" className="text-gray-400 hover:text-white transition-colors">
+                <Link to="/services" className="text-vedra-floral text-white/90 hover:text-vedra-silver transition-colors font-inter">
                   Research Indexing
                 </Link>
               </li>
               <li>
-                <Link to="/services" className="text-gray-400 hover:text-white transition-colors">
+                <Link to="/services" className="text-vedra-floral text-white/90 hover:text-vedra-silver transition-colors font-inter">
                   Academic Publishing
                 </Link>
               </li>
               <li>
-                <Link to="/services" className="text-gray-400 hover:text-white transition-colors">
+                <Link to="/services" className="text-vedra-floral text-white/90 hover:text-vedra-silver transition-colors font-inter">
                   Digital Archiving
                 </Link>
               </li>
@@ -88,38 +82,30 @@ const Footer: React.FC = () => {
 
           {/* Contact Info */}
           <div className="space-y-4">
-            <h3 className="text-lg font-semibold">Contact Info</h3>
+            <h3 className="text-lg font-semibold font-ibm-plex text-white/90">Contact Info</h3>
             <div className="space-y-3">
               <div className="flex items-center space-x-3">
-                <Mail className="w-5 h-5 text-primary-400" />
-                <span className="text-gray-400 text-sm">info@vedra.in</span>
-              </div>
-              <div className="flex items-center space-x-3">
-                <Phone className="w-5 h-5 text-primary-400" />
-                <span className="text-gray-400 text-sm">+91 98765 43210</span>
-              </div>
-              <div className="flex items-center space-x-3">
-                <MapPin className="w-5 h-5 text-primary-400" />
-                <span className="text-gray-400 text-sm">New Delhi, India</span>
+                <Mail className="w-5 h-5 text-vedra-calpoly" />
+                <span className="text-vedra-floral text-white/90 text-sm font-inter">contact@mvedra.com</span>
               </div>
             </div>
           </div>
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-gray-800 mt-12 pt-8">
+        <div className="border-t border-neutral-700 mt-12 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-            <p className="text-gray-400 text-sm">
-              © 2024 Vedra. All rights reserved.
+            <p className="text-vedra-floral text-white/90 text-sm font-inter">
+              © 2024 mVEDRA. All rights reserved.
             </p>
             <div className="flex space-x-6 text-sm">
-              <Link to="/privacy" className="text-gray-400 hover:text-white transition-colors">
+              <Link to="/privacy" className="text-vedra-floral text-white/90 hover:text-vedra-silver transition-colors font-inter">
                 Privacy Policy
               </Link>
-              <Link to="/terms" className="text-gray-400 hover:text-white transition-colors">
+              <Link to="/terms" className="text-vedra-floral text-white/90 hover:text-vedra-silver transition-colors font-inter">
                 Terms of Service
               </Link>
-              <Link to="/cookies" className="text-gray-400 hover:text-white transition-colors">
+              <Link to="/cookies" className="text-vedra-floral text-white/90 hover:text-vedra-silver transition-colors font-inter">
                 Cookie Policy
               </Link>
             </div>

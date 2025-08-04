@@ -19,95 +19,40 @@ const Pricing: React.FC = () => {
 
   const plans = [
     {
-      name: "Individual",
-      icon: <Users className="w-8 h-8" />,
-      description: "Perfect for individual researchers and academicians",
-      monthlyPrice: 500,
-      yearlyPrice: 5000,
-      features: [
-        "Single DOI generation",
-        "Basic metadata support",
-        "Email support",
-        "Standard processing time",
-        "GST compliant invoicing",
-        "Payment in INR"
-      ],
-      popular: false
-    },
-    {
       name: "Institution",
       icon: <Building className="w-8 h-8" />,
       description: "For universities and research institutions",
-      monthlyPrice: 5000,
-      yearlyPrice: 60000,
       features: [
-        "Bulk DOI generation",
-        "Advanced metadata support",
-        "Priority support",
-        "Fast processing time",
-        "Quarterly billing",
-        "Dedicated account manager",
+        "Bulk DOIs",
+        "Full metadata support",
+        "Priority Support",
+        "Quick Processing Time",
+        "Monthly & Quarterly Billing",
+        "Dedicated AM",
         "Custom DOI prefixes",
-        "API access"
+        "Custom integrations"
       ],
-      popular: true
+      popular: true,
+      color: "from-vedra-hunter to-vedra-calpoly",
+      bgColor: "from-green-50 to-emerald-50"
     },
     {
       name: "Publisher",
       icon: <BookOpen className="w-8 h-8" />,
       description: "For academic publishers and journals",
-      monthlyPrice: 10000,
-      yearlyPrice: 120000,
       features: [
-        "Unlimited DOI generation",
-        "Full metadata support",
-        "24/7 priority support",
-        "Instant processing",
-        "Custom integrations",
-        "White-label solutions",
-        "Advanced analytics",
-        "Dedicated support team"
+        "Unlimited DOIs",
+        "Advanced metadata support",
+        "Priority Support",
+        "Instant Processing Time",
+        "Pay per usage",
+        "Dedicated support team",
+        "Custom DOI prefixes",
+        "API access"
       ],
-      popular: false
-    }
-  ];
-
-  const comparisonFeatures = [
-    {
-      feature: "DOI Generation",
-      individual: "Single",
-      institution: "Bulk",
-      publisher: "Unlimited"
-    },
-    {
-      feature: "Processing Time",
-      individual: "24 hours",
-      institution: "4 hours",
-      publisher: "Instant"
-    },
-    {
-      feature: "Support",
-      individual: "Email",
-      institution: "Priority",
-      publisher: "24/7 Dedicated"
-    },
-    {
-      feature: "API Access",
-      individual: "✗",
-      institution: "✓",
-      publisher: "✓"
-    },
-    {
-      feature: "Custom Prefix",
-      individual: "✗",
-      institution: "✓",
-      publisher: "✓"
-    },
-    {
-      feature: "Bulk Upload",
-      individual: "✗",
-      institution: "✓",
-      publisher: "✓"
+      popular: false,
+      color: "from-vedra-hunter to-vedra-calpoly",
+      bgColor: "from-green-50 to-emerald-50"
     }
   ];
 
@@ -146,36 +91,11 @@ const Pricing: React.FC = () => {
             className="text-center max-w-4xl mx-auto"
           >
             <h1 className="text-5xl lg:text-6xl font-bold text-gray-900 mb-6">
-              Simple & <span className="text-gradient">Transparent</span> Pricing
+              <span className="text-gradient">Choose Your Plan</span>
             </h1>
             <p className="text-xl text-gray-600 leading-relaxed mb-8">
-              Choose the plan that best fits your needs. All plans include GST and are billed in INR.
+              Select the plan that best fits your organization's needs. Each plan serves different customer bases with specialized features.
             </p>
-
-            {/* Billing Toggle */}
-            <div className="flex items-center justify-center space-x-4 mb-8">
-              <span className={`text-sm font-medium ${billingCycle === 'monthly' ? 'text-gray-900' : 'text-gray-500'}`}>
-                Monthly
-              </span>
-              <button
-                onClick={() => setBillingCycle(billingCycle === 'monthly' ? 'yearly' : 'monthly')}
-                className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
-                  billingCycle === 'yearly' ? 'bg-primary-600' : 'bg-gray-200'
-                }`}
-              >
-                <span
-                  className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
-                    billingCycle === 'yearly' ? 'translate-x-6' : 'translate-x-1'
-                  }`}
-                />
-              </button>
-              <span className={`text-sm font-medium ${billingCycle === 'yearly' ? 'text-gray-900' : 'text-gray-500'}`}>
-                Yearly
-                <span className="ml-1 text-xs bg-green-100 text-green-800 px-2 py-1 rounded-full">
-                  Save 20%
-                </span>
-              </span>
-            </div>
           </motion.div>
         </div>
       </section>
@@ -183,58 +103,56 @@ const Pricing: React.FC = () => {
       {/* Pricing Cards */}
       <section className="bg-white section-padding">
         <div className="container-custom">
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
             {plans.map((plan, index) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className={`relative ${plan.popular ? 'transform scale-105' : ''}`}
+                className="relative"
               >
                 {plan.popular && (
-                  <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                    <span className="bg-gradient-to-r from-primary-600 to-primary-800 text-white px-4 py-2 rounded-full text-sm font-semibold flex items-center">
-                      <Star className="w-4 h-4 mr-1" />
-                      Most Popular
+                  <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 z-10">
+                    <span className="bg-gradient-to-r from-vedra-hunter to-vedra-calpoly text-white px-6 py-3 rounded-full text-lg font-semibold flex items-center">
+                      <Star className="w-5 h-5 mr-2" />
+                      Choose Your Plan
                     </span>
                   </div>
                 )}
                 
-                <div className={`card p-8 h-full ${plan.popular ? 'border-2 border-primary-600' : ''}`}>
+                <div className={`card p-10 h-full border-2 ${plan.popular ? 'border-vedra-hunter shadow-2xl' : 'border-gray-200 shadow-xl'}`}>
                   <div className="text-center mb-8">
-                    <div className="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4 text-primary-600">
-                      {plan.icon}
+                    <div className={`w-20 h-20 bg-gradient-to-br ${plan.bgColor} rounded-full flex items-center justify-center mx-auto mb-6`}>
+                      <div className={`w-12 h-12 bg-gradient-to-br ${plan.color} rounded-full flex items-center justify-center text-white`}>
+                        {plan.icon}
+                      </div>
                     </div>
-                    <h3 className="text-2xl font-bold text-gray-900 mb-2">{plan.name}</h3>
-                    <p className="text-gray-600 mb-6">{plan.description}</p>
-                    
-                    <div className="mb-6">
-                      <span className="text-4xl font-bold text-gray-900">
-                        ₹{billingCycle === 'monthly' ? plan.monthlyPrice : plan.yearlyPrice}
-                      </span>
-                      <span className="text-gray-500">
-                        /{billingCycle === 'monthly' ? 'month' : 'year'}
-                      </span>
-                    </div>
+                    <h3 className="text-3xl font-bold text-gray-900 mb-3">{plan.name}</h3>
+                    <p className="text-gray-600 text-lg mb-8">{plan.description}</p>
 
-                    <button className={`w-full py-3 px-6 rounded-lg font-semibold transition-all duration-200 ${
-                      plan.popular
-                        ? 'bg-primary-600 text-white hover:bg-primary-700'
-                        : 'bg-gray-100 text-gray-900 hover:bg-gray-200'
-                    }`}>
-                      Get Started
-                      <ArrowRight className="inline w-4 h-4 ml-2" />
-                    </button>
+                    <div className="space-y-4">
+                      {plan.name === "Institution" ? (
+                        <button className="w-full py-4 px-8 bg-gradient-to-r from-vedra-hunter to-vedra-calpoly text-white rounded-lg font-semibold text-lg transition-all duration-200 hover:from-vedra-calpoly hover:to-vedra-hunter transform hover:scale-105">
+                          Enquire Now
+                          <ArrowRight className="inline w-5 h-5 ml-2" />
+                        </button>
+                      ) : (
+                        <button className="w-full py-4 px-8 bg-gradient-to-r from-vedra-hunter to-vedra-calpoly text-white rounded-lg font-semibold text-lg transition-all duration-200 hover:from-vedra-calpoly hover:to-vedra-hunter transform hover:scale-105">
+                          Get Started
+                          <ArrowRight className="inline w-5 h-5 ml-2" />
+                        </button>
+                      )}
+                    </div>
                   </div>
 
-                  <div className="space-y-4">
-                    <h4 className="font-semibold text-gray-900">What's included:</h4>
-                    <ul className="space-y-3">
+                  <div className="space-y-6">
+                    <h4 className="font-semibold text-gray-900 text-xl text-center">What's included:</h4>
+                    <ul className="space-y-4">
                       {plan.features.map((feature, featureIndex) => (
-                        <li key={featureIndex} className="flex items-center space-x-3">
-                          <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
-                          <span className="text-gray-600">{feature}</span>
+                        <li key={featureIndex} className="flex items-center space-x-4">
+                          <CheckCircle className="w-6 h-6 text-vedra-calpoly flex-shrink-0" />
+                          <span className="text-gray-700 text-lg">{feature}</span>
                         </li>
                       ))}
                     </ul>
@@ -246,52 +164,8 @@ const Pricing: React.FC = () => {
         </div>
       </section>
 
-      {/* Comparison Table */}
-      <section className="bg-gray-50 section-padding">
-        <div className="container-custom">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-center mb-12"
-          >
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">
-              Compare Plans
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              See how our different plans stack up against each other
-            </p>
-          </motion.div>
-
-          <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
-            <div className="overflow-x-auto">
-              <table className="w-full">
-                <thead className="bg-gray-50">
-                  <tr>
-                    <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900">Feature</th>
-                    <th className="px-6 py-4 text-center text-sm font-semibold text-gray-900">Individual</th>
-                    <th className="px-6 py-4 text-center text-sm font-semibold text-gray-900">Institution</th>
-                    <th className="px-6 py-4 text-center text-sm font-semibold text-gray-900">Publisher</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-gray-200">
-                  {comparisonFeatures.map((feature, index) => (
-                    <tr key={index} className="hover:bg-gray-50">
-                      <td className="px-6 py-4 text-sm font-medium text-gray-900">{feature.feature}</td>
-                      <td className="px-6 py-4 text-center text-sm text-gray-600">{feature.individual}</td>
-                      <td className="px-6 py-4 text-center text-sm text-gray-600">{feature.institution}</td>
-                      <td className="px-6 py-4 text-center text-sm text-gray-600">{feature.publisher}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Benefits Section */}
-      <section className="bg-white section-padding">
+      <section className="bg-gray-50 section-padding">
         <div className="container-custom">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -316,7 +190,7 @@ const Pricing: React.FC = () => {
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 className="card p-6 text-center"
               >
-                <div className="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4 text-primary-600">
+                <div className="w-16 h-16 bg-gradient-to-br from-vedra-hunter to-vedra-calpoly rounded-full flex items-center justify-center mx-auto mb-4 text-white/90">
                   {benefit.icon}
                 </div>
                 <h3 className="text-xl font-semibold text-gray-900 mb-3">
@@ -332,7 +206,7 @@ const Pricing: React.FC = () => {
       </section>
 
       {/* FAQ Section */}
-      <section className="bg-gray-50 section-padding">
+      <section className="bg-white section-padding">
         <div className="container-custom">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -344,13 +218,13 @@ const Pricing: React.FC = () => {
               Frequently Asked Questions
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Get answers to common questions about our pricing and services.
+              Get answers to common questions about our services.
             </p>
           </motion.div>
 
           <div className="grid lg:grid-cols-2 gap-8">
             <div className="space-y-6">
-              <div className="bg-white rounded-lg p-6 shadow-sm">
+              <div className="bg-gray-50 rounded-lg p-6">
                 <h3 className="text-lg font-semibold text-gray-900 mb-3">
                   Do you offer government-sponsored programs?
                 </h3>
@@ -359,7 +233,7 @@ const Pricing: React.FC = () => {
                 </p>
               </div>
               
-              <div className="bg-white rounded-lg p-6 shadow-sm">
+              <div className="bg-gray-50 rounded-lg p-6">
                 <h3 className="text-lg font-semibold text-gray-900 mb-3">
                   Can I pay in INR?
                 </h3>
@@ -368,7 +242,7 @@ const Pricing: React.FC = () => {
                 </p>
               </div>
               
-              <div className="bg-white rounded-lg p-6 shadow-sm">
+              <div className="bg-gray-50 rounded-lg p-6">
                 <h3 className="text-lg font-semibold text-gray-900 mb-3">
                   Do you provide GST invoices?
                 </h3>
@@ -379,16 +253,16 @@ const Pricing: React.FC = () => {
             </div>
 
             <div className="space-y-6">
-              <div className="bg-white rounded-lg p-6 shadow-sm">
+              <div className="bg-gray-50 rounded-lg p-6">
                 <h3 className="text-lg font-semibold text-gray-900 mb-3">
                   How long does DOI generation take?
                 </h3>
                 <p className="text-gray-600">
-                  Processing time varies by plan: Individual (24 hours), Institution (4 hours), Publisher (instant).
+                  Processing time varies by plan: Institution (Quick Processing Time), Publisher (Instant Processing Time).
                 </p>
               </div>
               
-              <div className="bg-white rounded-lg p-6 shadow-sm">
+              <div className="bg-gray-50 rounded-lg p-6">
                 <h3 className="text-lg font-semibold text-gray-900 mb-3">
                   Do you offer bulk discounts?
                 </h3>
@@ -397,43 +271,16 @@ const Pricing: React.FC = () => {
                 </p>
               </div>
               
-              <div className="bg-white rounded-lg p-6 shadow-sm">
+              <div className="bg-gray-50 rounded-lg p-6">
                 <h3 className="text-lg font-semibold text-gray-900 mb-3">
                   Is there a setup fee?
                 </h3>
                 <p className="text-gray-600">
-                  No setup fees for individual plans. Institution and Publisher plans include one-time setup costs.
+                  Setup costs are included in Institution and Publisher plans with dedicated support.
                 </p>
               </div>
             </div>
           </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="bg-gradient-to-r from-primary-600 to-primary-800 section-padding">
-        <div className="container-custom text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="max-w-3xl mx-auto"
-          >
-            <h2 className="text-4xl font-bold text-white mb-6">
-              Ready to Get Started?
-            </h2>
-            <p className="text-xl text-primary-100 mb-8">
-              Choose your plan and start making your research globally discoverable today.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="bg-white text-primary-600 hover:bg-gray-100 font-semibold py-3 px-8 rounded-lg transition-all duration-200 transform hover:scale-105">
-                Start Free Trial
-              </button>
-              <button className="border-2 border-white text-white hover:bg-white hover:text-primary-600 font-semibold py-3 px-8 rounded-lg transition-all duration-200">
-                Contact Sales
-              </button>
-            </div>
-          </motion.div>
         </div>
       </section>
     </div>

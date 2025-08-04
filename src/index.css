@@ -1,29 +1,107 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Inter:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.cdnfonts.com/css/jsmath-cmti10');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   html {
-    font-family: 'Inter', sans-serif;
+    font-family: 'IBM Plex Sans', sans-serif;
+    scroll-behavior: smooth;
   }
   
   body {
-    @apply bg-white text-gray-900;
+    @apply bg-vedra-floral text-vedra-night font-ibm-plex;
+  }
+  
+  /* Ensure navbar stays on top with proper separation */
+  nav {
+    z-index: 9999 !important;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+  }
+  
+  /* Add box-shadow only when not on homepage */
+  nav:not(.transparent) {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+  }
+  
+  /* Ensure transparent navbar has no borders or shadows */
+  nav.bg-transparent {
+    box-shadow: none !important;
+    border: none !important;
+  }
+  
+  /* Ensure main content has proper spacing from navbar */
+  main {
+    padding-top: 5rem !important;
+    position: relative;
+    z-index: 1;
+    margin-top: 0 !important;
+  }
+  
+  /* Ensure first section has extra top padding */
+  main > div > section:first-child {
+    padding-top: 2rem !important;
+  }
+  
+  /* Ensure absolutely positioned elements don't interfere with navbar */
+  main .absolute {
+    z-index: 1 !important;
+  }
+  
+  /* Ensure no content interferes with fixed navbar */
+  .fixed {
+    position: fixed !important;
+  }
+  
+  /* Additional z-index management */
+  .z-50 {
+    z-index: 50 !important;
+  }
+  
+  .z-100 {
+    z-index: 100 !important;
+  }
+  
+  .z-1000 {
+    z-index: 1000 !important;
+  }
+  
+  .z-9999 {
+    z-index: 9999 !important;
+  }
+  
+  /* Ensure all content stays below navbar */
+  * {
+    box-sizing: border-box;
+  }
+  
+  /* Prevent any content from overlapping the navbar */
+  body > *:not(nav) {
+    z-index: 1;
+  }
+  
+  /* Ensure sections and other content don't overlap navbar */
+  section, div, header, footer {
+    position: relative;
+    z-index: 1;
   }
 }
 
 @layer components {
   .btn-primary {
-    @apply bg-primary-600 hover:bg-primary-700 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-xl;
+    @apply bg-vedra-hunter hover:bg-vedra-calpoly text-white font-semibold py-3 px-6 rounded-lg transition-all duration-200 transform hover:scale-105 shadow-md hover:shadow-lg;
   }
   
   .btn-secondary {
-    @apply bg-white hover:bg-gray-50 text-primary-600 font-semibold py-3 px-6 rounded-lg border-2 border-primary-600 transition-all duration-200 transform hover:scale-105;
+    @apply bg-vedra-floral hover:bg-neutral-100 text-vedra-hunter font-semibold py-3 px-6 rounded-lg border-2 border-vedra-hunter transition-all duration-200 transform hover:scale-105;
   }
   
   .card {
-    @apply bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1;
+    @apply bg-vedra-floral rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border border-neutral-200;
   }
   
   .section-padding {
@@ -37,6 +115,98 @@
 
 @layer utilities {
   .text-gradient {
-    @apply bg-gradient-to-r from-primary-600 to-primary-800 bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-vedra-hunter to-vedra-calpoly bg-clip-text text-transparent;
   }
+  
+  .bg-green-gradient {
+    @apply bg-gradient-to-br from-green-50 via-green-100 to-emerald-50;
+  }
+  
+  .bg-vedra-gradient {
+    @apply bg-gradient-to-r from-vedra-hunter to-vedra-calpoly;
+  }
+  
+  .bg-radial-gradient {
+    background: radial-gradient(circle at center, var(--tw-gradient-from), var(--tw-gradient-via), var(--tw-gradient-to));
+  }
+  
+  .text-white-on-green {
+    @apply text-vedra-floral text-white;
+  }
+  
+  .text-white-on-dark-green {
+    @apply text-white !important;
+  }
+}
+
+h1, h2, h3, .font-primary {
+  @apply font-ibm-plex font-bold;
+}
+
+.font-secondary {
+  @apply font-inter;
+}
+
+.font-jsmath {
+  font-family: 'jsMath-cmti10', serif;
+}
+
+.vedra-hunter {
+  color: #185C2F;
+}
+
+.bg-vedra-hunter {
+  background-color: #185C2F;
+}
+
+.vedra-calpoly {
+  color: #1f6b35;
+}
+
+.bg-vedra-calpoly {
+  background-color: #1f6b35;
+}
+
+.vedra-floral {
+  color: #FFFBFO;
+}
+
+.bg-vedra-floral {
+  background-color: #FFFBFO;
+}
+
+.vedra-silver {
+  color: #CECFDI;
+}
+
+.bg-vedra-silver {
+  background-color: #CECFDI;
+}
+
+.vedra-night {
+  color: #131314;
+}
+
+.bg-vedra-night {
+  background-color: #131314;
+}
+
+.tracking-wide {
+  letter-spacing: 0.15em;
+}
+
+/* Footer specific styles to ensure white text */
+footer {
+  color: white !important;
+}
+
+footer * {
+  color: inherit;
+}
+
+footer h3,
+footer p,
+footer span,
+footer a {
+  color: white !important;
 }

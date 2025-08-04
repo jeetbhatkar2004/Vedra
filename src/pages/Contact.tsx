@@ -59,26 +59,8 @@ const Contact: React.FC = () => {
     {
       icon: <Mail className="w-6 h-6" />,
       title: "Email Us",
-      details: ["info@vedra.in", "support@vedra.in"],
+      details: ["contact@mvedra.com"],
       description: "Get in touch with our team"
-    },
-    {
-      icon: <Phone className="w-6 h-6" />,
-      title: "Call Us",
-      details: ["+91 98765 43210", "+91 98765 43211"],
-      description: "Speak with our experts"
-    },
-    {
-      icon: <MapPin className="w-6 h-6" />,
-      title: "Visit Us",
-      details: ["New Delhi, India", "Mumbai, India"],
-      description: "Our office locations"
-    },
-    {
-      icon: <Clock className="w-6 h-6" />,
-      title: "Business Hours",
-      details: ["Mon - Fri: 9:00 AM - 6:00 PM", "Sat: 9:00 AM - 1:00 PM"],
-      description: "We're here to help"
     }
   ];
 
@@ -126,7 +108,7 @@ const Contact: React.FC = () => {
       {/* Contact Information */}
       <section className="bg-white section-padding">
         <div className="container-custom">
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid md:grid-cols-2 gap-8">
             {contactInfo.map((info, index) => (
               <motion.div
                 key={index}
@@ -346,21 +328,21 @@ const Contact: React.FC = () => {
                   ))}
                 </div>
 
-                <div className="bg-gradient-to-r from-primary-600 to-primary-800 rounded-2xl p-8 text-white">
-                  <h3 className="text-2xl font-bold mb-4">
+                <div className="bg-vedra-hunter rounded-2xl p-8 text-white">
+                  <h3 className="text-2xl font-bold mb-4 font-ibm-plex">
                     Need Immediate Help?
                   </h3>
-                  <p className="text-primary-100 mb-6">
+                  <p className="text-white/90 mb-6 font-inter">
                     Our support team is available 24/7 to assist you with any urgent questions.
                   </p>
                   <div className="space-y-3">
                     <div className="flex items-center space-x-3">
                       <Phone className="w-5 h-5" />
-                      <span>+91 98765 43210</span>
+                      <span className="font-inter">+91 98765 43210</span>
                     </div>
                     <div className="flex items-center space-x-3">
                       <Mail className="w-5 h-5" />
-                      <span>support@vedra.in</span>
+                      <span className="font-inter">founder@mvedra.com</span>
                     </div>
                   </div>
                 </div>
@@ -370,7 +352,7 @@ const Contact: React.FC = () => {
         </div>
       </section>
 
-      {/* Office Locations */}
+      {/* Price Inquiry Form */}
       <section className="bg-white section-padding">
         <div className="container-custom">
           <motion.div
@@ -380,91 +362,28 @@ const Contact: React.FC = () => {
             className="text-center mb-16"
           >
             <h2 className="text-4xl font-bold text-gray-900 mb-4">
-              Our Offices
+              Get a Custom Quote
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Visit us at our office locations across India
+              Fill out our price inquiry form to receive a personalized quote for your DOI services
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 gap-8">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              className="card p-8"
-            >
-              <h3 className="text-2xl font-bold text-gray-900 mb-4">New Delhi</h3>
-              <div className="space-y-4">
-                <div className="flex items-start space-x-3">
-                  <MapPin className="w-5 h-5 text-primary-600 mt-1" />
-                  <div>
-                    <p className="text-gray-900 font-medium">Vedra Technologies Pvt. Ltd.</p>
-                    <p className="text-gray-600">Connaught Place, New Delhi - 110001</p>
-                  </div>
-                </div>
-                <div className="flex items-center space-x-3">
-                  <Phone className="w-5 h-5 text-primary-600" />
-                  <span className="text-gray-600">+91 98765 43210</span>
-                </div>
-                <div className="flex items-center space-x-3">
-                  <Mail className="w-5 h-5 text-primary-600" />
-                  <span className="text-gray-600">delhi@vedra.in</span>
-                </div>
-              </div>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              className="card p-8"
-            >
-              <h3 className="text-2xl font-bold text-gray-900 mb-4">Mumbai</h3>
-              <div className="space-y-4">
-                <div className="flex items-start space-x-3">
-                  <MapPin className="w-5 h-5 text-primary-600 mt-1" />
-                  <div>
-                    <p className="text-gray-900 font-medium">Vedra Technologies Pvt. Ltd.</p>
-                    <p className="text-gray-600">Bandra Kurla Complex, Mumbai - 400051</p>
-                  </div>
-                </div>
-                <div className="flex items-center space-x-3">
-                  <Phone className="w-5 h-5 text-primary-600" />
-                  <span className="text-gray-600">+91 98765 43211</span>
-                </div>
-                <div className="flex items-center space-x-3">
-                  <Mail className="w-5 h-5 text-primary-600" />
-                  <span className="text-gray-600">mumbai@vedra.in</span>
-                </div>
-              </div>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="bg-gradient-to-r from-primary-600 to-primary-800 section-padding">
-        <div className="container-custom text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="max-w-3xl mx-auto"
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="max-w-4xl mx-auto"
           >
-            <h2 className="text-4xl font-bold text-white mb-6">
-              Ready to Get Started?
-            </h2>
-            <p className="text-xl text-primary-100 mb-8">
-              Contact us today to learn more about our DOI services and how we can help you.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="bg-white text-primary-600 hover:bg-gray-100 font-semibold py-3 px-8 rounded-lg transition-all duration-200 transform hover:scale-105">
-                Schedule a Demo
-              </button>
-              <button className="border-2 border-white text-white hover:bg-white hover:text-primary-600 font-semibold py-3 px-8 rounded-lg transition-all duration-200">
-                Download Brochure
-              </button>
+            <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
+              <iframe
+                src="https://forms.office.com/pages/responsepage.aspx?id=aY3FhK3E50KsBVuZFti-bEQBc7yPTsJPlwGNM1ilviFUQlkzUzhNV0tFV1JGS0lZSVBINVJLMEZRMS4u&route=shorturl"
+                width="100%"
+                height="800"
+                frameBorder="0"
+                title="Price Inquiry Form"
+                className="w-full"
+              />
             </div>
           </motion.div>
         </div>

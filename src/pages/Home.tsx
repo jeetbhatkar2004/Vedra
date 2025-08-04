@@ -38,10 +38,10 @@ const Home: React.FC = () => {
   ];
 
   const stats = [
-    { number: "50,000+", label: "Researchers in UP" },
-    { number: "10,000+", label: "DOI Compliant Papers" },
-    { number: "20%", label: "Cost Reduction" },
-    { number: "24/7", label: "Local Support" }
+    { number: "₹2.5L+", label: "Cost Savings" },
+    { number: "2400+", label: "Hours Saved" },
+    { number: "24/7", label: "Local Support" },
+    { number: "1000+", label: "Researchers Served" }
   ];
 
   const benefits = [
@@ -54,10 +54,10 @@ const Home: React.FC = () => {
   ];
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen relative" style={{ paddingTop: '100px' }}>
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-primary-50 via-white to-secondary-50 section-padding">
-        <div className="container-custom">
+      <section className="pb-16 flex items-center relative z-10">
+        <div className="container-custom relative z-10 w-full">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <motion.div
               initial={{ opacity: 0, x: -50 }}
@@ -66,12 +66,12 @@ const Home: React.FC = () => {
               className="space-y-8"
             >
               <div className="space-y-4">
-                <h1 className="text-5xl lg:text-6xl font-bold leading-tight">
+                <h1 className="text-5xl lg:text-6xl font-bold leading-tight font-ibm-plex">
                   <span className="text-gradient">Indian Research</span>
                   <br />
-                  <span className="text-gray-900">Indexing Solution</span>
+                  <span className="text-vedra-night">Indexing Solution</span>
                 </h1>
-                <p className="text-xl text-gray-600 leading-relaxed">
+                <p className="text-xl text-vedra-night leading-relaxed font-inter">
                   Empowering Indian researchers with affordable and globally accessible DOI indexing solutions. 
                   Making research discoverable worldwide without the need for foreign vendors.
                 </p>
@@ -87,9 +87,9 @@ const Home: React.FC = () => {
                 </Link>
               </div>
 
-              <div className="flex items-center space-x-6 text-sm text-gray-600">
+              <div className="flex items-center space-x-6 text-sm text-neutral-600 font-inter">
                 <div className="flex items-center space-x-2">
-                  <CheckCircle className="w-5 h-5 text-green-500" />
+                  <CheckCircle className="w-5 h-5 text-vedra-calpoly" />
                   <span>Trusted by 1000+ researchers</span>
                 </div>
                 <div className="flex items-center space-x-2">
@@ -105,30 +105,30 @@ const Home: React.FC = () => {
               transition={{ duration: 0.8, delay: 0.2 }}
               className="relative"
             >
-              <div className="bg-white rounded-2xl shadow-2xl p-8 border border-gray-100">
+              <div className="bg-gradient-to-br from-vedra-floral to-green-50 rounded-2xl shadow-2xl p-8 border border-green-200">
                 <div className="space-y-6">
                   <div className="flex items-center space-x-3">
-                    <div className="w-12 h-12 bg-gradient-to-r from-primary-600 to-primary-800 rounded-lg flex items-center justify-center">
-                      <BookOpen className="w-6 h-6 text-white" />
+                    <div className="w-12 h-12 bg-gradient-to-br from-vedra-hunter to-vedra-calpoly rounded-lg flex items-center justify-center">
+                      <BookOpen className="w-6 h-6 text-white/90" />
                     </div>
                     <div>
-                      <h3 className="font-semibold text-gray-900">DOI Generation</h3>
-                      <p className="text-sm text-gray-500">Quick and easy process</p>
+                      <h3 className="font-semibold text-vedra-night font-ibm-plex">DOI Generation</h3>
+                      <p className="text-sm text-neutral-500 font-inter">Quick and easy process</p>
                     </div>
                   </div>
                   
                   <div className="space-y-4">
-                    <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
-                      <span className="text-sm font-medium">Research Paper</span>
-                      <span className="text-xs text-gray-500">PDF Upload</span>
+                    <div className="flex items-center justify-between p-4 bg-neutral-100 rounded-lg">
+                      <span className="text-sm font-medium font-inter">Research Paper</span>
+                      <span className="text-xs text-neutral-500 font-inter">PDF Upload</span>
                     </div>
-                    <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
-                      <span className="text-sm font-medium">Metadata</span>
-                      <span className="text-xs text-gray-500">Auto-filled</span>
+                    <div className="flex items-center justify-between p-4 bg-neutral-100 rounded-lg">
+                      <span className="text-sm font-medium font-inter">Metadata</span>
+                      <span className="text-xs text-neutral-500 font-inter">Auto-filled</span>
                     </div>
-                    <div className="flex items-center justify-between p-4 bg-primary-50 rounded-lg border border-primary-200">
-                      <span className="text-sm font-medium text-primary-700">DOI Generated</span>
-                      <span className="text-xs text-primary-600">10.1234/vedra.2024.001</span>
+                    <div className="flex items-center justify-between p-4 bg-gradient-to-r from-vedra-hunter to-vedra-calpoly rounded-lg">
+                      <span className="text-sm font-medium text-white/90 font-inter">DOI Generated</span>
+                      <span className="text-xs text-white/70 font-inter">10.1234/mvedra.2024.001</span>
                     </div>
                   </div>
                 </div>
@@ -139,8 +139,8 @@ const Home: React.FC = () => {
       </section>
 
       {/* Stats Section */}
-      <section className="bg-white section-padding">
-        <div className="container-custom">
+      <section className="section-padding relative z-10 py-4">
+        <div className="container-custom relative z-10">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
             {stats.map((stat, index) => (
               <motion.div
@@ -150,10 +150,10 @@ const Home: React.FC = () => {
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 className="text-center"
               >
-                <div className="text-3xl lg:text-4xl font-bold text-gradient mb-2">
+                <div className="text-3xl lg:text-4xl font-bold text-gradient mb-2 font-ibm-plex">
                   {stat.number}
                 </div>
-                <div className="text-gray-600 font-medium">
+                <div className="text-neutral-600 font-medium font-inter">
                   {stat.label}
                 </div>
               </motion.div>
@@ -163,7 +163,7 @@ const Home: React.FC = () => {
       </section>
 
       {/* Features Section */}
-      <section className="bg-gray-50 section-padding">
+      <section className="bg-white/80 backdrop-blur-sm section-padding py-24">
         <div className="container-custom">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -171,10 +171,10 @@ const Home: React.FC = () => {
             transition={{ duration: 0.8 }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">
-              Why Choose Vedra?
+            <h2 className="text-4xl font-bold text-vedra-night mb-4 font-ibm-plex">
+              Why Choose mVEDRA?
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-xl text-neutral-700 max-w-3xl mx-auto font-inter">
               We provide comprehensive DOI indexing solutions tailored specifically for the Indian research community.
             </p>
           </motion.div>
@@ -188,13 +188,13 @@ const Home: React.FC = () => {
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 className="card p-6 text-center"
               >
-                <div className="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4 text-primary-600">
+                <div className="w-16 h-16 bg-gradient-to-br from-vedra-hunter to-vedra-calpoly rounded-full flex items-center justify-center mx-auto mb-4 text-white/90">
                   {feature.icon}
                 </div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-3">
+                <h3 className="text-xl font-semibold text-vedra-night mb-3 font-ibm-plex">
                   {feature.title}
                 </h3>
-                <p className="text-gray-600 leading-relaxed">
+                <p className="text-neutral-700 leading-relaxed font-inter">
                   {feature.description}
                 </p>
               </motion.div>
@@ -204,18 +204,22 @@ const Home: React.FC = () => {
       </section>
 
       {/* Benefits Section */}
-      <section className="bg-white section-padding">
-        <div className="container-custom">
+      <section className="bg-gradient-to-br from-white via-gray-50 to-slate-50 section-padding relative z-10 py-24">
+        {/* Decorative gradient overlay */}
+        <div className="absolute inset-0 bg-gradient-to-br from-vedra-hunter/3 via-vedra-calpoly/5 to-emerald-400/3 z-0"></div>
+        <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-transparent via-gray-100/20 to-transparent z-0"></div>
+        
+        <div className="container-custom relative z-10">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <motion.div
               initial={{ opacity: 0, x: -50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8 }}
             >
-              <h2 className="text-4xl font-bold text-gray-900 mb-6">
+              <h2 className="text-4xl font-bold text-vedra-night mb-6 font-ibm-plex">
                 Made for Indian Researchers
               </h2>
-              <p className="text-xl text-gray-600 mb-8 leading-relaxed">
+              <p className="text-xl text-vedra-night mb-8 leading-relaxed font-inter">
                 We understand the unique challenges faced by Indian researchers and institutions. 
                 Our platform is designed to address these specific needs.
               </p>
@@ -223,8 +227,8 @@ const Home: React.FC = () => {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {benefits.map((benefit, index) => (
                   <div key={index} className="flex items-center space-x-3">
-                    <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
-                    <span className="text-gray-700">{benefit}</span>
+                    <CheckCircle className="w-5 h-5 text-vedra-calpoly flex-shrink-0" />
+                    <span className="text-vedra-night font-inter">{benefit}</span>
                   </div>
                 ))}
               </div>
@@ -236,36 +240,36 @@ const Home: React.FC = () => {
               transition={{ duration: 0.8, delay: 0.2 }}
               className="relative"
             >
-              <div className="bg-gradient-to-br from-primary-600 to-primary-800 rounded-2xl p-8 text-white">
+              <div className="bg-vedra-hunter rounded-2xl p-8 text-white shadow-xl">
                 <div className="space-y-6">
                   <div className="flex items-center space-x-3">
-                    <TrendingUp className="w-8 h-8" />
-                    <h3 className="text-2xl font-bold">Growth Statistics</h3>
+                    <TrendingUp className="w-8 h-8 text-white/90" />
+                    <h3 className="text-2xl font-bold font-ibm-plex text-white/90">Growth Statistics</h3>
                   </div>
                   
                   <div className="space-y-4">
-                    <div className="flex justify-between items-center">
-                      <span>DOI Generation</span>
-                      <span className="font-semibold">+150%</span>
+                    <div className="flex justify-between items-center font-inter">
+                      <span className="text-white/90">DOI Generation</span>
+                      <span className="font-semibold text-white/90">+150%</span>
                     </div>
                     <div className="w-full bg-white/20 rounded-full h-2">
-                      <div className="bg-white h-2 rounded-full" style={{ width: '75%' }}></div>
+                      <div className="bg-white/90 h-2 rounded-full" style={{ width: '75%' }}></div>
                     </div>
                     
-                    <div className="flex justify-between items-center">
-                      <span>User Satisfaction</span>
-                      <span className="font-semibold">98%</span>
+                    <div className="flex justify-between items-center font-inter">
+                      <span className="text-white/90">User Satisfaction</span>
+                      <span className="font-semibold text-white/90">98%</span>
                     </div>
                     <div className="w-full bg-white/20 rounded-full h-2">
-                      <div className="bg-white h-2 rounded-full" style={{ width: '98%' }}></div>
+                      <div className="bg-white/90 h-2 rounded-full" style={{ width: '98%' }}></div>
                     </div>
                     
-                    <div className="flex justify-between items-center">
-                      <span>Cost Savings</span>
-                      <span className="font-semibold">₹2.5L+</span>
+                    <div className="flex justify-between items-center font-inter">
+                      <span className="text-white/90">Cost Savings</span>
+                      <span className="font-semibold text-white/90">₹2.5L+</span>
                     </div>
                     <div className="w-full bg-white/20 rounded-full h-2">
-                      <div className="bg-white h-2 rounded-full" style={{ width: '60%' }}></div>
+                      <div className="bg-white/90 h-2 rounded-full" style={{ width: '60%' }}></div>
                     </div>
                   </div>
                 </div>
@@ -276,7 +280,7 @@ const Home: React.FC = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="bg-gradient-to-r from-primary-600 to-primary-800 section-padding">
+      <section className="bg-gradient-to-r from-vedra-hunter to-vedra-calpoly section-padding py-24">
         <div className="container-custom text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -284,17 +288,17 @@ const Home: React.FC = () => {
             transition={{ duration: 0.8 }}
             className="max-w-3xl mx-auto"
           >
-            <h2 className="text-4xl font-bold text-white mb-6">
+            <h2 className="text-4xl font-bold text-white/90 mb-6 font-ibm-plex">
               Ready to Make Your Research Global?
             </h2>
-            <p className="text-xl text-primary-100 mb-8">
-              Join thousands of Indian researchers who are already using Vedra to make their work discoverable worldwide.
+            <p className="text-xl text-white/80 mb-8 font-inter">
+              Join thousands of Indian researchers who are already using mVEDRA to make their work discoverable worldwide.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link to="/services" className="bg-white text-primary-600 hover:bg-gray-100 font-semibold py-3 px-8 rounded-lg transition-all duration-200 transform hover:scale-105">
+              <Link to="/services" className="bg-neutral-100 text-vedra-hunter hover:bg-neutral-200 font-semibold py-3 px-8 rounded-lg transition-all duration-200 transform hover:scale-105 font-inter">
                 Start Your Journey
               </Link>
-              <Link to="/contact" className="border-2 border-white text-white hover:bg-white hover:text-primary-600 font-semibold py-3 px-8 rounded-lg transition-all duration-200">
+              <Link to="/contact" className="bg-neutral-100 text-vedra-hunter hover:bg-neutral-200 font-semibold py-3 px-8 rounded-lg transition-all duration-200 transform hover:scale-105 font-inter">
                 Contact Us
               </Link>
             </div>

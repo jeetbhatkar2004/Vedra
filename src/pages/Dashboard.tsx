@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import { 
   BookOpen, 
   Plus, 
@@ -20,7 +21,8 @@ import {
   Calendar,
   Clock,
   CheckCircle,
-  AlertCircle
+  AlertCircle,
+  ArrowLeft
 } from 'lucide-react';
 
 const Dashboard: React.FC = () => {
@@ -117,28 +119,39 @@ const Dashboard: React.FC = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
-      <header className="bg-white shadow-sm border-b">
+      <header className="bg-vedra-floral shadow-sm border-b border-neutral-200">
         <div className="container-custom">
           <div className="flex items-center justify-between py-4">
             <div className="flex items-center space-x-4">
-              <div className="w-10 h-10 bg-gradient-to-r from-primary-600 to-primary-800 rounded-lg flex items-center justify-center">
-                <BookOpen className="w-6 h-6 text-white" />
+              <Link to="/">
+                <ArrowLeft className="w-6 h-6 text-vedra-night" />
+              </Link>
+              <div className="flex items-center space-x-3">
+                <img 
+                  src="/vedrawebsite_transparent.png" 
+                  alt="mVEDRA Icon" 
+                  className="h-10 w-auto"
+                />
+                <div className="flex items-center">
+                  <span className="font-jsmath text-2xl text-black mt-1">m</span>
+                  <span className="font-inter text-2xl font-bold text-black">Vedra</span>
+                </div>
               </div>
               <div>
-                <h1 className="text-xl font-bold text-gray-900">Vedra Dashboard</h1>
-                <p className="text-sm text-gray-600">Welcome back, Dr. Rajesh Kumar</p>
+                <h1 className="text-xl font-bold text-vedra-night font-ibm-plex">mVEDRA Dashboard</h1>
+                <p className="text-sm text-neutral-600 font-inter">Welcome back, Dr. Rajesh Kumar</p>
               </div>
             </div>
             
             <div className="flex items-center space-x-4">
-              <button className="p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg">
+              <button className="p-2 text-neutral-600 hover:text-vedra-night hover:bg-neutral-100 rounded-lg">
                 <Bell className="w-5 h-5" />
               </button>
               <div className="flex items-center space-x-2">
-                <div className="w-8 h-8 bg-primary-100 rounded-full flex items-center justify-center">
-                  <User className="w-4 h-4 text-primary-600" />
+                <div className="w-8 h-8 bg-gradient-to-br from-vedra-hunter to-vedra-calpoly rounded-full flex items-center justify-center">
+                  <User className="w-4 h-4 text-white/90" />
                 </div>
-                <button className="p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg">
+                <button className="p-2 text-neutral-600 hover:text-vedra-night hover:bg-neutral-100 rounded-lg">
                   <LogOut className="w-4 h-4" />
                 </button>
               </div>
@@ -233,8 +246,8 @@ const Dashboard: React.FC = () => {
                     {recentDOIs.slice(0, 3).map((doi, index) => (
                       <div key={index} className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
                         <div className="flex items-center space-x-4">
-                          <div className="w-10 h-10 bg-primary-100 rounded-lg flex items-center justify-center">
-                            <BookOpen className="w-5 h-5 text-primary-600" />
+                          <div className="w-10 h-10 bg-gradient-to-br from-vedra-hunter to-vedra-calpoly rounded-lg flex items-center justify-center">
+                            <BookOpen className="w-5 h-5 text-white/90" />
                           </div>
                           <div>
                             <h4 className="font-medium text-gray-900">{doi.title}</h4>
@@ -303,7 +316,7 @@ const Dashboard: React.FC = () => {
                   <div className="flex flex-col md:flex-row gap-4">
                     <div className="flex-1">
                       <div className="relative">
-                        <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+                        <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400 z-10" />
                         <input
                           type="text"
                           placeholder="Search DOIs..."
