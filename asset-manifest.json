@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/Vedra/static/css/main.0f2c0cd0.css",
+    "main.js": "/Vedra/static/js/main.f57c6d26.js",
+    "index.html": "/Vedra/index.html",
+    "main.0f2c0cd0.css.map": "/Vedra/static/css/main.0f2c0cd0.css.map",
+    "main.f57c6d26.js.map": "/Vedra/static/js/main.f57c6d26.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.0f2c0cd0.css",
+    "static/js/main.f57c6d26.js"
+  ]
+}
