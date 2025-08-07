@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/Vedra/static/css/main.0f2c0cd0.css",
-    "main.js": "/Vedra/static/js/main.bf57687e.js",
+    "main.css": "/Vedra/static/css/main.30d736e1.css",
+    "main.js": "/Vedra/static/js/main.0fbc8a0d.js",
     "index.html": "/Vedra/index.html",
-    "main.0f2c0cd0.css.map": "/Vedra/static/css/main.0f2c0cd0.css.map",
-    "main.bf57687e.js.map": "/Vedra/static/js/main.bf57687e.js.map"
+    "main.30d736e1.css.map": "/Vedra/static/css/main.30d736e1.css.map",
+    "main.0fbc8a0d.js.map": "/Vedra/static/js/main.0fbc8a0d.js.map"
   },
   "entrypoints": [
-    "static/css/main.0f2c0cd0.css",
-    "static/js/main.bf57687e.js"
+    "static/css/main.30d736e1.css",
+    "static/js/main.0fbc8a0d.js"
   ]
 }
