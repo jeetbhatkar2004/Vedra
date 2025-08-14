@@ -59,7 +59,7 @@ const Pricing: React.FC = () => {
   const benefits = [
     {
       icon: <Zap className="w-6 h-6" />,
-      title: "20% Cost Savings",
+      title: "40% Cost Savings",
       description: "Compared to foreign DOI services"
     },
     {
@@ -82,7 +82,7 @@ const Pricing: React.FC = () => {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-primary-50 via-white to-secondary-50 section-padding">
+      <section className="bg-gradient-to-br from-primary-50 via-vedra-floral to-secondary-50 section-padding">
         <div className="container-custom">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -90,7 +90,7 @@ const Pricing: React.FC = () => {
             transition={{ duration: 0.8 }}
             className="text-center max-w-4xl mx-auto"
           >
-            <h1 className="text-5xl lg:text-6xl font-bold text-gray-900 mb-6">
+            <h1 className="text-5xl lg:text-6xl font-bold text-gray-900 mt-12 mb-6">
               <span className="text-gradient">Choose Your Plan</span>
             </h1>
             <p className="text-xl text-gray-600 leading-relaxed mb-8">
@@ -113,8 +113,8 @@ const Pricing: React.FC = () => {
                 className="relative"
               >
                 {plan.popular && (
-                  <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 z-10">
-                    <span className="bg-gradient-to-r from-vedra-hunter to-vedra-calpoly text-white px-6 py-3 rounded-full text-lg font-semibold flex items-center">
+                  <div className="absolute -top-7 left-1/2 transform -translate-x-1/2 z-10">
+                    <span className="bg-vedra-hunter text-white px-6 py-3 rounded-full text-lg font-semibold flex items-center">
                       <Star className="w-5 h-5 mr-2" />
                       Choose Your Plan
                     </span>
@@ -226,39 +226,38 @@ const Pricing: React.FC = () => {
             <div className="space-y-6">
               <div className="bg-gray-50 rounded-lg p-6">
                 <h3 className="text-lg font-semibold text-gray-900 mb-3">
-                  Do you offer government-sponsored programs?
+                  Why do I need a DOI?
                 </h3>
                 <p className="text-gray-600">
-                  Yes, we work with state governments to provide free DOI services for registered researchers and academicians.
+                  A DOI (Digital Object Identifier) ensures your work is permanently findable, citable, and trackable across global research platforms and databases.
                 </p>
               </div>
               
               <div className="bg-gray-50 rounded-lg p-6">
                 <h3 className="text-lg font-semibold text-gray-900 mb-3">
-                  Can I pay in INR?
+                 Does a DOI improve citations?
                 </h3>
                 <p className="text-gray-600">
-                  Absolutely! All our pricing is in INR and we accept payments through UPI, bank transfers, and other Indian payment methods.
+                  Yes! DOIs increase visibility and discoverability, making your research easier to cite and reference in academic and professional publications. If you have an ORCID ID, your DOIs auto-sync to your profile, helping citations update automatically.
                 </p>
               </div>
               
               <div className="bg-gray-50 rounded-lg p-6">
                 <h3 className="text-lg font-semibold text-gray-900 mb-3">
-                  Do you provide GST invoices?
+                  How long does DOI generation take?
                 </h3>
                 <p className="text-gray-600">
-                  Yes, all our invoices are GST compliant and can be used for business expense claims.
-                </p>
+                  Bulk generation takes 1–2 hours. Individual DOI creation is near-instant—usually less than 2 minutes from submission to activation.                </p>
               </div>
             </div>
 
             <div className="space-y-6">
               <div className="bg-gray-50 rounded-lg p-6">
                 <h3 className="text-lg font-semibold text-gray-900 mb-3">
-                  How long does DOI generation take?
+                 Will I have to pay in a foreign currency?
                 </h3>
                 <p className="text-gray-600">
-                  Processing time varies by plan: Institution (Quick Processing Time), Publisher (Instant Processing Time).
+                 Not at all. All payments are accepted in INR (₹) through UPI, Credit/Debit Cards, and Bank Transfer. 
                 </p>
               </div>
               
@@ -267,16 +266,16 @@ const Pricing: React.FC = () => {
                   Do you offer bulk discounts?
                 </h3>
                 <p className="text-gray-600">
-                  Yes, institutions and publishers get significant discounts for bulk DOI generation.
+                  Yes, but only for Institutional and Publisher plans. These plans include significant savings for large-volume DOI generation.
                 </p>
               </div>
               
               <div className="bg-gray-50 rounded-lg p-6">
                 <h3 className="text-lg font-semibold text-gray-900 mb-3">
-                  Is there a setup fee?
+                  Do you provide GST-compliant invoices?
                 </h3>
                 <p className="text-gray-600">
-                  Setup costs are included in Institution and Publisher plans with dedicated support.
+                  Absolutely. All invoices are GST-compliant and valid for business accounting, reimbursement, and official expense claims.
                 </p>
               </div>
             </div>

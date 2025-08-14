@@ -16,7 +16,8 @@ import {
   ArrowRight,
   Download,
   Upload,
-  Search
+  Search,
+  Newspaper
 } from 'lucide-react';
 
 const Services: React.FC = () => {
@@ -52,27 +53,27 @@ const Services: React.FC = () => {
     {
       icon: <BookOpen className="w-8 h-8" />,
       title: "Book Chapters",
-      description: "Individual chapters from books and edited volumes"
+      description: "Individual chapters from books and\nedited volumes"
     },
     {
-      icon: <Database className="w-8 h-8" />,
-      title: "Datasets",
-      description: "Research datasets, surveys, and statistical data"
+      icon: <Newspaper className="w-8 h-8" />,
+      title: "Grey Research",
+      description: "Dissertations, thesis, and projects\nby students"
     },
     {
       icon: <Image className="w-8 h-8" />,
-      title: "Images & Graphics",
-      description: "Research images, diagrams, charts, and visual content"
-    },
-    {
-      icon: <Video className="w-8 h-8" />,
-      title: "Videos & Films",
-      description: "Educational videos, documentaries, and research films"
+      title: "Audio Visuals",
+      description: "Educational videos, charts, diagrams, photographs, documentaries"
     },
     {
       icon: <Music className="w-8 h-8" />,
       title: "Audio Content",
       description: "Research interviews, lectures, and audio materials"
+    },
+    {
+      icon: <Database className="w-8 h-8" />,
+      title: "Datasets",
+      description: "Research datasets, surveys, and statistical data"
     }
   ];
 
@@ -125,11 +126,7 @@ const Services: React.FC = () => {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-green-50 via-green-100 to-emerald-50 section-padding relative overflow-hidden">
-        {/* Decorative gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-br from-vedra-hunter/10 via-vedra-calpoly/15 to-emerald-400/10 z-0"></div>
-        <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-transparent via-green-200/20 to-transparent z-0"></div>
-        
+      <section className="bg-gradient-to-br from-primary-50 via-vedra-floral to-secondary-50 section-padding">
         <div className="container-custom relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -137,7 +134,7 @@ const Services: React.FC = () => {
             transition={{ duration: 0.8 }}
             className="text-center max-w-4xl mx-auto"
           >
-            <h1 className="text-5xl lg:text-6xl font-bold text-vedra-night mb-6 font-ibm-plex">
+            <h1 className="text-5xl lg:text-6xl font-bold text-vedra-night mb-6 mt-12 font-ibm-plex">
               DOI Services for <span className="text-gradient">Indian Research</span>
             </h1>
             <p className="text-xl text-vedra-night leading-relaxed mb-8 font-inter">
@@ -149,9 +146,9 @@ const Services: React.FC = () => {
       </section>
 
       {/* Service Types */}
-      <section className="bg-gradient-to-r from-green-50 via-vedra-floral to-emerald-50 section-padding relative overflow-hidden">
+      <section className="section-padding relative bg-neutral-200 overflow-hidden">
         {/* Decorative elements */}
-        <div className="absolute inset-0 bg-gradient-to-br from-vedra-hunter/5 via-transparent to-vedra-calpoly/5 z-0"></div>
+        <div className="absolute inset-0 z-0"></div>
         
         <div className="container-custom relative z-10">
           <motion.div
@@ -176,7 +173,7 @@ const Services: React.FC = () => {
                 className={`px-6 py-3 rounded-lg font-medium transition-all duration-200 font-inter ${
                   activeTab === type.id
                     ? 'bg-gradient-to-r from-vedra-hunter to-vedra-calpoly text-white shadow-lg transform scale-105'
-                    : 'bg-neutral-100 text-neutral-700 hover:bg-neutral-200 hover:shadow-md'
+                    : 'bg-neutral-400 text-neutral-800 hover:bg-neutral-500 hover:shadow-md'
                 }`}
               >
                 {type.title}
@@ -252,9 +249,9 @@ const Services: React.FC = () => {
       </section>
 
       {/* Process Section */}
-      <section className="bg-gradient-to-br from-green-50 via-vedra-floral to-emerald-50 section-padding relative overflow-hidden">
+      <section className="section-padding relative bg-neutral-200 overflow-hidden">
         {/* Decorative gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-br from-vedra-hunter/8 via-transparent to-vedra-calpoly/8 z-0"></div>
+        <div className="absolute inset-0 z-0"></div>
         
         <div className="container-custom relative z-10">
           <motion.div

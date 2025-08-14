@@ -10,8 +10,10 @@ import {
   CheckCircle,
   BookOpen,
   Shield,
+  Mail,
   Heart
 } from 'lucide-react';
+import { FaXTwitter, FaLinkedinIn, FaInstagram, FaEnvelope, FaGithub } from "react-icons/fa6";
 
 const About: React.FC = () => {
   const values = [
@@ -39,19 +41,14 @@ const About: React.FC = () => {
 
   const milestones = [
     {
-      year: "2024",
+      year: "2025",
       title: "Company Founded",
-      description: "mVEDRA established with the vision to democratize DOI services in India."
-    },
-    {
-      year: "2024",
-      title: "DOI Foundation Partnership",
-      description: "Became a member of the DOI Foundation to provide official DOI services."
+      description: "Vedra established with the vision to democratize DOI services in India."
     },
     {
       year: "2025",
-      title: "Government Partnerships",
-      description: "Partnered with state governments to sponsor DOI services for researchers."
+      title: "DOI Foundation Partnership",
+      description: "Became a member of a DOI Foundation Registered Agency to provide official DOI services."
     },
     {
       year: "2026",
@@ -63,21 +60,30 @@ const About: React.FC = () => {
   const team = [
     {
       name: "Ajeant Sharma",
-      role: "CEO",
-      description: "Leading mVEDRA's mission to democratize research indexing in India.",
-      photo: "/ajeant-ceo.jpg"
+      role: "Founder & CEO",
+      description: "Leading Vedra's mission to democratize research indexing in India.",
+      photo: "/ajeant-ceo.jpg",
+      linkedin: "https://www.linkedin.com/in/ajeant/",
+      github:"",
+      email: "founder@mvedra.com"
     },
     {
       name: "Jeet Bhatkar",
       role: "CTO",
       description: "Technology expert specializing in digital archiving and indexing systems.",
-      photo: "/jeet-cto.jpeg"
+      photo: "/jeet-cto.jpg",
+      linkedin: "https://www.linkedin.com/in/jeetbhatkar/",
+      github:"https://github.com/jeetbhatkar2004",
+      email: "founder@mvedra.com"
     },
     {
       name: "Umang Agarwal",
       role: "CFO",
       description: "Managing financial operations and strategic partnerships for sustainable growth.",
-      photo: null
+      photo: null,
+      linkedin: "",
+      github:"",
+      email: "founder@mvedra.com"
     }
   ];
 
@@ -92,7 +98,7 @@ const About: React.FC = () => {
             transition={{ duration: 0.8 }}
             className="text-center max-w-4xl mx-auto"
           >
-            <h1 className="text-5xl lg:text-6xl font-bold text-vedra-night mb-6 font-ibm-plex">
+            <h1 className="text-5xl lg:text-6xl font-bold text-vedra-night mb-6 mt-10 font-ibm-plex">
               About <span className="text-gradient">mVEDRA</span>
             </h1>
             <p className="text-xl text-vedra-night leading-relaxed mb-8 font-inter">
@@ -261,7 +267,7 @@ const About: React.FC = () => {
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid md:grid-cols-3 lg:grid-cols-3 gap-8">
             {milestones.map((milestone, index) => (
               <motion.div
                 key={index}
@@ -307,33 +313,54 @@ const About: React.FC = () => {
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-3 gap-8 justify-items-center">
             {team.map((member, index) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="card p-6 text-center"
+                className="relative bg-white rounded-2xl shadow-xl px-8 pt-20 pb-10 text-center"
               >
-                <div className="w-20 h-20 bg-vedra-hunter rounded-full mx-auto mb-4 flex items-center justify-center overflow-hidden">
+                <div className="w-28 h-28 rounded-full overflow-hidden shadow-lg bg-vedra-hunter absolute left-1/2 -translate-x-1/2 -top-6">
                   {member.photo ? (
                     <img 
                       src={member.photo} 
                       alt={member.name}
-                      className="w-full h-full object-cover rounded-full"
+                      className="w-full h-full object-cover"
                     />
                   ) : (
-                    <Users className="w-10 h-10 text-white" />
+                    <div className='w-full h-full flex items-center justify-center'>
+                      <Users className="w-10 h-10 text-white" />
+                    </div>
                   )}
                 </div>
-                <h3 className="text-xl font-semibold text-vedra-night mb-2 font-ibm-plex">
+                <h3 className="mt-8 text-2xl font-semibold text-vedra-night font-ibm-plex">
                   {member.name}
                 </h3>
-                <p className="text-vedra-hunter font-medium mb-3 font-inter">
+                <p className="text-vedra-hunter font-medium mt-1 mb-3 font-inter">
                   {member.role}
                 </p>
-                <p className="text-vedra-night text-sm leading-relaxed font-inter">
+                <div className="mt-4 mb-6 flex justify-center gap-5">
+                  {member.linkedin && (
+                    <a href={member.linkedin} target="_blank" rel="noopener noreferrer"
+                      className="text-vedra-hunter/90 hover:text-vedra-hunter">
+                      <FaLinkedinIn className="w-5 h-5" />
+                    </a>
+                  )}
+                  {member.github && (
+                    <a href={member.github} target="_blank" rel="noopener noreferrer"
+                      className="text-vedra-hunter/90 hover:text-vedra-hunter">
+                      <FaGithub className="w-5 h-5" />
+                    </a>
+                  )}
+                  {member.email && (
+                    <a href={`mailto:${member.email}`} className="text-vedra-hunter/90 hover:text-vedra-hunter">
+                      <Mail className="w-5 h-5" />
+                    </a>
+                  )}
+                </div>
+                <p className="mt-5 text-vedra-night leading-relaxed font-inter max-w-[44ch] mx-auto">
                   {member.description}
                 </p>
               </motion.div>
@@ -373,8 +400,8 @@ const About: React.FC = () => {
                 <div className="text-white/70 font-inter">Institutions</div>
               </div>
               <div className="text-center">
-                <div className="text-3xl lg:text-4xl font-bold text-white/90 mb-2 font-ibm-plex">98%</div>
-                <div className="text-white/70 font-inter">Satisfaction Rate</div>
+                <div className="text-3xl lg:text-4xl font-bold text-white/90 mb-2 font-ibm-plex">2400+</div>
+                <div className="text-white/70 font-inter">Hours Saved</div>
               </div>
             </div>
           </motion.div>

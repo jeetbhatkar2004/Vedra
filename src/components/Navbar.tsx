@@ -47,7 +47,7 @@ const Navbar: React.FC = () => {
             <img 
               src="/vedrawebsite_transparent.png" 
               alt="mVEDRA Icon" 
-              className="h-10 w-auto"
+              className="h-8 w-auto"
             />
             <div className="flex items-center">
               <span className="font-jsmath text-2xl text-black mt-1">m</span>
@@ -74,10 +74,10 @@ const Navbar: React.FC = () => {
 
           {/* CTA Buttons */}
           <div className="hidden md:flex items-center space-x-4">
-            <Link to="/dashboard" className="btn-secondary">
+            <Link to="/dashboard" className="btn-secondary h-12 items-center justify-center flex">
               Dashboard
             </Link>
-            <Link to="/services" className="btn-primary">
+            <Link to="/services" className="btn-primary h-12 items-center justify-center flex">
               Get Started
             </Link>
           </div>

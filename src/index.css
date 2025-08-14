@@ -8,19 +8,20 @@
   html {
     font-family: 'IBM Plex Sans', sans-serif;
     scroll-behavior: smooth;
+    font-size: 95%;
   }
   
   body {
-    @apply bg-vedra-floral text-vedra-night font-ibm-plex;
+    background-color: white;
   }
   
-  /* Ensure navbar stays on top with proper separation */
+  /* Ensure navbar stays on top but doesn't interfere with Dashboard */
   nav {
-    z-index: 9999 !important;
     position: fixed !important;
     top: 0 !important;
     left: 0 !important;
     right: 0 !important;
+    z-index: 50 !important;
   }
   
   /* Add box-shadow only when not on homepage */
@@ -34,27 +35,20 @@
     border: none !important;
   }
   
-  /* Ensure main content has proper spacing from navbar */
+  /* Main content spacing - only apply when navbar is present */
   main {
-    padding-top: 5rem !important;
     position: relative;
     z-index: 1;
-    margin-top: 0 !important;
   }
   
-  /* Ensure first section has extra top padding */
+  /* Ensure first section has proper spacing */
   main > div > section:first-child {
     padding-top: 2rem !important;
   }
   
-  /* Ensure absolutely positioned elements don't interfere with navbar */
+  /* Ensure absolutely positioned elements don't interfere */
   main .absolute {
     z-index: 1 !important;
-  }
-  
-  /* Ensure no content interferes with fixed navbar */
-  .fixed {
-    position: fixed !important;
   }
   
   /* Additional z-index management */
@@ -70,10 +64,6 @@
     z-index: 1000 !important;
   }
   
-  .z-9999 {
-    z-index: 9999 !important;
-  }
-  
   /* Ensure all content stays below navbar */
   * {
     box-sizing: border-box;
@@ -87,6 +77,26 @@
   /* Ensure sections and other content don't overlap navbar */
   section, div, header, footer {
     position: relative;
+    z-index: 1;
+  }
+  
+  /* Dashboard-specific isolation */
+  .dashboard-wrapper {
+    position: relative;
+    z-index: 1;
+    isolation: isolate;
+  }
+  
+  .dashboard-wrapper * {
+    position: relative;
+    z-index: 1;
+  }
+  
+  .dashboard-wrapper header {
+    z-index: 10;
+  }
+  
+  .dashboard-wrapper .container-custom {
     z-index: 1;
   }
 }
@@ -127,7 +137,7 @@
   }
   
   .bg-radial-gradient {
-    background: radial-gradient(circle at center, var(--tw-gradient-from), var(--tw-gradient-via), var(--tw-gradient-to));
+    background-color: white;
   }
   
   .text-white-on-green {

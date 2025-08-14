@@ -15,18 +15,22 @@ function AppContent() {
   const isHomePage = location.pathname === '/';
 
   return (
-    <div className={`min-h-screen flex flex-col ${isHomePage ? 'bg-gradient-to-br from-green-100 via-white to-green-50' : ''}`}>
-      {/* Enhanced gradient overlay for homepage only */}
+    <div className="min-h-screen flex flex-col">
+      {/* Homepage-specific background and overlays */}
       {isHomePage && (
         <>
-          <div className="fixed inset-0 bg-gradient-to-br from-vedra-hunter/20 via-white/80 to-emerald-400/15 z-0"></div>
-          <div className="fixed top-0 left-0 w-full h-full bg-gradient-to-r from-green-200/20 via-white/90 to-green-200/20 z-0"></div>
-          <div className="fixed top-0 left-0 w-full h-full bg-radial-gradient from-white/70 via-transparent to-green-100/30 z-0"></div>
+          <div className="fixed inset-0 bg-gradient-to-br from-green-100 via-white to-green-50 -z-10"></div>
+          <div className="fixed inset-0 bg-gradient-to-br from-vedra-hunter/20 via-white/80 to-emerald-400/15 -z-10"></div>
+          <div className="fixed inset-0 bg-gradient-to-r from-green-200/20 via-white/90 to-green-200/20 -z-10"></div>
+          <div className="fixed inset-0 bg-radial-gradient from-white/70 via-transparent to-green-100/30 -z-10"></div>
         </>
       )}
       
+      {/* Navbar - only show when not on Dashboard */}
       {!isDashboard && <Navbar />}
-      <main className={`flex-grow relative z-10 ${isDashboard ? 'pt-0' : ''}`}>
+      
+      {/* Main content area */}
+      <main className={`flex-grow ${isDashboard ? 'pt-0' : 'pt-20'}`}>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
@@ -36,6 +40,8 @@ function AppContent() {
           <Route path="/dashboard" element={<Dashboard />} />
         </Routes>
       </main>
+      
+      {/* Footer - only show when not on Dashboard */}
       {!isDashboard && <Footer />}
     </div>
   );

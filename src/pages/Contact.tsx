@@ -10,6 +10,7 @@ import {
   CheckCircle,
   AlertCircle
 } from 'lucide-react';
+import Cal from "@calcom/embed-react";
 
 const Contact: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -61,6 +62,12 @@ const Contact: React.FC = () => {
       title: "Email Us",
       details: ["contact@mvedra.com"],
       description: "Get in touch with our team"
+    },
+    {
+      icon: <Phone className="w-6 h-6" />,
+      title: "Call Us",
+      details: ["+91 96540 07695"],
+      description: "Business Hours: 11:00AM - 6:00PM"
     }
   ];
 
@@ -86,7 +93,7 @@ const Contact: React.FC = () => {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-primary-50 via-white to-secondary-50 section-padding">
+      <section className="bg-gradient-to-br from-primary-50 via-vedra-floral to-secondary-50 section-padding">
         <div className="container-custom">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -94,7 +101,7 @@ const Contact: React.FC = () => {
             transition={{ duration: 0.8 }}
             className="text-center max-w-4xl mx-auto"
           >
-            <h1 className="text-5xl lg:text-6xl font-bold text-gray-900 mb-6">
+            <h1 className="text-5xl lg:text-6xl font-bold text-gray-900 mb-6 mt-12">
               Get in <span className="text-gradient">Touch</span>
             </h1>
             <p className="text-xl text-gray-600 leading-relaxed mb-8">
@@ -106,7 +113,7 @@ const Contact: React.FC = () => {
       </section>
 
       {/* Contact Information */}
-      <section className="bg-white section-padding">
+      <section className="bg-neutral-100 section-padding">
         <div className="container-custom">
           <div className="grid md:grid-cols-2 gap-8">
             {contactInfo.map((info, index) => (
@@ -140,7 +147,7 @@ const Contact: React.FC = () => {
       </section>
 
       {/* Contact Form & Support Topics */}
-      <section className="bg-gray-50 section-padding">
+      <section className="bg-white section-padding">
         <div className="container-custom">
           <div className="grid lg:grid-cols-2 gap-12">
             {/* Contact Form */}
@@ -149,147 +156,20 @@ const Contact: React.FC = () => {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8 }}
             >
-              <div className="bg-white rounded-2xl p-8 shadow-lg">
+              <div className="bg-white rounded-2xl p-8 shadow-lg h-full">
                 <h2 className="text-3xl font-bold text-gray-900 mb-6">
-                  Send us a Message
+                   Book a Call
                 </h2>
-                
-                {submitStatus === 'success' && (
-                  <div className="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg flex items-center space-x-3">
-                    <CheckCircle className="w-5 h-5 text-green-500" />
-                    <span className="text-green-700">Thank you! Your message has been sent successfully.</span>
-                  </div>
-                )}
 
-                {submitStatus === 'error' && (
-                  <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg flex items-center space-x-3">
-                    <AlertCircle className="w-5 h-5 text-red-500" />
-                    <span className="text-red-700">Something went wrong. Please try again.</span>
-                  </div>
-                )}
-
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  <div className="grid md:grid-cols-2 gap-6">
-                    <div>
-                      <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
-                        Full Name *
-                      </label>
-                      <input
-                        type="text"
-                        id="name"
-                        name="name"
-                        value={formData.name}
-                        onChange={handleInputChange}
-                        required
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                        placeholder="Enter your full name"
-                      />
-                    </div>
-                    
-                    <div>
-                      <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
-                        Email Address *
-                      </label>
-                      <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        value={formData.email}
-                        onChange={handleInputChange}
-                        required
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                        placeholder="Enter your email"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="grid md:grid-cols-2 gap-6">
-                    <div>
-                      <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-2">
-                        Phone Number
-                      </label>
-                      <input
-                        type="tel"
-                        id="phone"
-                        name="phone"
-                        value={formData.phone}
-                        onChange={handleInputChange}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                        placeholder="Enter your phone number"
-                      />
-                    </div>
-                    
-                    <div>
-                      <label htmlFor="organization" className="block text-sm font-medium text-gray-700 mb-2">
-                        Organization
-                      </label>
-                      <input
-                        type="text"
-                        id="organization"
-                        name="organization"
-                        value={formData.organization}
-                        onChange={handleInputChange}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                        placeholder="Enter your organization"
-                      />
-                    </div>
-                  </div>
-
-                  <div>
-                    <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-2">
-                      Subject *
-                    </label>
-                    <select
-                      id="subject"
-                      name="subject"
-                      value={formData.subject}
-                      onChange={handleInputChange}
-                      required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                    >
-                      <option value="">Select a subject</option>
-                      <option value="doi-generation">DOI Generation</option>
-                      <option value="pricing">Pricing & Plans</option>
-                      <option value="technical-support">Technical Support</option>
-                      <option value="partnership">Partnership</option>
-                      <option value="general">General Inquiry</option>
-                    </select>
-                  </div>
-
-                  <div>
-                    <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
-                      Message *
-                    </label>
-                    <textarea
-                      id="message"
-                      name="message"
-                      value={formData.message}
-                      onChange={handleInputChange}
-                      required
-                      rows={6}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                      placeholder="Tell us how we can help you..."
-                    />
-                  </div>
-
-                  <button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className="w-full btn-primary flex items-center justify-center"
-                  >
-                    {isSubmitting ? (
-                      <>
-                        <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>
-                        Sending...
-                      </>
-                    ) : (
-                      <>
-                        Send Message
-                        <Send className="ml-2 w-5 h-5" />
-                      </>
-                    )}
-                  </button>
-                </form>
+                <Cal
+                  namespace="15min"
+                  calLink="ajeant/15min"
+                  style={{ width: "100%", height: "700px", overflow: "hidden" }}
+                  config={{
+                    layout: "month_view",
+                    theme: "light"
+                  }}
+                />
               </div>
             </motion.div>
 
@@ -338,7 +218,7 @@ const Contact: React.FC = () => {
                   <div className="space-y-3">
                     <div className="flex items-center space-x-3">
                       <Phone className="w-5 h-5" />
-                      <span className="font-inter">+91 98765 43210</span>
+                      <span className="font-inter">+91 96540 07695</span>
                     </div>
                     <div className="flex items-center space-x-3">
                       <Mail className="w-5 h-5" />

@@ -47,10 +47,8 @@ const Home: React.FC = () => {
   const benefits = [
     "Affordable pricing for Indian researchers",
     "Local customer support in Hindi & English",
-    "GST compliant invoicing",
-    "Payment in INR through UPI/Bank Transfer",
-    "Bulk DOI generation for institutions",
-    "Government-sponsored programs available"
+    "Payment in INR through UPI",
+    "Bulk DOI generation for institutions"
   ];
 
   return (
@@ -72,8 +70,7 @@ const Home: React.FC = () => {
                   <span className="text-vedra-night">Indexing Solution</span>
                 </h1>
                 <p className="text-xl text-vedra-night leading-relaxed font-inter">
-                  Empowering Indian researchers with affordable and globally accessible DOI indexing solutions. 
-                  Making research discoverable worldwide without the need for foreign vendors.
+                  Empowering Indian researchers with affordable and globally accessible DOI indexing solutions.
                 </p>
               </div>
               
@@ -105,10 +102,10 @@ const Home: React.FC = () => {
               transition={{ duration: 0.8, delay: 0.2 }}
               className="relative"
             >
-              <div className="bg-gradient-to-br from-vedra-floral to-green-50 rounded-2xl shadow-2xl p-8 border border-green-200">
+              <div className="bg-gradient-to-br from-vedra-floral to-green-50 rounded-2xl shadow-2xl p-8 border border-black-200">
                 <div className="space-y-6">
                   <div className="flex items-center space-x-3">
-                    <div className="w-12 h-12 bg-gradient-to-br from-vedra-hunter to-vedra-calpoly rounded-lg flex items-center justify-center">
+                    <div className="w-11 h-11 bg-gradient-to-br from-vedra-hunter to-vedra-calpoly rounded-lg flex items-center justify-center">
                       <BookOpen className="w-6 h-6 text-white/90" />
                     </div>
                     <div>
@@ -204,11 +201,9 @@ const Home: React.FC = () => {
       </section>
 
       {/* Benefits Section */}
-      <section className="bg-gradient-to-br from-white via-gray-50 to-slate-50 section-padding relative z-10 py-24">
+      <section className="section-padding relative bg-neutral-200 overflow-hidden">
         {/* Decorative gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-br from-vedra-hunter/3 via-vedra-calpoly/5 to-emerald-400/3 z-0"></div>
-        <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-transparent via-gray-100/20 to-transparent z-0"></div>
-        
+
         <div className="container-custom relative z-10">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <motion.div
