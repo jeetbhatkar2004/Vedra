@@ -7,7 +7,6 @@ import {
   Shield, 
   Users, 
   TrendingUp, 
-  Award,
   ArrowRight,
   CheckCircle,
   Star

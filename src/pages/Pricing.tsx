@@ -1,10 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 import { 
   CheckCircle, 
-  X, 
   Star, 
-  Users, 
   Building, 
   BookOpen,
   ArrowRight,
@@ -15,8 +13,6 @@ import {
 } from 'lucide-react';
 
 const Pricing: React.FC = () => {
-  const [billingCycle, setBillingCycle] = useState('monthly');
-
   const plans = [
     {
       name: "Institution",

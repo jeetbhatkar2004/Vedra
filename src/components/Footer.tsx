@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { BookOpen, Mail, Phone, MapPin } from 'lucide-react';
+import { Mail, Phone } from 'lucide-react';
 import { FaXTwitter, FaLinkedinIn, FaInstagram } from "react-icons/fa6";
 
 const Footer: React.FC = () => {
@@ -12,6 +12,7 @@ const Footer: React.FC = () => {
           <div className="space-y-4">
             <img
               src="vedraWebsitelogoW.png"
+              alt="Vedra Logo"
               className='mb-4 w-32 h-auto'
             />
             <p className="text-vedra-floral text-white/90 text-sm leading-relaxed font-inter">

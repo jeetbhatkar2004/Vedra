@@ -18,10 +18,6 @@ import {
   Bell,
   User,
   LogOut,
-  Calendar,
-  Clock,
-  CheckCircle,
-  AlertCircle,
   ArrowLeft
 } from 'lucide-react';
 

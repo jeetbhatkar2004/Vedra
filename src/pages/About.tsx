@@ -5,15 +5,12 @@ import {
   Eye, 
   Users, 
   Globe, 
-  Award, 
-  TrendingUp,
   CheckCircle,
-  BookOpen,
   Shield,
   Mail,
   Heart
 } from 'lucide-react';
-import { FaXTwitter, FaLinkedinIn, FaInstagram, FaEnvelope, FaGithub } from "react-icons/fa6";
+import { FaLinkedinIn, FaGithub } from "react-icons/fa6";
 
 const About: React.FC = () => {
   const values = [

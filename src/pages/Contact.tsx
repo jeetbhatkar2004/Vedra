@@ -2,13 +2,7 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { 
   Mail, 
-  Phone, 
-  MapPin, 
-  Clock, 
-  MessageSquare,
-  Send,
-  CheckCircle,
-  AlertCircle
+  Phone
 } from 'lucide-react';
 import Cal from "@calcom/embed-react";
 
@@ -21,40 +15,6 @@ const Contact: React.FC = () => {
     subject: '',
     message: ''
   });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    
-    // Simulate form submission
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setSubmitStatus('success');
-      setFormData({
-        name: '',
-        email: '',
-        phone: '',
-        organization: '',
-        subject: '',
-        message: ''
-      });
-      
-      // Reset success message after 5 seconds
-      setTimeout(() => {
-        setSubmitStatus('idle');
-      }, 5000);
-    }, 2000);
-  };
 
   const contactInfo = [
     {

@@ -4,7 +4,6 @@ import {
   BookOpen, 
   FileText, 
   Image, 
-  Video, 
   Music, 
   Database,
   Users,
@@ -12,10 +11,6 @@ import {
   Globe,
   Shield,
   Zap,
-  CheckCircle,
-  ArrowRight,
-  Download,
-  Upload,
   Search,
   Newspaper
 } from 'lucide-react';
