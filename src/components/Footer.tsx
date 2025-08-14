@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Mail, Phone } from 'lucide-react';
+import { Mail, Phone, MapPin } from 'lucide-react';
 import { FaXTwitter, FaLinkedinIn, FaInstagram } from "react-icons/fa6";
 
 const Footer: React.FC = () => {
