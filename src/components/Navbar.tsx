@@ -49,10 +49,6 @@ const Navbar: React.FC = () => {
               alt="mVEDRA Icon" 
               className="h-7 w-auto"
             />
-            <div className="flex items-center">
-              <span className="font-jsmath text-2xl text-black mt-1">m</span>
-              <span className="font-inter text-2xl font-bold text-black">Vedra</span>
-            </div>
           </Link>
 
           {/* Desktop Navigation */}
