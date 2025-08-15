@@ -45,7 +45,7 @@ const Navbar: React.FC = () => {
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-3">
             <img 
-              src="/vedraWebsitelogo.jpg" 
+              src="/vedraWebsitelogo.png" 
               alt="mVEDRA Icon" 
               className="h-7 w-auto"
             />
