@@ -1,5 +1,3 @@
-//TODO: Fix the dashboard
-
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
@@ -119,10 +117,10 @@ const Dashboard: React.FC = () => {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
-      className="space-y-8"
+      className="space-y-6 sm:space-y-8"
     >
       {/* Stats Cards */}
-      <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
         {stats.map((stat, index) => (
           <motion.div
             key={index}
@@ -174,7 +172,7 @@ const Dashboard: React.FC = () => {
       </div>
 
       {/* Quick Stats */}
-      <div className="grid md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
         <div className="bg-white rounded-xl shadow-sm p-6">
           <h3 className="text-lg font-bold text-gray-900 mb-4">DOI Growth</h3>
           <div className="space-y-3">
@@ -219,11 +217,11 @@ const Dashboard: React.FC = () => {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
-      className="space-y-6"
+      className="space-y-4 sm:space-y-6"
     >
       {/* Search and Filters */}
       <div className="bg-white rounded-xl shadow-sm p-6">
-        <div className="flex flex-col md:flex-row gap-4">
+        <div className="flex flex-col sm:flex-row gap-4">
           <div className="flex-1">
             <div className="relative">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400 z-10" />
@@ -326,7 +324,7 @@ const Dashboard: React.FC = () => {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
-      className="space-y-6"
+      className="space-y-4 sm:space-y-6"
     >
       <div className="bg-white rounded-xl shadow-sm p-6">
         <h2 className="text-xl font-bold text-gray-900 mb-4">Analytics Dashboard</h2>
@@ -340,7 +338,7 @@ const Dashboard: React.FC = () => {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
-      className="space-y-6"
+      className="space-y-4 sm:space-y-6"
     >
       <div className="bg-white rounded-xl shadow-sm p-6">
         <h2 className="text-xl font-bold text-gray-900 mb-4">Account Settings</h2>
@@ -354,35 +352,32 @@ const Dashboard: React.FC = () => {
       {/* Header */}
       <header className="bg-vedra-floral shadow-sm border-b border-neutral-200">
         <div className="container-custom">
-          <div className="flex items-center justify-between py-4">
-            <div className="flex items-center space-x-4">
+          {/* Top Row - Logo and Actions */}
+          <div className="flex items-center justify-between py-3">
+            <div className="flex items-center space-x-3">
               <Link to="/" className="hover:bg-white/50 p-2 rounded-lg transition-colors">
-                <ArrowLeft className="w-6 h-6 text-vedra-night" />
+                <ArrowLeft className="w-5 h-5 text-vedra-night" />
               </Link>
-              <div className="flex items-center space-x-3">
+              <div className="flex items-center space-x-2">
                 <img 
                   src="/vedrawebsite_transparent.png" 
                   alt="mVEDRA Icon" 
-                  className="h-10 w-auto"
+                  className="h-8 w-auto"
                 />
                 <div className="flex items-center">
-                  <span className="font-jsmath text-2xl text-black mt-1">m</span>
-                  <span className="font-inter text-2xl font-bold text-black">Vedra</span>
+                  <span className="font-jsmath text-lg text-black mt-1">m</span>
+                  <span className="font-inter text-lg font-bold text-black">Vedra</span>
                 </div>
-              </div>
-              <div>
-                <h1 className="text-xl font-bold text-vedra-night font-ibm-plex">mVEDRA Dashboard</h1>
-                <p className="text-sm text-neutral-600 font-inter">Welcome back, Dr. Rajesh Kumar</p>
               </div>
             </div>
             
-            <div className="flex items-center space-x-4">
+            <div className="flex items-center space-x-2">
               <button className="p-2 text-neutral-600 hover:text-vedra-night hover:bg-white/50 rounded-lg transition-colors">
-                <Bell className="w-5 h-5" />
+                <Bell className="w-4 h-4" />
               </button>
-              <div className="flex items-center space-x-2">
-                <div className="w-8 h-8 bg-gradient-to-br from-vedra-hunter to-vedra-calpoly rounded-full flex items-center justify-center">
-                  <User className="w-4 h-4 text-white/90" />
+              <div className="flex items-center space-x-1">
+                <div className="w-7 h-7 bg-gradient-to-br from-vedra-hunter to-vedra-calpoly rounded-full flex items-center justify-center">
+                  <User className="w-3 h-3 text-white/90" />
                 </div>
                 <button className="p-2 text-neutral-600 hover:text-vedra-night hover:bg-white/50 rounded-lg transition-colors">
                   <LogOut className="w-4 h-4" />
@@ -390,59 +385,64 @@ const Dashboard: React.FC = () => {
               </div>
             </div>
           </div>
+          
+          {/* Title and Welcome Message */}
+          <div className="pb-3">
+            <h1 className="text-lg font-bold text-vedra-night font-ibm-plex">mVEDRA Dashboard</h1>
+            <p className="text-sm text-neutral-600 font-inter">Welcome back, Dr. Rajesh Kumar</p>
+          </div>
+          
+          {/* Navigation Tabs */}
+          <div className="flex items-center space-x-1 pb-4 overflow-x-auto">
+            {tabs.map((tab) => (
+              <button
+                key={tab.id}
+                onClick={() => setActiveTab(tab.id)}
+                className={`flex items-center space-x-1 px-3 py-2 rounded-lg font-medium transition-colors whitespace-nowrap ${
+                  activeTab === tab.id
+                    ? 'bg-white text-vedra-hunter shadow-sm'
+                    : 'text-neutral-600 hover:bg-white/50 hover:text-vedra-night'
+                }`}
+              >
+                {tab.icon}
+                <span className="text-sm">{tab.name}</span>
+              </button>
+            ))}
+          </div>
         </div>
       </header>
 
       {/* Main Content */}
-      <div className="container-custom py-8">
-        <div className="grid lg:grid-cols-4 gap-8">
-          {/* Sidebar */}
-          <div className="lg:col-span-1">
-            <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
-              <nav className="space-y-2">
-                {tabs.map((tab) => (
-                  <button
-                    key={tab.id}
-                    onClick={() => setActiveTab(tab.id)}
-                    className={`w-full flex items-center space-x-3 px-4 py-3 rounded-lg font-medium transition-colors ${
-                      activeTab === tab.id
-                        ? 'bg-primary-50 text-primary-600'
-                        : 'text-gray-600 hover:bg-gray-50'
-                    }`}
-                  >
-                    {tab.icon}
-                    <span>{tab.name}</span>
-                  </button>
-                ))}
-              </nav>
-
-              <div className="mt-8 pt-6 border-t border-gray-200">
-                <h3 className="text-sm font-semibold text-gray-900 mb-3">Quick Actions</h3>
-                <div className="space-y-2">
-                  <button className="w-full flex items-center space-x-3 px-4 py-2 text-sm text-gray-600 hover:bg-gray-50 rounded-lg transition-colors">
-                    <Plus className="w-4 h-4" />
-                    <span>Create New DOI</span>
-                  </button>
-                  <button className="w-full flex items-center space-x-3 px-4 py-2 text-sm text-gray-600 hover:bg-gray-50 rounded-lg transition-colors">
-                    <Download className="w-4 h-4" />
-                    <span>Export Data</span>
-                  </button>
-                  <button className="w-full flex items-center space-x-3 px-4 py-2 text-sm text-gray-600 hover:bg-gray-50 rounded-lg transition-colors">
-                    <Settings className="w-4 h-4" />
-                    <span>Account Settings</span>
-                  </button>
-                </div>
+      <div className="container-custom py-4 sm:py-8">
+        {/* Quick Actions Bar */}
+        <div className="mb-6">
+          <div className="bg-white rounded-xl shadow-sm p-4 border border-gray-100">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+              <h3 className="text-sm font-semibold text-gray-900">Quick Actions</h3>
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 sm:gap-3">
+                <button className="flex items-center justify-center space-x-2 px-3 py-2 text-sm text-gray-600 hover:bg-gray-50 rounded-lg transition-colors border border-gray-200">
+                  <Plus className="w-4 h-4" />
+                  <span>Create New DOI</span>
+                </button>
+                <button className="flex items-center justify-center space-x-2 px-3 py-2 text-sm text-gray-600 hover:bg-gray-50 rounded-lg transition-colors border border-gray-200">
+                  <Download className="w-4 h-4" />
+                  <span>Export Data</span>
+                </button>
+                <button className="flex items-center justify-center space-x-2 px-3 py-2 text-sm text-gray-600 hover:bg-gray-50 rounded-lg transition-colors border border-gray-200">
+                  <Settings className="w-4 h-4" />
+                  <span>Account Settings</span>
+                </button>
               </div>
             </div>
           </div>
+        </div>
 
-          {/* Main Content Area */}
-          <div className="lg:col-span-3">
-            {activeTab === 'overview' && renderOverviewTab()}
-            {activeTab === 'dois' && renderDOIsTab()}
-            {activeTab === 'analytics' && renderAnalyticsTab()}
-            {activeTab === 'settings' && renderSettingsTab()}
-          </div>
+        {/* Main Content Area */}
+        <div className="w-full">
+          {activeTab === 'overview' && renderOverviewTab()}
+          {activeTab === 'dois' && renderDOIsTab()}
+          {activeTab === 'analytics' && renderAnalyticsTab()}
+          {activeTab === 'settings' && renderSettingsTab()}
         </div>
       </div>
     </div>
