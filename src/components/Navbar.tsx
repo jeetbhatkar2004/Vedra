@@ -41,7 +41,7 @@ const Navbar: React.FC = () => {
   return (
     <nav className={`fixed top-0 left-0 right-0 z-[9999] transition-all duration-300 ${getNavbarClasses()}`}>
       <div className="container-custom">
-        <div className="flex justify-between items-center py-4">
+        <div className="flex justify-between items-center py-3 sm:py-4">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-3">
             <img 
@@ -81,7 +81,7 @@ const Navbar: React.FC = () => {
           {/* Mobile menu button */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden p-2 rounded-md text-neutral-700 hover:text-vedra-hunter hover:bg-neutral-100"
+            className="md:hidden p-3 rounded-md text-neutral-700 hover:text-vedra-hunter hover:bg-neutral-100"
           >
             {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
@@ -90,7 +90,7 @@ const Navbar: React.FC = () => {
         {/* Mobile Navigation */}
         {isOpen && (
           <div className="md:hidden">
-            <div className={`px-2 pt-2 pb-3 space-y-1 sm:px-3 border-t ${
+            <div className={`px-4 pt-3 pb-4 space-y-1 sm:px-6 border-t ${
               isScrolled || !isHomePage
                 ? 'bg-vedra-floral border-neutral-200' 
                 : 'bg-white/80 backdrop-blur-md border-neutral-200/30'
@@ -99,7 +99,7 @@ const Navbar: React.FC = () => {
                 <Link
                   key={item.name}
                   to={item.href}
-                  className={`block px-3 py-2 rounded-md text-base font-medium transition-colors duration-200 font-inter ${
+                  className={`block px-4 py-3 rounded-md text-base font-medium transition-colors duration-200 font-inter ${
                     isActive(item.href)
                       ? 'text-vedra-hunter bg-primary-50'
                       : 'text-neutral-700 hover:text-vedra-hunter hover:bg-neutral-100'
@@ -109,17 +109,17 @@ const Navbar: React.FC = () => {
                   {item.name}
                 </Link>
               ))}
-              <div className="pt-4 space-y-2">
+              <div className="pt-4 space-y-3">
                 <Link
                   to="/dashboard"
-                  className="block px-3 py-2 rounded-md text-base font-medium text-vedra-hunter hover:bg-primary-50 font-inter"
+                  className="block px-4 py-3 rounded-md text-base font-medium text-vedra-hunter hover:bg-primary-50 font-inter"
                   onClick={() => setIsOpen(false)}
                 >
                   Dashboard
                 </Link>
                 <Link
                   to="/services"
-                  className="block px-3 py-2 rounded-md text-base font-medium bg-vedra-hunter text-white hover:bg-vedra-calpoly font-inter"
+                  className="block px-4 py-3 rounded-md text-base font-medium bg-vedra-hunter text-white hover:bg-vedra-calpoly font-inter"
                   onClick={() => setIsOpen(false)}
                 >
                   Get Started

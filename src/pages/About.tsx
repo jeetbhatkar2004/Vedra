@@ -11,7 +11,7 @@ import {
   Heart
 } from 'lucide-react';
 import { FaLinkedinIn, FaGithub } from "react-icons/fa6";
-
+import DataCiteLogo from '../DataCite-Logos_secondary.svg';
 const About: React.FC = () => {
   const values = [
     {
@@ -44,8 +44,8 @@ const About: React.FC = () => {
     },
     {
       year: "2025",
-      title: "DOI Foundation Partnership",
-      description: "Became a member of a DOI Foundation Registered Agency to provide official DOI services."
+      title: "DataCite Consortium Lead",
+      description: "Established the 1st DataCite Consortium in India, to provide official DOI services."
     },
     {
       year: "2026",
@@ -65,8 +65,17 @@ const About: React.FC = () => {
       email: "founder@mvedra.com"
     },
     {
+      name: "Aditya Rana",
+      role: "Co-Founder & CTO",
+      description: "Technology expert specializing in digital archiving and indexing systems.",
+      photo: "/aditya-cto.jpg",
+      linkedin: "https://www.linkedin.com/in/aditya-rana-043625241/",
+      github:"https://github.com/adityarana-ar",
+      email: "founder@mvedra.com"
+    },
+    {
       name: "Jeet Bhatkar",
-      role: "CTO",
+      role: "Tech Lead",
       description: "Technology expert specializing in digital archiving and indexing systems.",
       photo: "/jeet-cto.jpg",
       linkedin: "https://www.linkedin.com/in/jeetbhatkar/",
@@ -96,11 +105,10 @@ const About: React.FC = () => {
             className="text-center max-w-4xl mx-auto"
           >
             <h1 className="text-5xl lg:text-6xl font-bold text-vedra-night mb-6 mt-10 font-ibm-plex">
-              About <span className="text-gradient">mVEDRA</span>
+              About <span className="text-gradient"><span className="font-jsmath">m</span><span className="font-inter font-bold">Vedra</span></span>
             </h1>
             <p className="text-xl text-vedra-night leading-relaxed mb-8 font-inter">
-              We are on a mission to democratize research indexing in India, making DOI services 
-              accessible, affordable, and locally supported for every researcher and institution.
+            We are India’s bridge to the global DataCite community, enhancing metadata quality to enable open science and advance knowledge.
             </p>
             <div className="flex items-center justify-center space-x-8 text-sm text-neutral-600 font-inter">
               <div className="flex items-center space-x-2">
@@ -136,9 +144,7 @@ const About: React.FC = () => {
                     <h2 className="text-3xl font-bold text-vedra-night font-ibm-plex">Our Mission</h2>
                   </div>
                   <p className="text-lg text-vedra-night leading-relaxed font-inter">
-                    To create an affordable and globally accessible system for indexing and archiving 
-                    research data for the Indian population, eliminating the dependency on expensive 
-                    foreign vendors while maintaining international standards.
+                  To create an affordable and globally accessible system for indexing and archiving research data for the Indian population, improving open access to research and high-quality metadata that enhances visibility, reuse, and collaboration.
                   </p>
                 </div>
 
@@ -148,9 +154,7 @@ const About: React.FC = () => {
                     <h2 className="text-3xl font-bold text-vedra-night font-ibm-plex">Our Vision</h2>
                   </div>
                   <p className="text-lg text-vedra-night leading-relaxed font-inter">
-                    To become the leading DOI service provider in India, empowering researchers 
-                    and institutions to make their work discoverable worldwide while building a 
-                    robust ecosystem for Indian academic excellence.
+                  To be the leading DOI consortium in India, fostering a vibrant research community by enabling affordability, global discoverability, advancing open science, and strengthening collaboration through trusted metadata.
                   </p>
                 </div>
               </div>
@@ -170,8 +174,8 @@ const About: React.FC = () => {
                     <div className="flex items-start space-x-3">
                       <div className="w-2 h-2 bg-white rounded-full mt-2 flex-shrink-0"></div>
                       <div>
-                        <h4 className="font-semibold font-inter">High Costs</h4>
-                        <p className="text-white/80 text-sm font-inter">Foreign DOI services are expensive and charge in USD</p>
+                        <h4 className="font-semibold font-inter">Open Access Research</h4>
+                        <p className="text-white/80 text-sm font-inter">Lack of local DOI infrastructure limits visibility and discoverability.</p>
                       </div>
                     </div>
                     
@@ -186,16 +190,16 @@ const About: React.FC = () => {
                     <div className="flex items-start space-x-3">
                       <div className="w-2 h-2 bg-white rounded-full mt-2 flex-shrink-0"></div>
                       <div>
-                        <h4 className="font-semibold font-inter">Time Zone Issues</h4>
-                        <p className="text-white/80 text-sm font-inter">Customer support in different time zones</p>
+                        <h4 className="font-semibold font-inter">Limited Accessibility</h4>
+                        <p className="text-white/80 text-sm font-inter">Only 20% of Indian researchers currently have digitised research.</p>
                       </div>
                     </div>
                     
                     <div className="flex items-start space-x-3">
                       <div className="w-2 h-2 bg-white rounded-full mt-2 flex-shrink-0"></div>
                       <div>
-                        <h4 className="font-semibold font-inter">Limited Accessibility</h4>
-                        <p className="text-white/80 text-sm font-inter">Only 10,000 out of 50,000 researchers have DOI-compliant research</p>
+                        <h4 className="font-semibold font-inter">High Costs</h4>
+                        <p className="text-white/80 text-sm font-inter">Foreign DOI services are expensive and charge in different currencies.</p>
                       </div>
                     </div>
                   </div>
@@ -205,7 +209,26 @@ const About: React.FC = () => {
           </div>
         </div>
       </section>
-
+      <section className="bg-neutral-200 section-padding">
+        <div className="container-custom">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-4xl font-bold text-vedra-night mb-4 font-ibm-plex">
+              Our Role in the DataCite Community
+            </h2>
+            <p className="text-xl text-vedra-night max-w-3xl mx-auto font-inter">
+              As part of the global DataCite community, mVedra is building India’s DOI consortium. By connecting researchers and institutions to trusted global infrastructure, we ensure research outputs are visible, reusable, and impactful.
+            </p>
+            {/* Added logo below the text */}
+            <img src={DataCiteLogo} alt="DataCite Logo" className="mt-10 mx-auto w-80" />
+          </motion.div>
+        </div>
+      
+      </section>
       {/* Values Section */}
       <section className="bg-neutral-50 section-padding">
         <div className="container-custom">
@@ -310,7 +333,7 @@ const About: React.FC = () => {
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-3 gap-8 justify-items-center">
+          <div className="grid md:grid-cols-4 gap-8 justify-items-center">
             {team.map((member, index) => (
               <motion.div
                 key={index}

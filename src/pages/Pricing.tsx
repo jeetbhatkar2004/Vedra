@@ -7,8 +7,7 @@ import {
   BookOpen,
   ArrowRight,
   Zap,
-  Shield,
-  Globe,
+  Calendar,
   Database
 } from 'lucide-react';
 
@@ -56,22 +55,22 @@ const Pricing: React.FC = () => {
     {
       icon: <Zap className="w-6 h-6" />,
       title: "40% Cost Savings",
-      description: "Compared to foreign DOI services"
+      description: "Compared to other DOI services"
     },
     {
-      icon: <Shield className="w-6 h-6" />,
-      title: "Local Support",
-      description: "Customer support in Hindi & English"
+      icon: <span className="text-2xl font-bold">₹</span>,
+      title: "Pay per usage",
+      description: "Pay only for the DOIs you use. No extra charges."
     },
     {
-      icon: <Globe className="w-6 h-6" />,
-      title: "Global Standards",
-      description: "Compliant with international DOI standards"
+      icon: <Calendar className="w-6 h-6" />,
+      title: "Monthly Settlements",
+      description: "Institutions can settle their invoices monthly"
     },
     {
       icon: <Database className="w-6 h-6" />,
       title: "Secure Storage",
-      description: "Your research is safely archived"
+      description: "Your research is safely stored and archived"
     }
   ];
 
@@ -170,7 +169,7 @@ const Pricing: React.FC = () => {
             className="text-center mb-16"
           >
             <h2 className="text-4xl font-bold text-gray-900 mb-4">
-              Why Choose Vedra?
+              Why Choose <span className="font-jsmath">m</span><span className="font-inter font-bold">Vedra</span>?
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
               We offer the best value for Indian researchers with local support and global standards.
@@ -250,10 +249,10 @@ const Pricing: React.FC = () => {
             <div className="space-y-6">
               <div className="bg-gray-50 rounded-lg p-6">
                 <h3 className="text-lg font-semibold text-gray-900 mb-3">
-                 Will I have to pay in a foreign currency?
+                 How will I pay for the services?
                 </h3>
                 <p className="text-gray-600">
-                 Not at all. All payments are accepted in INR (₹) through UPI, Credit/Debit Cards, and Bank Transfer. 
+                 All payments are accepted in INR (₹) through UPI, Credit/Debit Cards, and Bank Transfer. 
                 </p>
               </div>
               
@@ -271,7 +270,7 @@ const Pricing: React.FC = () => {
                   Do you provide GST-compliant invoices?
                 </h3>
                 <p className="text-gray-600">
-                  Absolutely. All invoices are GST-compliant and valid for business accounting, reimbursement, and official expense claims.
+                  Absolutely. We do provide GST-compliant invoices valid for business accounting, reimbursement, and official expense claims.
                 </p>
               </div>
             </div>

@@ -37,21 +37,21 @@ const Home: React.FC = () => {
   ];
 
   const stats = [
-    { number: "₹2.5L+", label: "Cost Savings" },
+    { number: "6", label: "Consortium Members" },
     { number: "2400+", label: "Hours Saved" },
     { number: "24/7", label: "Local Support" },
     { number: "1000+", label: "Researchers Served" }
   ];
 
   const benefits = [
-    "Affordable pricing for Indian researchers",
-    "Local customer support in Hindi & English",
-    "Payment in INR through UPI",
-    "Bulk DOI generation for institutions"
+    "Support for high-quality open-metadata standards",
+    "Regional language support in Hindi & English",
+    "Easy payments in INR (₹) via UPI",
+    "Citation metrics for authors & journals"
   ];
 
   return (
-    <div className="min-h-screen relative" style={{ paddingTop: '100px' }}>
+    <div className="min-h-screen relative pt-4 lg:pt-24 xl:pt-24">
       {/* Hero Section */}
       <section className="pb-16 flex items-center relative z-10">
         <div className="container-custom relative z-10 w-full">
@@ -63,13 +63,13 @@ const Home: React.FC = () => {
               className="space-y-8"
             >
               <div className="space-y-4">
-                <h1 className="text-5xl lg:text-6xl font-bold leading-tight font-ibm-plex">
+                <h1 className="text-4xl lg:text-6xl font-bold leading-tight font-ibm-plex">
                   <span className="text-gradient">Indian Research</span>
                   <br />
                   <span className="text-vedra-night">Indexing Solution</span>
                 </h1>
                 <p className="text-xl text-vedra-night leading-relaxed font-inter">
-                  Empowering Indian researchers with affordable and globally accessible DOI indexing solutions.
+                  Empowering Indian researchers with affordable and globally accessible open-metadata indexing solutions.
                 </p>
               </div>
               
@@ -168,7 +168,7 @@ const Home: React.FC = () => {
             className="text-center mb-16"
           >
             <h2 className="text-4xl font-bold text-vedra-night mb-4 font-ibm-plex">
-              Why Choose mVEDRA?
+              Why Choose <span className="font-jsmath">m</span><span className="font-inter font-bold">Vedra</span>?
             </h2>
             <p className="text-xl text-neutral-700 max-w-3xl mx-auto font-inter">
               We provide comprehensive DOI indexing solutions tailored specifically for the Indian research community.
@@ -241,14 +241,14 @@ const Home: React.FC = () => {
                     <h3 className="text-2xl font-bold font-ibm-plex text-white/90">Growth Statistics</h3>
                   </div>
                   
-                  <div className="space-y-4">
-                    <div className="flex justify-between items-center font-inter">
-                      <span className="text-white/90">DOI Generation</span>
-                      <span className="font-semibold text-white/90">+150%</span>
-                    </div>
-                    <div className="w-full bg-white/20 rounded-full h-2">
-                      <div className="bg-white/90 h-2 rounded-full" style={{ width: '75%' }}></div>
-                    </div>
+                    <div className="space-y-4">
+                      <div className="flex justify-between items-center font-inter">
+                        <span className="text-white/90">Research Visibility</span>
+                        <span className="font-semibold text-white/90">+70%</span>
+                      </div>
+                      <div className="w-full bg-white/20 rounded-full h-2">
+                        <div className="bg-white/90 h-2 rounded-full" style={{ width: '70%' }}></div>
+                      </div>
                     
                     <div className="flex justify-between items-center font-inter">
                       <span className="text-white/90">User Satisfaction</span>

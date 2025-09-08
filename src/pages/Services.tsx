@@ -114,7 +114,7 @@ const Services: React.FC = () => {
     {
       step: "04",
       title: "Get DOI",
-      description: "Receive your unique DOI identifier within minutes"
+      description: "Receive your unique DOI within minutes"
     }
   ];
 
@@ -130,116 +130,21 @@ const Services: React.FC = () => {
             className="text-center max-w-4xl mx-auto"
           >
             <h1 className="text-5xl lg:text-6xl font-bold text-vedra-night mb-6 mt-12 font-ibm-plex">
-              DOI Services for <span className="text-gradient">Indian Research</span>
+              Solutions for <span className="text-gradient">Indian Research</span>
             </h1>
             <p className="text-xl text-vedra-night leading-relaxed mb-8 font-inter">
-              Comprehensive DOI generation and indexing services tailored for Indian researchers, 
-              institutions, and publishers. Make your research globally discoverable.
+              Comprehensive DOI generation and indexing services tailored towards the{' '}
+              <a
+                href="https://www.unesco.org/en/open-science/about?hub=686"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-bold text-vedra-hunter hover:text-vedra-calpoly transition-colors"
+              >
+                2021 UNESCO recommendation on Open Science
+              </a>
+              .
             </p>
           </motion.div>
-        </div>
-      </section>
-
-      {/* Service Types */}
-      <section className="section-padding relative bg-neutral-200 overflow-hidden">
-        {/* Decorative elements */}
-        <div className="absolute inset-0 z-0"></div>
-        
-        <div className="container-custom relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-4xl font-bold text-vedra-night mb-4 font-ibm-plex">
-              Choose Your Service Type
-            </h2>
-            <p className="text-xl text-vedra-night max-w-3xl mx-auto font-inter">
-              We offer specialized DOI services for different types of users and organizations.
-            </p>
-          </motion.div>
-
-          <div className="flex flex-wrap justify-center gap-4 mb-12">
-            {serviceTypes.map((type) => (
-              <button
-                key={type.id}
-                onClick={() => setActiveTab(type.id)}
-                className={`px-6 py-3 rounded-lg font-medium transition-all duration-200 font-inter ${
-                  activeTab === type.id
-                    ? 'bg-gradient-to-r from-vedra-hunter to-vedra-calpoly text-white shadow-lg transform scale-105'
-                    : 'bg-neutral-400 text-neutral-800 hover:bg-neutral-500 hover:shadow-md'
-                }`}
-              >
-                {type.title}
-              </button>
-            ))}
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            {serviceTypes.map((type, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className={`card p-6 text-center transition-all duration-200 ${
-                  activeTab === type.id ? 'ring-2 ring-vedra-hunter shadow-xl' : ''
-                }`}
-              >
-                <div className="w-16 h-16 bg-gradient-to-br from-vedra-hunter to-vedra-calpoly rounded-full flex items-center justify-center mx-auto mb-4 text-white/90">
-                  {type.icon}
-                </div>
-                <h3 className="text-xl font-semibold text-vedra-night mb-3 font-ibm-plex">
-                  {type.title}
-                </h3>
-                <p className="text-vedra-night leading-relaxed font-inter">
-                  {type.description}
-                </p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Content Types */}
-      <section className="bg-neutral-50 section-padding">
-        <div className="container-custom">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-4xl font-bold text-vedra-night mb-4 font-ibm-plex">
-              Supported Content Types
-            </h2>
-            <p className="text-xl text-vedra-night max-w-3xl mx-auto font-inter">
-              We support a wide range of academic and research content for DOI generation.
-            </p>
-          </motion.div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {contentTypes.map((content, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="card p-6 text-center"
-              >
-                <div className="w-16 h-16 bg-gradient-to-br from-vedra-hunter to-vedra-calpoly rounded-full flex items-center justify-center mx-auto mb-4 text-white/90">
-                  {content.icon}
-                </div>
-                <h3 className="text-xl font-semibold text-vedra-night mb-3 font-ibm-plex">
-                  {content.title}
-                </h3>
-                <p className="text-vedra-night leading-relaxed font-inter">
-                  {content.description}
-                </p>
-              </motion.div>
-            ))}
-          </div>
         </div>
       </section>
 
@@ -286,6 +191,47 @@ const Services: React.FC = () => {
                 {index < processSteps.length - 1 && (
                   <div className="hidden lg:block absolute top-1/2 -right-4 w-8 h-0.5 bg-gradient-to-r from-vedra-hunter to-vedra-calpoly transform -translate-y-1/2 z-0"></div>
                 )}
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Content Types */}
+      <section className="section-padding relative overflow-hidden">
+        <div className="container-custom">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-4xl font-bold text-vedra-night mb-4 font-ibm-plex">
+              Supported Content Types
+            </h2>
+            <p className="text-xl text-vedra-night max-w-3xl mx-auto font-inter">
+              We support a wide range of academic and research content for DOI generation.
+            </p>
+          </motion.div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {contentTypes.map((content, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                className="card p-6 text-center"
+              >
+                <div className="w-16 h-16 bg-gradient-to-br from-vedra-hunter to-vedra-calpoly rounded-full flex items-center justify-center mx-auto mb-4 text-white/90">
+                  {content.icon}
+                </div>
+                <h3 className="text-xl font-semibold text-vedra-night mb-3 font-ibm-plex">
+                  {content.title}
+                </h3>
+                <p className="text-vedra-night leading-relaxed font-inter">
+                  {content.description}
+                </p>
               </motion.div>
             ))}
           </div>

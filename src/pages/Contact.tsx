@@ -65,7 +65,7 @@ const Contact: React.FC = () => {
               Get in <span className="text-gradient">Touch</span>
             </h1>
             <p className="text-xl text-gray-600 leading-relaxed mb-8">
-              Have questions about our DOI services? We're here to help. 
+              Have questions about our services? We're here to help. 
               Reach out to us and we'll get back to you as soon as possible.
             </p>
           </motion.div>
