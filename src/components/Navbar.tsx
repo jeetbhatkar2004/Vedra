@@ -1,10 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, LogIn, UserPlus, LogOut, User } from 'lucide-react';
+import { useAuth } from '../contexts/AuthContext';
+import LoginModal from './LoginModal';
+import SignupModal from './SignupModal';
 
 const Navbar: React.FC = () => {
+  const { isAuthenticated, logout } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [showLoginModal, setShowLoginModal] = useState(false);
+  const [showSignupModal, setShowSignupModal] = useState(false);
   const location = useLocation();
   const isHomePage = location.pathname === '/';
 
@@ -27,6 +33,11 @@ const Navbar: React.FC = () => {
   ];
 
   const isActive = (path: string) => location.pathname === path;
+
+  const handleLogout = () => {
+    logout();
+    setIsOpen(false);
+  };
 
   const getNavbarClasses = () => {
     if (isScrolled) {
@@ -70,12 +81,41 @@ const Navbar: React.FC = () => {
 
           {/* CTA Buttons */}
           <div className="hidden md:flex items-center space-x-4">
-            <Link to="/dashboard" className="btn-secondary h-12 items-center justify-center flex">
-              Dashboard
-            </Link>
-            <Link to="/services" className="btn-primary h-12 items-center justify-center flex">
-              Get Started
-            </Link>
+            {isAuthenticated ? (
+              <>
+                <Link to="/dashboard" className="btn-secondary h-12 items-center justify-center flex">
+                  Dashboard
+                </Link>
+                <div className="flex items-center space-x-2">
+                  <div className="w-8 h-8 bg-gradient-to-br from-vedra-hunter to-vedra-calpoly rounded-full flex items-center justify-center">
+                    <User className="w-4 h-4 text-white/90" />
+                  </div>
+                  <button 
+                    onClick={handleLogout}
+                    className="text-neutral-600 hover:text-vedra-hunter transition-colors"
+                  >
+                    <LogOut className="w-5 h-5" />
+                  </button>
+                </div>
+              </>
+            ) : (
+              <>
+                <button 
+                  onClick={() => setShowLoginModal(true)}
+                  className="btn-secondary h-12 items-center justify-center flex"
+                >
+                  <LogIn className="w-4 h-4 mr-2" />
+                  Sign In
+                </button>
+                <button 
+                  onClick={() => setShowSignupModal(true)}
+                  className="btn-primary h-12 items-center justify-center flex"
+                >
+                  <UserPlus className="w-4 h-4 mr-2" />
+                  Get Started
+                </button>
+              </>
+            )}
           </div>
 
           {/* Mobile menu button */}
@@ -110,25 +150,68 @@ const Navbar: React.FC = () => {
                 </Link>
               ))}
               <div className="pt-4 space-y-3">
-                <Link
-                  to="/dashboard"
-                  className="block px-4 py-3 rounded-md text-base font-medium text-vedra-hunter hover:bg-primary-50 font-inter"
-                  onClick={() => setIsOpen(false)}
-                >
-                  Dashboard
-                </Link>
-                <Link
-                  to="/services"
-                  className="block px-4 py-3 rounded-md text-base font-medium bg-vedra-hunter text-white hover:bg-vedra-calpoly font-inter"
-                  onClick={() => setIsOpen(false)}
-                >
-                  Get Started
-                </Link>
+                {isAuthenticated ? (
+                  <>
+                    <Link
+                      to="/dashboard"
+                      className="block px-4 py-3 rounded-md text-base font-medium text-vedra-hunter hover:bg-primary-50 font-inter"
+                      onClick={() => setIsOpen(false)}
+                    >
+                      Dashboard
+                    </Link>
+                    <button
+                      onClick={handleLogout}
+                      className="block w-full text-left px-4 py-3 rounded-md text-base font-medium text-red-600 hover:bg-red-50 font-inter"
+                    >
+                      Sign Out
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    <button
+                      onClick={() => {
+                        setShowLoginModal(true);
+                        setIsOpen(false);
+                      }}
+                      className="block w-full text-left px-4 py-3 rounded-md text-base font-medium text-vedra-hunter hover:bg-primary-50 font-inter"
+                    >
+                      Sign In
+                    </button>
+                    <button
+                      onClick={() => {
+                        setShowSignupModal(true);
+                        setIsOpen(false);
+                      }}
+                      className="block w-full text-left px-4 py-3 rounded-md text-base font-medium bg-vedra-hunter text-white hover:bg-vedra-calpoly font-inter"
+                    >
+                      Get Started
+                    </button>
+                  </>
+                )}
               </div>
             </div>
           </div>
         )}
       </div>
+
+      {/* Authentication Modals */}
+      <LoginModal 
+        isOpen={showLoginModal}
+        onClose={() => setShowLoginModal(false)}
+        onSwitchToSignup={() => {
+          setShowLoginModal(false);
+          setShowSignupModal(true);
+        }}
+      />
+      
+      <SignupModal 
+        isOpen={showSignupModal}
+        onClose={() => setShowSignupModal(false)}
+        onSwitchToLogin={() => {
+          setShowSignupModal(false);
+          setShowLoginModal(true);
+        }}
+      />
     </nav>
   );
 };

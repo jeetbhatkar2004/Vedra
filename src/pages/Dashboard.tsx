@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { 
   BookOpen, 
   Plus, 
@@ -20,10 +20,37 @@ import {
   LogOut,
   ArrowLeft
 } from 'lucide-react';
+import { useAuth } from '../contexts/AuthContext';
 
 const Dashboard: React.FC = () => {
+  const { user, isAuthenticated, logout, isLoading } = useAuth();
+  const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState('overview');
   const [searchTerm, setSearchTerm] = useState('');
+
+  // Redirect to home if not authenticated
+  useEffect(() => {
+    if (!isLoading && !isAuthenticated) {
+      navigate('/');
+    }
+  }, [isAuthenticated, isLoading, navigate]);
+
+  const handleLogout = () => {
+    logout();
+    navigate('/');
+  };
+
+  // Show loading state while checking authentication
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="text-center">
+          <div className="w-8 h-8 border-4 border-vedra-hunter border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+          <p className="text-gray-600">Loading...</p>
+        </div>
+      </div>
+    );
+  }
 
   // Mock data
   const stats = [
@@ -149,7 +176,7 @@ const Dashboard: React.FC = () => {
             View All
           </button>
         </div>
-        
+
         <div className="space-y-4">
           {recentDOIs.slice(0, 3).map((doi, index) => (
             <div key={index} className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
@@ -359,9 +386,9 @@ const Dashboard: React.FC = () => {
                 <ArrowLeft className="w-5 h-5 text-vedra-night" />
               </Link>
               <div className="flex items-center space-x-2">
-                <img 
-                  src="/vedrawebsite_transparent.png" 
-                  alt="mVEDRA Icon" 
+                <img
+                  src="/vedrawebsite_transparent.png"
+                  alt="mVEDRA Icon"
                   className="h-8 w-auto"
                 />
                 <div className="flex items-center">
@@ -370,7 +397,7 @@ const Dashboard: React.FC = () => {
                 </div>
               </div>
             </div>
-            
+
             <div className="flex items-center space-x-2">
               <button className="p-2 text-neutral-600 hover:text-vedra-night hover:bg-white/50 rounded-lg transition-colors">
                 <Bell className="w-4 h-4" />
@@ -379,30 +406,34 @@ const Dashboard: React.FC = () => {
                 <div className="w-7 h-7 bg-gradient-to-br from-vedra-hunter to-vedra-calpoly rounded-full flex items-center justify-center">
                   <User className="w-3 h-3 text-white/90" />
                 </div>
-                <button className="p-2 text-neutral-600 hover:text-vedra-night hover:bg-white/50 rounded-lg transition-colors">
+                <button 
+                  onClick={handleLogout}
+                  className="p-2 text-neutral-600 hover:text-vedra-night hover:bg-white/50 rounded-lg transition-colors"
+                >
                   <LogOut className="w-4 h-4" />
                 </button>
               </div>
             </div>
           </div>
-          
+
           {/* Title and Welcome Message */}
           <div className="pb-3">
             <h1 className="text-lg font-bold text-vedra-night font-ibm-plex">mVEDRA Dashboard</h1>
-            <p className="text-sm text-neutral-600 font-inter">Welcome back, Dr. Rajesh Kumar</p>
+        <p className="text-sm text-neutral-600 font-inter">
+          Welcome back, {user?.name || 'User'}
+        </p>
           </div>
-          
+
           {/* Navigation Tabs */}
           <div className="flex items-center space-x-1 pb-4 overflow-x-auto">
             {tabs.map((tab) => (
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
-                className={`flex items-center space-x-1 px-3 py-2 rounded-lg font-medium transition-colors whitespace-nowrap ${
-                  activeTab === tab.id
+                className={`flex items-center space-x-1 px-3 py-2 rounded-lg font-medium transition-colors whitespace-nowrap ${activeTab === tab.id
                     ? 'bg-white text-vedra-hunter shadow-sm'
                     : 'text-neutral-600 hover:bg-white/50 hover:text-vedra-night'
-                }`}
+                  }`}
               >
                 {tab.icon}
                 <span className="text-sm">{tab.name}</span>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { 
@@ -9,10 +9,19 @@ import {
   TrendingUp, 
   ArrowRight,
   CheckCircle,
-  Star
+  Star,
+  LogIn,
+  UserPlus
 } from 'lucide-react';
+import { useAuth } from '../contexts/AuthContext';
+import LoginModal from '../components/LoginModal';
+import SignupModal from '../components/SignupModal';
 
 const Home: React.FC = () => {
+  const { isAuthenticated } = useAuth();
+  const [showLoginModal, setShowLoginModal] = useState(false);
+  const [showSignupModal, setShowSignupModal] = useState(false);
+
   const features = [
     {
       icon: <BookOpen className="w-8 h-8" />,
@@ -74,10 +83,29 @@ const Home: React.FC = () => {
               </div>
               
               <div className="flex flex-col sm:flex-row gap-4">
-                <Link to="/services" className="btn-primary inline-flex items-center justify-center">
-                  Get Started
-                  <ArrowRight className="ml-2 w-5 h-5" />
-                </Link>
+                {isAuthenticated ? (
+                  <Link to="/dashboard" className="btn-primary inline-flex items-center justify-center">
+                    Go to Dashboard
+                    <ArrowRight className="ml-2 w-5 h-5" />
+                  </Link>
+                ) : (
+                  <>
+                    <button 
+                      onClick={() => setShowSignupModal(true)}
+                      className="btn-primary inline-flex items-center justify-center"
+                    >
+                      Get Started
+                      <UserPlus className="ml-2 w-5 h-5" />
+                    </button>
+                    <button 
+                      onClick={() => setShowLoginModal(true)}
+                      className="btn-secondary inline-flex items-center justify-center"
+                    >
+                      Sign In
+                      <LogIn className="ml-2 w-5 h-5" />
+                    </button>
+                  </>
+                )}
                 <Link to="/about" className="btn-secondary inline-flex items-center justify-center">
                   Learn More
                 </Link>
@@ -289,9 +317,18 @@ const Home: React.FC = () => {
               Join thousands of Indian researchers who are already using mVEDRA to make their work discoverable worldwide.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link to="/services" className="bg-neutral-100 text-vedra-hunter hover:bg-neutral-200 font-semibold py-3 px-8 rounded-lg transition-all duration-200 transform hover:scale-105 font-inter">
-                Start Your Journey
-              </Link>
+              {isAuthenticated ? (
+                <Link to="/dashboard" className="bg-neutral-100 text-vedra-hunter hover:bg-neutral-200 font-semibold py-3 px-8 rounded-lg transition-all duration-200 transform hover:scale-105 font-inter">
+                  Go to Dashboard
+                </Link>
+              ) : (
+                <button 
+                  onClick={() => setShowSignupModal(true)}
+                  className="bg-neutral-100 text-vedra-hunter hover:bg-neutral-200 font-semibold py-3 px-8 rounded-lg transition-all duration-200 transform hover:scale-105 font-inter"
+                >
+                  Start Your Journey
+                </button>
+              )}
               <Link to="/contact" className="bg-neutral-100 text-vedra-hunter hover:bg-neutral-200 font-semibold py-3 px-8 rounded-lg transition-all duration-200 transform hover:scale-105 font-inter">
                 Contact Us
               </Link>
@@ -299,6 +336,25 @@ const Home: React.FC = () => {
           </motion.div>
         </div>
       </section>
+
+      {/* Authentication Modals */}
+      <LoginModal 
+        isOpen={showLoginModal}
+        onClose={() => setShowLoginModal(false)}
+        onSwitchToSignup={() => {
+          setShowLoginModal(false);
+          setShowSignupModal(true);
+        }}
+      />
+      
+      <SignupModal 
+        isOpen={showSignupModal}
+        onClose={() => setShowSignupModal(false)}
+        onSwitchToLogin={() => {
+          setShowSignupModal(false);
+          setShowLoginModal(true);
+        }}
+      />
     </div>
   );
 };
