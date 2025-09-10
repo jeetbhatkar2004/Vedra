@@ -286,14 +286,14 @@ const Home: React.FC = () => {
               Ready to Make Your Research Global?
             </h2>
             <p className="text-xl text-white/80 mb-8 font-inter">
-              Join thousands of Indian researchers who are already using mVEDRA to make their work discoverable worldwide.
+            We’re preparing to launch mVedra in the coming months to help researchers make their work globally discoverable. Be among the first to transform your research with open metadata and global indexing.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link to="/services" className="bg-neutral-100 text-vedra-hunter hover:bg-neutral-200 font-semibold py-3 px-8 rounded-lg transition-all duration-200 transform hover:scale-105 font-inter">
-                Start Your Journey
-              </Link>
               <Link to="/contact" className="bg-neutral-100 text-vedra-hunter hover:bg-neutral-200 font-semibold py-3 px-8 rounded-lg transition-all duration-200 transform hover:scale-105 font-inter">
-                Contact Us
+                Join the Waitlist
+              </Link>
+              <Link to="/services" className="bg-neutral-100 text-vedra-hunter hover:bg-neutral-200 font-semibold py-3 px-8 rounded-lg transition-all duration-200 transform hover:scale-105 font-inter">
+                Learn More
               </Link>
             </div>
           </motion.div>

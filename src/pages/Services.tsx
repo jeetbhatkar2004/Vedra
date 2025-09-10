@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import { 
   BookOpen, 
   FileText, 
@@ -14,6 +15,7 @@ import {
   Search,
   Newspaper
 } from 'lucide-react';
+import DataCiteLogo from '../Logo_Schwoop-grey-light.svg';
 
 const Services: React.FC = () => {
   const [activeTab, setActiveTab] = useState('individual');
@@ -75,8 +77,8 @@ const Services: React.FC = () => {
   const features = [
     {
       icon: <Zap className="w-6 h-6" />,
-      title: "Quick Processing",
-      description: "Get your DOI within minutes, not days"
+      title: "Advanced Metadata",
+      description: "Adopt Open Metadata Standards and track citation metrics"
     },
     {
       icon: <Shield className="w-6 h-6" />,
@@ -84,13 +86,25 @@ const Services: React.FC = () => {
       description: "Your research is safely archived and protected"
     },
     {
-      icon: <Globe className="w-6 h-6" />,
+      icon: <img src={DataCiteLogo} alt="DataCite" className="w-8 h-8" />,
       title: "Global Discovery",
-      description: "Make your work discoverable worldwide"
+      description: (
+        <>
+          Make your work discoverable worldwide through{' '}
+          <a 
+            href="https://commons.datacite.org/" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className="text-vedra-calpoly hover:underline font-semibold"
+          >
+            DataCite Commons
+          </a>
+        </>
+      )
     },
     {
       icon: <Search className="w-6 h-6" />,
-      title: "Advanced Search",
+      title: "AI Powered Search",
       description: "Powerful search and indexing capabilities"
     }
   ];
@@ -235,6 +249,51 @@ const Services: React.FC = () => {
               </motion.div>
             ))}
           </div>
+          
+          <div className="text-left mt-8">
+            <span className="relative group">
+              <span className="text-vedra-night italic  text-lg leading-relaxed font-inter cursor-help">
+                And 24 more content types...
+              </span>
+                <div className="absolute bottom-full left-0 mb-2 px-4 py-3 bg-vedra-night text-white text-sm rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none z-10 w-96">
+                <div className="grid grid-cols-2 gap-2 text-xs">
+                  <div>Audiovisual</div>
+                  <div>Award</div>
+                  <div>Book</div>
+                  <div>Book Chapter</div>
+                  <div>Collection</div>
+                  <div>Computational Notebook</div>
+                  <div>Conference Paper</div>
+                  <div>Conference Proceeding</div>
+                  <div>Data Paper</div>
+                  <div>Dataset</div>
+                  <div>Dissertation</div>
+                  <div>Event</div>
+                  <div>Image</div>
+                  <div>Interactive Resource</div>
+                  <div>Instrument</div>
+                  <div>Journal</div>
+                  <div>Journal Article</div>
+                  <div>Model</div>
+                  <div>Output Management Plan</div>
+                  <div>Peer Review</div>
+                  <div>Physical Object</div>
+                  <div>Preprint</div>
+                  <div>Project</div>
+                  <div>Report</div>
+                  <div>Service</div>
+                  <div>Software</div>
+                  <div>Sound</div>
+                  <div>Standard</div>
+                  <div>Study Registration</div>
+                  <div>Text</div>
+                  <div>Workflow</div>
+                  <div>And others</div>
+                </div>
+                <div className="absolute top-full left-4 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-vedra-night"></div>
+              </div>
+            </span>
+          </div>
         </div>
       </section>
 
@@ -286,21 +345,39 @@ const Services: React.FC = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="max-w-3xl mx-auto"
+            className="max-w-4xl mx-auto"
           >
             <h2 className="text-4xl font-bold text-white/90 mb-6 font-ibm-plex">
-              Ready to Get Started?
+            Ready to Make Your Research Global?
             </h2>
             <p className="text-xl text-white/80 mb-8 font-inter">
-              Join thousands of researchers who are already using mVEDRA to make their work globally discoverable.
+            We’re preparing to launch mVedra in the coming months to help researchers make their work globally discoverable. Be among the first to transform your research with open metadata and global indexing.
             </p>
+            <div className="grid grid-cols-2 lg:grid-cols-4 mb-10">
+              <div className="text-center">
+                <div className="text-3xl lg:text-4xl font-bold text-white/90 mb-2 font-ibm-plex">₹2.5L+</div>
+                <div className="text-white/70 font-inter">Cost Savings</div>
+              </div>
+              <div className="text-center">
+                <div className="text-3xl lg:text-4xl font-bold text-white/90 mb-2 font-ibm-plex">1000+</div>
+                <div className="text-white/70 font-inter">Researchers Served</div>
+              </div>
+              <div className="text-center">
+                <div className="text-3xl lg:text-4xl font-bold text-white/90 mb-2 font-ibm-plex">50+</div>
+                <div className="text-white/70 font-inter">Institutions</div>
+              </div>
+              <div className="text-center">
+                <div className="text-3xl lg:text-4xl font-bold text-white/90 mb-2 font-ibm-plex">2400+</div>
+                <div className="text-white/70 font-inter">Hours Saved</div>
+              </div>
+            </div>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="border-2 border-white text-white hover:bg-white hover:text-vedra-hunter font-semibold py-3 px-8 rounded-lg transition-all duration-200 font-inter">
-                Start Your DOI Journey
-              </button>
-              <button className="border-2 border-white text-white hover:bg-white hover:text-vedra-hunter font-semibold py-3 px-8 rounded-lg transition-all duration-200 font-inter">
+            <Link to="/contact" className="bg-neutral-100 text-vedra-hunter hover:bg-neutral-200 font-semibold py-3 px-8 rounded-lg transition-all duration-200 transform hover:scale-105 font-inter">
+                Join the Waitlist
+              </Link>
+              <Link to="/pricing" className="bg-neutral-100 text-vedra-hunter hover:bg-neutral-200 font-semibold py-3 px-8 rounded-lg transition-all duration-200 transform hover:scale-105 font-inter">
                 View Pricing
-              </button>
+              </Link>
             </div>
           </motion.div>
         </div>

@@ -215,16 +215,24 @@ const About: React.FC = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="text-center mb-16"
+            className="text-center py-1"
           >
-            <h2 className="text-4xl font-bold text-vedra-night mb-4 font-ibm-plex">
-              Our Role in the DataCite Community
-            </h2>
+             <h2 className="text-4xl font-bold text-vedra-night mb-4 font-ibm-plex">
+               Our Role in the DataCite Community
+               <span className="relative group">
+                 <span className="align-super text-lg text-vedra-calpoly font-bold ml-1 cursor-help">*</span>
+                 <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-2 bg-vedra-night text-white text-sm rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap z-10">
+                   We are in the final stages of securing approval from DataCite's Board and look forward to sharing updates soon.
+                   <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-vedra-night"></div>
+                 </div>
+               </span>
+             </h2>
             <p className="text-xl text-vedra-night max-w-3xl mx-auto font-inter">
-              As part of the global DataCite community, mVedra is building India’s DOI consortium. By connecting researchers and institutions to trusted global infrastructure, we ensure research outputs are visible, reusable, and impactful.
+              As part of the global DataCite community, mVedra is building India's DOI consortium. By connecting researchers and institutions to trusted global infrastructure, we ensure research outputs are visible, reusable, and impactful.
             </p>
-            {/* Added logo below the text */}
-            <img src={DataCiteLogo} alt="DataCite Logo" className="mt-10 mx-auto w-80" />
+             {/* Centered logo with equal spacing */}
+             <img src={DataCiteLogo} alt="DataCite Logo" className="mt-12 mx-auto w-80" />
+              
           </motion.div>
         </div>
       
