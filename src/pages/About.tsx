@@ -198,8 +198,8 @@ const About: React.FC = () => {
                     <div className="flex items-start space-x-3">
                       <div className="w-2 h-2 bg-white rounded-full mt-2 flex-shrink-0"></div>
                       <div>
-                        <h4 className="font-semibold font-inter">High Costs</h4>
-                        <p className="text-white/80 text-sm font-inter">Foreign DOI services are expensive and charge in different currencies.</p>
+                        <h4 className="font-semibold font-inter">Affordability</h4>
+                        <p className="text-white/80 text-sm font-inter">Being part of our DataCite Consortium is a more economical way to avail DOI functionality, including payments in INR.</p>
                       </div>
                     </div>
                   </div>
@@ -221,9 +221,9 @@ const About: React.FC = () => {
                Our Role in the DataCite Community
                <span className="relative group">
                  <span className="align-super text-lg text-vedra-calpoly font-bold ml-1 cursor-help">*</span>
-                 <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-2 bg-vedra-night text-white text-sm rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none z-10 max-w-xs sm:max-w-sm md:max-w-md lg:whitespace-nowrap lg:max-w-none">
+                 <div className="absolute bottom-full right-0 mb-2 px-4 py-3 bg-vedra-night text-white text-sm rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none z-10 w-48 sm:w-56">
                    We are in the final stages of securing approval from DataCite's Board and look forward to sharing updates soon.
-                   <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-vedra-night"></div>
+                   <div className="absolute top-full right-4 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-vedra-night"></div>
                  </div>
                </span>
              </h2>
