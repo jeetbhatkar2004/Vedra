@@ -219,19 +219,17 @@ const About: React.FC = () => {
           >
              <h2 className="text-4xl font-bold text-vedra-night mb-4 font-ibm-plex">
                Our Role in the DataCite Community
-               <span className="relative group">
-                 <span className="align-super text-lg text-vedra-calpoly font-bold ml-1 cursor-help">*</span>
-                 <div className="absolute bottom-full right-0 mb-2 px-4 py-3 bg-vedra-night text-white text-sm rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none z-10 w-48 sm:w-56">
-                   We are in the final stages of securing approval from DataCite's Board and look forward to sharing updates soon.
-                   <div className="absolute top-full right-4 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-vedra-night"></div>
-                 </div>
-               </span>
              </h2>
             <p className="text-xl text-vedra-night max-w-3xl mx-auto font-inter">
               As part of the global DataCite community, mVedra is building India's DOI consortium. By connecting researchers and institutions to trusted global infrastructure, we ensure research outputs are visible, reusable, and impactful.
             </p>
              {/* Centered logo with equal spacing */}
              <img src={DataCiteLogo} alt="DataCite Logo" className="mt-12 mx-auto w-80" />
+             
+             {/* Note below logo */}
+             <p className="text-lg text-vedra-night max-w-3xl mx-auto font-inter mt-12">
+               Note: We are in the final stages of securing approval from DataCite's Board and look forward to sharing updates soon.
+             </p>
               
           </motion.div>
         </div>
