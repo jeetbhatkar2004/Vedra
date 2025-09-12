@@ -121,6 +121,7 @@ const Dashboard: React.FC = () => {
 
   const tabs = [
     { id: 'overview', name: 'Overview', icon: <TrendingUp className="w-5 h-5" /> },
+    { id: 'upload', name: 'Upload', icon: <Plus className="w-5 h-5" /> },
     { id: 'dois', name: 'My DOIs', icon: <BookOpen className="w-5 h-5" /> },
     { id: 'analytics', name: 'Analytics', icon: <FileText className="w-5 h-5" /> },
     { id: 'settings', name: 'Settings', icon: <Settings className="w-5 h-5" /> }
@@ -429,7 +430,13 @@ const Dashboard: React.FC = () => {
             {tabs.map((tab) => (
               <button
                 key={tab.id}
-                onClick={() => setActiveTab(tab.id)}
+                onClick={() => {
+                  if (tab.id === 'upload') {
+                    navigate('/upload');
+                  } else {
+                    setActiveTab(tab.id);
+                  }
+                }}
                 className={`flex items-center space-x-1 px-3 py-2 rounded-lg font-medium transition-colors whitespace-nowrap ${activeTab === tab.id
                     ? 'bg-white text-vedra-hunter shadow-sm'
                     : 'text-neutral-600 hover:bg-white/50 hover:text-vedra-night'

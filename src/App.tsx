@@ -9,10 +9,12 @@ import Services from './pages/Services';
 import Pricing from './pages/Pricing';
 import Contact from './pages/Contact';
 import Dashboard from './pages/Dashboard';
+import Upload from './pages/Upload';
 
 function AppContent() {
   const location = useLocation();
   const isDashboard = location.pathname === '/dashboard';
+  const isUpload = location.pathname === '/upload';
   const isHomePage = location.pathname === '/';
 
   return (
@@ -27,11 +29,11 @@ function AppContent() {
         </>
       )}
       
-      {/* Navbar - only show when not on Dashboard */}
-      {!isDashboard && <Navbar />}
+      {/* Navbar - only show when not on Dashboard or Upload */}
+      {!isDashboard && !isUpload && <Navbar />}
       
       {/* Main content area */}
-      <main className={`flex-grow ${isDashboard ? 'pt-0' : 'pt-20'}`}>
+      <main className={`flex-grow ${isDashboard || isUpload ? 'pt-0' : 'pt-20'}`}>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
@@ -39,11 +41,12 @@ function AppContent() {
           <Route path="/pricing" element={<Pricing />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/upload" element={<Upload />} />
         </Routes>
       </main>
       
-      {/* Footer - only show when not on Dashboard */}
-      {!isDashboard && <Footer />}
+      {/* Footer - only show when not on Dashboard or Upload */}
+      {!isDashboard && !isUpload && <Footer />}
     </div>
   );
 }
