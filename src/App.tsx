@@ -8,6 +8,9 @@ import Services from './pages/Services';
 import Pricing from './pages/Pricing';
 import Contact from './pages/Contact';
 import Dashboard from './pages/Dashboard';
+import Privacy from './pages/Privacy';
+import Terms from './pages/Terms';
+import Cookies from './pages/Cookies';
 
 function AppContent() {
   const location = useLocation();
@@ -38,6 +41,9 @@ function AppContent() {
           <Route path="/pricing" element={<Pricing />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/privacy" element={<Privacy />} />
+          <Route path="/terms" element={<Terms />} />
+          <Route path="/cookies" element={<Cookies />} />
         </Routes>
       </main>
       
