@@ -21,6 +21,7 @@ import ReferencesSection from '../components/upload/ReferencesSection';
 import PublishingInfoSection from '../components/upload/PublishingInfoSection';
 import FooterActionBar from '../components/upload/FooterActionBar';
 import PreviewModal from '../components/upload/PreviewModal';
+import PaymentModal from '../components/upload/PaymentModal';
 
 // Types
 interface FileItem {
@@ -220,6 +221,7 @@ const Upload: React.FC = () => {
   const [openSections, setOpenSections] = useState<Set<string>>(new Set(['files']));
   const [isDragOver, setIsDragOver] = useState<boolean>(false);
   const [showPreview, setShowPreview] = useState(false);
+  const [showPayment, setShowPayment] = useState(false);
 
   // Helper functions
   const formatFileSize = (bytes: number): string => {
@@ -418,7 +420,8 @@ const Upload: React.FC = () => {
       return;
     }
     
-    alert('Publish functionality not implemented in demo');
+    // Show payment modal
+    setShowPayment(true);
   };
 
   const handleShare = () => {
@@ -603,6 +606,13 @@ const Upload: React.FC = () => {
           />
         )}
       </AnimatePresence>
+
+      {/* Payment Modal */}
+      <PaymentModal
+        isOpen={showPayment}
+        onClose={() => setShowPayment(false)}
+        amount={60}
+      />
     </div>
   );
 };
