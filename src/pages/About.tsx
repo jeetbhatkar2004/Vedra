@@ -227,7 +227,7 @@ const About: React.FC = () => {
              <img src={DataCiteLogo} alt="DataCite Logo" className="mt-12 mx-auto w-80" />
              
              {/* Note below logo */}
-             <p className="text-lg text-vedra-night max-w-3xl mx-auto font-inter mt-12">
+              <p className="text-lg text-gray-500 max-w-3xl mx-auto font-inter mt-12">
                Note: We are in the final stages of securing approval from DataCite's Board and look forward to sharing updates soon.
              </p>
               
