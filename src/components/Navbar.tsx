@@ -1,16 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, LogIn, UserPlus, LogOut, User } from 'lucide-react';
+import { Menu, X, LogIn, UserPlus, LogOut, User, Globe } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
+import { useLanguage } from '../contexts/LanguageContext';
 import LoginModal from './LoginModal';
 import SignupModal from './SignupModal';
 
 const Navbar: React.FC = () => {
   const { isAuthenticated, logout } = useAuth();
+  const { language, setLanguage, t } = useLanguage();
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [showSignupModal, setShowSignupModal] = useState(false);
+  const [showLanguageDropdown, setShowLanguageDropdown] = useState(false);
   const location = useLocation();
   const isHomePage = location.pathname === '/';
 
@@ -20,16 +23,30 @@ const Navbar: React.FC = () => {
       setIsScrolled(scrollTop > 50);
     };
 
+    const handleClickOutside = (event: MouseEvent) => {
+      if (showLanguageDropdown) {
+        const target = event.target as Element;
+        if (!target.closest('.language-dropdown')) {
+          setShowLanguageDropdown(false);
+        }
+      }
+    };
+
     window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+    document.addEventListener('mousedown', handleClickOutside);
+    
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [showLanguageDropdown]);
 
   const navigation = [
-    { name: 'Home', href: '/' },
-    { name: 'About', href: '/about' },
-    { name: 'Services', href: '/services' },
-    { name: 'Pricing', href: '/pricing' },
-    { name: 'Contact', href: '/contact' },
+    { name: t('home'), href: '/' },
+    { name: t('about'), href: '/about' },
+    { name: t('services'), href: '/services' },
+    { name: t('pricing'), href: '/pricing' },
+    { name: t('contact'), href: '/contact' },
   ];
 
   const isActive = (path: string) => location.pathname === path;
@@ -37,6 +54,11 @@ const Navbar: React.FC = () => {
   const handleLogout = () => {
     logout();
     setIsOpen(false);
+  };
+
+  const handleLanguageChange = (lang: 'en' | 'hi') => {
+    setLanguage(lang);
+    setShowLanguageDropdown(false);
   };
 
   const getNavbarClasses = () => {
@@ -81,10 +103,42 @@ const Navbar: React.FC = () => {
 
           {/* CTA Buttons */}
           <div className="hidden md:flex items-center space-x-4">
+            {/* Language Toggle */}
+            <div className="relative language-dropdown">
+              <button
+                onClick={() => setShowLanguageDropdown(!showLanguageDropdown)}
+                className="flex items-center space-x-2 px-3 py-2 rounded-lg text-neutral-700 hover:text-vedra-hunter hover:bg-neutral-100 transition-colors"
+              >
+                <Globe className="w-4 h-4" />
+                <span className="text-sm font-medium">{language === 'en' ? 'EN' : 'HI'}</span>
+              </button>
+              
+              {showLanguageDropdown && (
+                <div className="absolute right-0 mt-2 w-40 bg-white rounded-lg shadow-lg border border-gray-200 py-1 z-50">
+                  <button
+                    onClick={() => handleLanguageChange('en')}
+                    className={`w-full text-left px-4 py-2 text-sm hover:bg-gray-100 transition-colors ${
+                      language === 'en' ? 'text-vedra-hunter bg-gray-50' : 'text-gray-700'
+                    }`}
+                  >
+                    {t('english')}
+                  </button>
+                  <button
+                    onClick={() => handleLanguageChange('hi')}
+                    className={`w-full text-left px-4 py-2 text-sm hover:bg-gray-100 transition-colors ${
+                      language === 'hi' ? 'text-vedra-hunter bg-gray-50' : 'text-gray-700'
+                    }`}
+                  >
+                    {t('hindi')}
+                  </button>
+                </div>
+              )}
+            </div>
+
             {isAuthenticated ? (
               <>
                 <Link to="/dashboard" className="btn-secondary h-12 items-center justify-center flex">
-                  Dashboard
+                  {t('dashboard')}
                 </Link>
                 <div className="flex items-center space-x-2">
                   <div className="w-8 h-8 bg-gradient-to-br from-vedra-hunter to-vedra-calpoly rounded-full flex items-center justify-center">
@@ -105,14 +159,14 @@ const Navbar: React.FC = () => {
                   className="btn-secondary h-12 items-center justify-center flex"
                 >
                   <LogIn className="w-4 h-4 mr-2" />
-                  Sign In
+                  {t('signIn')}
                 </button>
                 <button 
                   onClick={() => setShowSignupModal(true)}
                   className="btn-primary h-12 items-center justify-center flex"
                 >
                   <UserPlus className="w-4 h-4 mr-2" />
-                  Get Started
+                  {t('getStarted')}
                 </button>
               </>
             )}
@@ -149,6 +203,37 @@ const Navbar: React.FC = () => {
                   {item.name}
                 </Link>
               ))}
+              {/* Mobile Language Toggle */}
+              <div className="pt-4 border-t border-gray-200">
+                <div className="px-4 py-3">
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm font-medium text-gray-700">{t('language')}</span>
+                    <div className="flex space-x-2">
+                      <button
+                        onClick={() => handleLanguageChange('en')}
+                        className={`px-3 py-1 rounded text-sm font-medium transition-colors ${
+                          language === 'en' 
+                            ? 'bg-vedra-hunter text-white' 
+                            : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                        }`}
+                      >
+                        EN
+                      </button>
+                      <button
+                        onClick={() => handleLanguageChange('hi')}
+                        className={`px-3 py-1 rounded text-sm font-medium transition-colors ${
+                          language === 'hi' 
+                            ? 'bg-vedra-hunter text-white' 
+                            : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                        }`}
+                      >
+                        HI
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
               <div className="pt-4 space-y-3">
                 {isAuthenticated ? (
                   <>
@@ -157,13 +242,13 @@ const Navbar: React.FC = () => {
                       className="block px-4 py-3 rounded-md text-base font-medium text-vedra-hunter hover:bg-primary-50 font-inter"
                       onClick={() => setIsOpen(false)}
                     >
-                      Dashboard
+                      {t('dashboard')}
                     </Link>
                     <button
                       onClick={handleLogout}
                       className="block w-full text-left px-4 py-3 rounded-md text-base font-medium text-red-600 hover:bg-red-50 font-inter"
                     >
-                      Sign Out
+                      {t('signOut')}
                     </button>
                   </>
                 ) : (
@@ -175,7 +260,7 @@ const Navbar: React.FC = () => {
                       }}
                       className="block w-full text-left px-4 py-3 rounded-md text-base font-medium text-vedra-hunter hover:bg-primary-50 font-inter"
                     >
-                      Sign In
+                      {t('signIn')}
                     </button>
                     <button
                       onClick={() => {
@@ -184,7 +269,7 @@ const Navbar: React.FC = () => {
                       }}
                       className="block w-full text-left px-4 py-3 rounded-md text-base font-medium bg-vedra-hunter text-white hover:bg-vedra-calpoly font-inter"
                     >
-                      Get Started
+                      {t('getStarted')}
                     </button>
                   </>
                 )}

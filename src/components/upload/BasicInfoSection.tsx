@@ -91,7 +91,10 @@ const BasicInfoSection: React.FC<BasicInfoSectionProps> = ({
   const softwareSubtypes = ['Computational notebook'];
 
   const titleTypes = ['Main', 'Alternative', 'Subtitle', 'Translated', 'Other'];
-  const languages = ['eng', 'fra', 'deu', 'spa', 'ita', 'por', 'rus', 'chi', 'jpn', 'ara', 'hin'];
+  const languages = [
+    { code: 'eng', name: 'English' },
+    { code: 'hin', name: 'Hindi' },
+  ];
 
   const getResourceTypeOptions = () => {
     const options = [];
@@ -186,7 +189,8 @@ const BasicInfoSection: React.FC<BasicInfoSectionProps> = ({
           <button
             onClick={() => addArrayItem('basicInformation.titles', {
               title: '',
-              type: 'main'
+              type: 'main',
+              language: 'eng'
             })}
             className="flex items-center space-x-1 text-sm text-vedra-hunter hover:text-vedra-hunter/80"
           >
@@ -210,8 +214,9 @@ const BasicInfoSection: React.FC<BasicInfoSectionProps> = ({
                 )}
               </div>
               
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
                 <div className="md:col-span-2">
+                  <label className="block text-xs font-medium text-gray-600 mb-1">Title *</label>
                   <input
                     type="text"
                     placeholder="Enter title"
@@ -223,6 +228,7 @@ const BasicInfoSection: React.FC<BasicInfoSectionProps> = ({
                   />
                 </div>
                 <div>
+                  <label className="block text-xs font-medium text-gray-600 mb-1">Type</label>
                   <select
                     value={title.type || 'main'}
                     onChange={(e) => updateArrayItem('basicInformation.titles', title.id, {
@@ -233,6 +239,22 @@ const BasicInfoSection: React.FC<BasicInfoSectionProps> = ({
                     {titleTypes.map((type) => (
                       <option key={type} value={type.toLowerCase()}>
                         {type}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+                <div>
+                  <label className="block text-xs font-medium text-gray-600 mb-1">Language</label>
+                  <select
+                    value={title.language || 'eng'}
+                    onChange={(e) => updateArrayItem('basicInformation.titles', title.id, {
+                      language: e.target.value
+                    })}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-vedra-hunter focus:border-transparent"
+                  >
+                    {languages.map((lang) => (
+                      <option key={lang.code} value={lang.code}>
+                        {lang.name}
                       </option>
                     ))}
                   </select>

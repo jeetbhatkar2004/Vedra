@@ -159,7 +159,7 @@ const Upload: React.FC = () => {
     basicInformation: {
       doi: { hasExisting: false, value: '' },
       resourceType: 'Dataset',
-      titles: [{ id: '1', title: '', type: 'main' }],
+      titles: [{ id: '1', title: '', type: 'main', language: 'eng' }],
       publicationDate: '',
       creators: [{ id: '1', name: '' }],
       descriptions: [{ id: '1', text: '', type: 'abstract' }],
@@ -218,7 +218,7 @@ const Upload: React.FC = () => {
   });
 
   // Section states
-  const [openSections, setOpenSections] = useState<Set<string>>(new Set(['files']));
+  const [openSections, setOpenSections] = useState<Set<string>>(new Set(['basic', 'recommended', 'funding', 'references', 'publishing']));
   const [isDragOver, setIsDragOver] = useState<boolean>(false);
   const [showPreview, setShowPreview] = useState(false);
   const [showPayment, setShowPayment] = useState(false);
@@ -438,6 +438,118 @@ const Upload: React.FC = () => {
     }
   };
 
+  const handleDemoFill = () => {
+    setFormData(prev => ({
+      ...prev,
+      basicInformation: {
+        ...prev.basicInformation,
+        doi: { hasExisting: true, value: 'doi.org/10.59467/WJASR.2022-23.12-13.11' },
+        resourceType: 'Publication: Journal article',
+        titles: [
+          { 
+            id: '1', 
+            title: 'Survey on Prevalence and Awareness of Gynecological Disorders among Rural Women of Gautam Buddha Nagar, Uttar Pradesh', 
+            type: 'main', 
+            language: 'eng' 
+          },
+          { 
+            id: '2', 
+            title: 'गौतम बुद्ध नगर, उत्तर प्रदेश की ग्रामीण महिलाओं में स्त्री रोग संबंधी विकारों की व्यापकता और जागरूकता पर सर्वेक्षण', 
+            type: 'translated', 
+            language: 'hin' 
+          }
+        ],
+        publicationDate: '30-Jul-2022',
+        creators: [
+          {
+            id: '1',
+            name: 'DINESH C. SHARMA',
+            affiliation: 'Km. Mayawati Government Girls PG College Badalpur',
+            orcid: '0000-0002-7447-460X',
+            role: 'Author'
+          },
+          {
+            id: '2',
+            name: 'AZMI NAQVI',
+            affiliation: 'Km. Mayawati Government Girls PG College Badalpur',
+            orcid: '',
+            role: 'Co-Author'
+          },
+          {
+            id: '3',
+            name: 'ARPANA RATHOUR',
+            affiliation: 'Km. Mayawati Government Girls PG College Badalpur',
+            orcid: '',
+            role: 'Co-Author'
+          }
+        ],
+        descriptions: [
+          {
+            id: '1',
+            text: 'Polycystic ovarian disease and cancers of the ovaries and uterus are common gynecological diseases, increasingly affecting even rural communities. These conditions pose significant challenges in rural India due to a lack of awareness, high screening costs, and ignorance of symptoms. This cross-sectional, community-based study assessed the prevalence of gynecological disorders and awareness among women aged 18–55 years in Lal Kuan, Badalpur, and Achheja, Gautam Buddha Nagar, Uttar Pradesh, India. The study revealed a gynecological disturbance prevalence of 31.7%. Menstrual irregularities affected 28.6% of participants, and 12% reported polycystic ovary syndrome. Alarmingly, 73% of women did not seek medical care for such issues due to hesitation and various sociocultural barriers. This highlights the urgent need for awareness programs and affordable healthcare interventions in rural communities.',
+            type: 'abstract',
+            language: 'eng'
+          }
+        ]
+      },
+      recommendedInformation: {
+        ...prev.recommendedInformation,
+        keywords: ['Gynecological disorders', 'Polycystic ovarian disease', 'Irregular periods', 'Menstrual cycle irregularities', 'Rural health awareness'],
+        languages: ['eng'],
+        publisher: 'Connect Journals'
+      },
+      funding: {
+        awards: [
+          {
+            id: '1',
+            mode: 'standard',
+            funderName: 'DST-CURIE',
+            awardTitle: 'Women Scientists\' Grant 2023',
+            awardNumber: '',
+            text: ''
+          }
+        ]
+      },
+      references: [
+        {
+          id: '1',
+          reference: 'Antonio, A., Sandro, L.V., Rocco, R., Alessandra, G., Rossella, E.N., Aldo, E. and Alberto, F. (2020) Fundamental concepts and novel aspects of polycystic ovarian syndrome: Expert consensus resolution. Front. Endocrinol. (Lausanne), 11, 516.'
+        },
+        {
+          id: '2',
+          reference: 'Balarajan, Y., Selvaraj, S. and Subramanian, S.V. (2011) Health care and equity in India. Lancet, 377, 505–515.'
+        },
+        {
+          id: '3',
+          reference: 'Ferguson, H.B., Bovaird, S. and Muller, M.P. (2007) The impact of poverty on educational outcomes for children. Paediatr. Child Health, 12, 701–706.'
+        }
+      ],
+      publishingInformation: {
+        journal: {
+          title: 'World Journal of Applied Sciences & Research (WJASR)',
+          issn: '2249-4197',
+          volume: '2022-23, 12-13',
+          issue: '01-02',
+          pagesOrArticleNumber: '11'
+        },
+        imprint: {
+          title: '',
+          isbn: '',
+          place: '',
+          pagination: '',
+          edition: ''
+        },
+        thesis: {
+          awardingUniversity: '',
+          awardingDepartment: '',
+          type: '',
+          submissionDate: '',
+          defenseDate: ''
+        }
+      }
+    }));
+  };
+
   // Calculate storage usage
   const totalFiles = formData.files.length;
   const totalSize = formData.files.reduce((sum, file) => sum + file.size, 0);
@@ -446,9 +558,17 @@ const Upload: React.FC = () => {
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
       <div className="bg-white border-b border-gray-200 px-6 py-4">
-        <div className="max-w-7xl mx-auto">
-          <h1 className="text-2xl font-bold text-gray-900">Upload New Publication</h1>
-          <p className="text-gray-600 mt-1">Create and manage your research publications</p>
+        <div className="max-w-7xl mx-auto flex items-center justify-between">
+          <div>
+            <h1 className="text-2xl font-bold text-gray-900">Upload New Publication</h1>
+            <p className="text-gray-600 mt-1">Create and manage your research publications</p>
+          </div>
+          <button
+            onClick={handleDemoFill}
+            className="px-4 py-2 bg-vedra-hunter text-white rounded-lg hover:bg-vedra-hunter/90 transition-colors font-medium"
+          >
+            Demo
+          </button>
         </div>
       </div>
 
@@ -463,116 +583,125 @@ const Upload: React.FC = () => {
           </div>
         </div>
 
-        {/* Sections */}
-        <div className="space-y-6">
-          {/* Files Section */}
-          <SectionAccordion
-            title="Files"
-            icon={<FileText className="w-5 h-5" />}
-            isOpen={openSections.has('files')}
-            onToggle={() => toggleSection('files')}
-            isComplete={true}
-          >
-            <FilesSection
-              files={formData.files}
-              onDrop={handleDrop}
-              onDragOver={handleDragOver}
-              onDragLeave={handleDragLeave}
-              isDragOver={isDragOver}
-              onFileInput={handleFileInput}
-              onFileSelect={handleFileSelect}
-              fileInputRef={fileInputRef}
-              onRemoveFile={removeFile}
-              totalFiles={totalFiles}
-              totalSize={totalSize}
-              formatFileSize={formatFileSize}
-            />
-          </SectionAccordion>
+        {/* Two Column Layout */}
+        <div className="grid grid-cols-1 lg:grid-cols-10 gap-8">
+          {/* Left Column - 70% - Form Sections */}
+          <div className="lg:col-span-7">
+            <div className="space-y-6">
+              {/* Basic Information Section */}
+              <SectionAccordion
+                title="Basic Information"
+                icon={<FileText className="w-5 h-5" />}
+                isOpen={openSections.has('basic')}
+                onToggle={() => toggleSection('basic')}
+                isComplete={isSectionComplete('basic')}
+              >
+                <BasicInfoSection
+                  data={formData.basicInformation}
+                  updateFormData={updateFormData}
+                  addArrayItem={addArrayItem}
+                  removeArrayItem={removeArrayItem}
+                  updateArrayItem={updateArrayItem}
+                  generateId={generateId}
+                />
+              </SectionAccordion>
 
-          {/* Basic Information Section */}
-          <SectionAccordion
-            title="Basic Information"
-            icon={<FileText className="w-5 h-5" />}
-            isOpen={openSections.has('basic')}
-            onToggle={() => toggleSection('basic')}
-            isComplete={isSectionComplete('basic')}
-          >
-            <BasicInfoSection
-              data={formData.basicInformation}
-              updateFormData={updateFormData}
-              addArrayItem={addArrayItem}
-              removeArrayItem={removeArrayItem}
-              updateArrayItem={updateArrayItem}
-              generateId={generateId}
-            />
-          </SectionAccordion>
+              {/* Recommended Information Section */}
+              <SectionAccordion
+                title="Recommended Information"
+                icon={<Tag className="w-5 h-5" />}
+                isOpen={openSections.has('recommended')}
+                onToggle={() => toggleSection('recommended')}
+                isComplete={true}
+              >
+                <RecommendedInfoSection
+                  data={formData.recommendedInformation}
+                  updateFormData={updateFormData}
+                  addArrayItem={addArrayItem}
+                  removeArrayItem={removeArrayItem}
+                  updateArrayItem={updateArrayItem}
+                  generateId={generateId}
+                />
+              </SectionAccordion>
 
-          {/* Recommended Information Section */}
-          <SectionAccordion
-            title="Recommended Information"
-            icon={<Tag className="w-5 h-5" />}
-            isOpen={openSections.has('recommended')}
-            onToggle={() => toggleSection('recommended')}
-            isComplete={true}
-          >
-            <RecommendedInfoSection
-              data={formData.recommendedInformation}
-              updateFormData={updateFormData}
-              addArrayItem={addArrayItem}
-              removeArrayItem={removeArrayItem}
-              updateArrayItem={updateArrayItem}
-              generateId={generateId}
-            />
-          </SectionAccordion>
+              {/* Funding Section */}
+              <SectionAccordion
+                title="Funding"
+                icon={<Award className="w-5 h-5" />}
+                isOpen={openSections.has('funding')}
+                onToggle={() => toggleSection('funding')}
+                isComplete={true}
+              >
+                <FundingSection
+                  data={formData.funding}
+                  updateFormData={updateFormData}
+                  addArrayItem={addArrayItem}
+                  removeArrayItem={removeArrayItem}
+                  updateArrayItem={updateArrayItem}
+                  generateId={generateId}
+                />
+              </SectionAccordion>
 
-          {/* Funding Section */}
-          <SectionAccordion
-            title="Funding"
-            icon={<Award className="w-5 h-5" />}
-            isOpen={openSections.has('funding')}
-            onToggle={() => toggleSection('funding')}
-            isComplete={true}
-          >
-            <FundingSection
-              data={formData.funding}
-              updateFormData={updateFormData}
-              addArrayItem={addArrayItem}
-              removeArrayItem={removeArrayItem}
-              updateArrayItem={updateArrayItem}
-              generateId={generateId}
-            />
-          </SectionAccordion>
+              {/* References Section */}
+              <SectionAccordion
+                title="References"
+                icon={<BookOpen className="w-5 h-5" />}
+                isOpen={openSections.has('references')}
+                onToggle={() => toggleSection('references')}
+                isComplete={true}
+              >
+                <ReferencesSection
+                  data={{ references: formData.references }}
+                  addArrayItem={addArrayItem}
+                  removeArrayItem={removeArrayItem}
+                  updateArrayItem={updateArrayItem}
+                  generateId={generateId}
+                />
+              </SectionAccordion>
 
-          {/* References Section */}
-          <SectionAccordion
-            title="References"
-            icon={<BookOpen className="w-5 h-5" />}
-            isOpen={openSections.has('references')}
-            onToggle={() => toggleSection('references')}
-            isComplete={true}
-          >
-            <ReferencesSection
-              data={{ references: formData.references }}
-              addArrayItem={addArrayItem}
-              removeArrayItem={removeArrayItem}
-              updateArrayItem={updateArrayItem}
-              generateId={generateId}
-            />
-          </SectionAccordion>
+              {/* Publishing Information Section */}
+              <SectionAccordion
+                title="Publishing Information"
+                icon={<Settings className="w-5 h-5" />}
+                isOpen={openSections.has('publishing')}
+                onToggle={() => toggleSection('publishing')}
+                isComplete={true}
+              >
+                <PublishingInfoSection
+                  data={formData.publishingInformation}
+                  updateFormData={updateFormData}
+                />
+              </SectionAccordion>
+            </div>
+          </div>
 
-          {/* Publishing Information Section */}
-          <SectionAccordion
-            title="Publishing Information"
-            icon={<Settings className="w-5 h-5" />}
-            isOpen={openSections.has('publishing')}
-            onToggle={() => toggleSection('publishing')}
-            isComplete={true}
-          >
-            <PublishingInfoSection
-              data={formData.publishingInformation}
-              updateFormData={updateFormData}
-            />
-          </SectionAccordion>
+          {/* Right Column - 30% - Files Section */}
+          <div className="lg:col-span-3">
+            <div className="sticky top-8">
+              <SectionAccordion
+                title="Files"
+                icon={<FileText className="w-5 h-5" />}
+                isOpen={openSections.has('files')}
+                onToggle={() => toggleSection('files')}
+                isComplete={true}
+              >
+                <FilesSection
+                  files={formData.files}
+                  onDrop={handleDrop}
+                  onDragOver={handleDragOver}
+                  onDragLeave={handleDragLeave}
+                  isDragOver={isDragOver}
+                  onFileInput={handleFileInput}
+                  onFileSelect={handleFileSelect}
+                  fileInputRef={fileInputRef}
+                  onRemoveFile={removeFile}
+                  totalFiles={totalFiles}
+                  totalSize={totalSize}
+                  formatFileSize={formatFileSize}
+                />
+              </SectionAccordion>
+            </div>
+          </div>
         </div>
       </div>
 

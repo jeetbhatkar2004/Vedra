@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { AuthProvider } from './contexts/AuthContext';
+import { LanguageProvider } from './contexts/LanguageContext';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Home from './pages/Home';
@@ -10,11 +11,13 @@ import Pricing from './pages/Pricing';
 import Contact from './pages/Contact';
 import Dashboard from './pages/Dashboard';
 import Upload from './pages/Upload';
+import Resource from './pages/Resource';
 
 function AppContent() {
   const location = useLocation();
   const isDashboard = location.pathname === '/dashboard';
   const isUpload = location.pathname === '/upload';
+  const isResource = location.pathname === '/resource';
   const isHomePage = location.pathname === '/';
 
   return (
@@ -30,10 +33,10 @@ function AppContent() {
       )}
       
       {/* Navbar - only show when not on Dashboard or Upload */}
-      {!isDashboard && !isUpload && <Navbar />}
+      {!isDashboard && !isUpload && !isResource && <Navbar />}
       
       {/* Main content area */}
-      <main className={`flex-grow ${isDashboard || isUpload ? 'pt-0' : 'pt-20'}`}>
+      <main className={`flex-grow ${isDashboard || isUpload || isResource ? 'pt-0' : 'pt-20'}`}>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
@@ -42,22 +45,25 @@ function AppContent() {
           <Route path="/contact" element={<Contact />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/upload" element={<Upload />} />
+          <Route path="/resource" element={<Resource />} />
         </Routes>
       </main>
       
       {/* Footer - only show when not on Dashboard or Upload */}
-      {!isDashboard && !isUpload && <Footer />}
+      {!isDashboard && !isUpload && !isResource && <Footer />}
     </div>
   );
 }
 
 function App() {
   return (
-    <AuthProvider>
-      <Router>
-        <AppContent />
-      </Router>
-    </AuthProvider>
+    <LanguageProvider>
+      <AuthProvider>
+        <Router>
+          <AppContent />
+        </Router>
+      </AuthProvider>
+    </LanguageProvider>
   );
 }
 

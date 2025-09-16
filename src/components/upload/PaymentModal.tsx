@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Clock, Smartphone } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 interface PaymentModalProps {
   isOpen: boolean;
@@ -9,13 +10,22 @@ interface PaymentModalProps {
 }
 
 const PaymentModal: React.FC<PaymentModalProps> = ({ isOpen, onClose, amount }) => {
+  const navigate = useNavigate();
   const [selectedMethod, setSelectedMethod] = useState<'qr' | 'upi'>('qr');
   const [upiId, setUpiId] = useState('');
+  const [isProcessing, setIsProcessing] = useState(false);
 
-  const handleContinue = () => {
-    // Handle payment processing
-    console.log('Processing payment:', { method: selectedMethod, amount, upiId });
+  const handleContinue = async () => {
+    setIsProcessing(true);
+    
+    // Simulate payment processing
+    await new Promise(resolve => setTimeout(resolve, 2000));
+    
+    setIsProcessing(false);
     onClose();
+    
+    // Navigate to the resource page
+    navigate('/resource');
   };
 
   return (
@@ -40,7 +50,7 @@ const PaymentModal: React.FC<PaymentModalProps> = ({ isOpen, onClose, amount }) 
                   <span className="text-white font-bold text-sm">V</span>
                 </div>
                 <div>
-                  <h2 className="text-lg font-semibold text-gray-900">Vedra Store</h2>
+                  <h2 className="text-lg font-semibold text-gray-900">mVedra</h2>
                   <div className="flex items-center space-x-1 mt-1">
                     <div className="w-2 h-2 bg-green-500 rounded-full"></div>
                     <span className="text-xs text-green-600 font-medium">Trusted Business</span>
@@ -186,9 +196,17 @@ const PaymentModal: React.FC<PaymentModalProps> = ({ isOpen, onClose, amount }) 
                 </div>
                 <button
                   onClick={handleContinue}
-                  className="px-8 py-3 bg-black text-white rounded-lg hover:bg-gray-800 transition-colors font-medium"
+                  disabled={isProcessing}
+                  className="px-8 py-3 bg-black text-white rounded-lg hover:bg-gray-800 transition-colors font-medium disabled:opacity-50 disabled:cursor-not-allowed flex items-center space-x-2"
                 >
-                  Continue
+                  {isProcessing ? (
+                    <>
+                      <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                      <span>Processing...</span>
+                    </>
+                  ) : (
+                    <span>Pay</span>
+                  )}
                 </button>
               </div>
             </div>

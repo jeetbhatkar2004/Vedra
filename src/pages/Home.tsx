@@ -1,3 +1,5 @@
+// TODO: Add a toggle in the header to change language between English and Hindi.
+
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
@@ -97,13 +99,7 @@ const Home: React.FC = () => {
                       Get Started
                       <UserPlus className="ml-2 w-5 h-5" />
                     </button>
-                    <button 
-                      onClick={() => setShowLoginModal(true)}
-                      className="btn-secondary inline-flex items-center justify-center"
-                    >
-                      Sign In
-                      <LogIn className="ml-2 w-5 h-5" />
-                    </button>
+                    
                   </>
                 )}
                 <Link to="/about" className="btn-secondary inline-flex items-center justify-center">
