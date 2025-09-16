@@ -11,6 +11,7 @@ import Dashboard from './pages/Dashboard';
 import Privacy from './pages/Privacy';
 import Terms from './pages/Terms';
 import Cookies from './pages/Cookies';
+import Calculator from './pages/Calculator';
 
 function AppContent() {
   const location = useLocation();
@@ -44,6 +45,8 @@ function AppContent() {
           <Route path="/privacy" element={<Privacy />} />
           <Route path="/terms" element={<Terms />} />
           <Route path="/cookies" element={<Cookies />} />
+          {/* Hidden, link-only route: not referenced in navigation */}
+          <Route path="/university-savings" element={<Calculator />} />
         </Routes>
       </main>
       
