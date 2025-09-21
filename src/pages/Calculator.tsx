@@ -16,7 +16,7 @@ function calculateTotals(estimatedDois: number, universityType: UniversityType) 
 	const mVedraAnnual = dois * 50 + (isPrivate ? 40000 : 20000);
 
 	// Competitors (including infrastructure costs to match mVedra capability)
-	const infra = 300000;
+	const infra = 500000;
 	const otherIndianAnnual = 20000 + dois * 120 + infra;
 	const foreignAnnual = 150000 + 88 * dois + infra;
 
@@ -38,57 +38,64 @@ function calculateTotals(estimatedDois: number, universityType: UniversityType) 
 	};
 }
 
-function BarChart({ pctIndian, pctForeign }: { pctIndian: number; pctForeign: number }) {
-	const data = [
-		{ label: 'vs Other Indian Publishers', value: pctIndian, color: '#dc2626' },
-		{ label: 'vs Foreign DOI Agencies', value: pctForeign, color: '#0ea5e9' },
-	];
+function BarChart({ mVedraAnnual, otherIndianAnnual, foreignAnnual }: { mVedraAnnual: number; otherIndianAnnual: number; foreignAnnual: number }) {
+    // Convert values to Lakhs for y-axis units
+    const data = [
+        { label: 'mVedra Annual Cost', value: mVedraAnnual / 100000, color: '#16a34a' }, // green
+        { label: 'Other Indian Publishers', value: otherIndianAnnual / 100000, color: '#dc2626' }, // red
+        { label: 'Foreign DOI Agencies', value: foreignAnnual / 100000, color: '#0ea5e9' }, // blue
+    ];
 
-	const maxValue = Math.max(100, ...data.map(d => d.value));
-	const barWidth = 140;
-	const barGap = 80;
-	const padLeft = 56; // extra room for y-axis labels
-	const padRight = 24;
-	const padTop = 16; // extra top padding so 100% is fully visible
-	const chartHeight = 320;
-	const chartWidth = data.length * barWidth + (data.length - 1) * barGap + padLeft + padRight;
+    const maxValue = Math.max(...data.map(d => d.value), 1);
+    // Create a "nice" upper bound for ticks (in Lakhs)
+    const niceMax = Math.ceil((maxValue + 0.1) / 5) * 5; // steps of 5 Lakhs
 
-	return (
-		<div className="w-full overflow-x-auto">
-			<svg width={chartWidth} height={padTop + chartHeight + 60} role="img" aria-label="Savings percentage chart">
-				{/* Axes */}
-				<line x1={padLeft} y1={padTop + chartHeight} x2={chartWidth - padRight} y2={padTop + chartHeight} stroke="#e5e7eb" />
-				{[0, 20, 40, 60, 80, 100].map(t => {
-					const y = padTop + chartHeight - (t / maxValue) * chartHeight;
-					return (
-						<g key={t}>
-							<line x1={padLeft} y1={y} x2={chartWidth - padRight} y2={y} stroke="#f3f4f6" />
-							<text x={8} y={y + 4} textAnchor="start" fontSize={12} fill="#6b7280">{t}%</text>
-						</g>
-					);
-				})}
+    const barWidth = 140;
+    const barGap = 80;
+    const padLeft = 72; // extra room for ₹ labels
+    const padRight = 24;
+    const padTop = 16;
+    const chartHeight = 320;
+    const chartWidth = data.length * barWidth + (data.length - 1) * barGap + padLeft + padRight;
 
-				{data.map((d, i) => {
-					const x = padLeft + i * (barWidth + barGap);
-					const h = Math.max(0, (d.value / maxValue) * chartHeight);
-					const y = padTop + chartHeight - h;
-					return (
-						<g key={d.label}>
-							<rect x={x} y={y} width={barWidth} height={h} fill={d.color} rx={6} />
-							{/* Value label above bar */}
-							<text x={x + barWidth / 2} y={Math.max(padTop + 12, y - 8)} textAnchor="middle" fontWeight={600} fill="#111827">
-								{d.value.toFixed(2)}%
-							</text>
-							{/* Category label */}
-							<text x={x + barWidth / 2} y={padTop + chartHeight + 24} textAnchor="middle" fontSize={13} fill="#374151">
-								{d.label}
-							</text>
-						</g>
-					);
-				})}
-			</svg>
-		</div>
-	);
+    const ticks = [0, 0.2, 0.4, 0.6, 0.8, 1].map(t => t * niceMax);
+
+    return (
+        <div className="w-full overflow-x-auto">
+            <svg width={chartWidth} height={padTop + chartHeight + 60} role="img" aria-label="Annual cost comparison chart (in Lakhs)">
+                {/* Axes */}
+                <line x1={padLeft} y1={padTop + chartHeight} x2={chartWidth - padRight} y2={padTop + chartHeight} stroke="#e5e7eb" />
+                {ticks.map(t => {
+                    const y = padTop + chartHeight - (t / niceMax) * chartHeight;
+                    return (
+                        <g key={t}>
+                            <line x1={padLeft} y1={y} x2={chartWidth - padRight} y2={y} stroke="#f3f4f6" />
+                            <text x={8} y={y + 4} textAnchor="start" fontSize={12} fill="#6b7280">₹{t.toFixed(0)} L</text>
+                        </g>
+                    );
+                })}
+
+                {data.map((d, i) => {
+                    const x = padLeft + i * (barWidth + barGap);
+                    const h = Math.max(0, (d.value / niceMax) * chartHeight);
+                    const y = padTop + chartHeight - h;
+                    return (
+                        <g key={d.label}>
+                            <rect x={x} y={y} width={barWidth} height={h} fill={d.color} rx={6} />
+                            {/* Value label above bar */}
+                            <text x={x + barWidth / 2} y={Math.max(padTop + 12, y - 8)} textAnchor="middle" fontWeight={600} fill="#111827">
+                                ₹{d.value.toFixed(2)} L
+                            </text>
+                            {/* Category label */}
+                            <text x={x + barWidth / 2} y={padTop + chartHeight + 24} textAnchor="middle" fontSize={13} fill="#374151">
+                                {d.label}
+                            </text>
+                        </g>
+                    );
+                })}
+            </svg>
+        </div>
+    );
 }
 
 export default function Calculator() {
@@ -143,9 +150,9 @@ export default function Calculator() {
 				</div>
 
 				<div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
-					<h3 className="text-xl font-semibold text-gray-800 mb-4">Savings Overview</h3>
-					<BarChart pctIndian={totals.pctVsIndian} pctForeign={totals.pctVsForeign} />
-					<p className="text-xs text-gray-500 mt-4">Chart shows percentage saved with mVedra over each alternative. Values include comparable infrastructure costs.</p>
+					<h3 className="text-xl font-semibold text-gray-800 mb-4">Cost Overview for {estimatedDois} DOIs/year</h3>
+					<BarChart mVedraAnnual={totals.mVedraAnnual} otherIndianAnnual={totals.otherIndianAnnual} foreignAnnual={totals.foreignAnnual} />
+					<p className="text-xs text-gray-500 mt-4">Pricing for foreign agencies is calculated at $1 = ₹88.47. The price also includes costs for setting up a web-infrastructure with similar functionalities to mVedra.</p>
 				</div>
 			</div>
 		</div>

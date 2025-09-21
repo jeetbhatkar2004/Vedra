@@ -92,6 +92,13 @@ const Pricing: React.FC = () => {
             <p className="text-xl text-gray-600 leading-relaxed mb-8">
               Select the plan that best fits your organization's needs. Each plan serves different customer bases with specialized features.
             </p>
+          <Link
+            to="/university-savings"
+            className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-vedra-hunter to-vedra-calpoly text-white rounded-lg font-semibold text-lg transition-all duration-200 hover:from-vedra-calpoly hover:to-vedra-hunter transform hover:scale-105 mb-4"
+          >
+            Cost Overview
+            <ArrowRight className="inline w-5 h-5 ml-2" />
+          </Link>
           </motion.div>
         </div>
       </section>
