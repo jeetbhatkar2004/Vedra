@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import { 
   CheckCircle, 
   Star, 
@@ -129,14 +130,16 @@ const Pricing: React.FC = () => {
                     <div className="space-y-4">
                       {plan.name === "Institution" ? (
                         <button className="w-full py-4 px-8 bg-gradient-to-r from-vedra-hunter to-vedra-calpoly text-white rounded-lg font-semibold text-lg transition-all duration-200 hover:from-vedra-calpoly hover:to-vedra-hunter transform hover:scale-105">
-                          Enquire Now
-                          <ArrowRight className="inline w-5 h-5 ml-2" />
-                        </button>
-                      ) : (
-                        <button className="w-full py-4 px-8 bg-gradient-to-r from-vedra-hunter to-vedra-calpoly text-white rounded-lg font-semibold text-lg transition-all duration-200 hover:from-vedra-calpoly hover:to-vedra-hunter transform hover:scale-105">
                           Get Started
                           <ArrowRight className="inline w-5 h-5 ml-2" />
                         </button>
+                      ) : (
+                        <Link to="/contact">
+                          <button className="w-full py-4 px-8 bg-gradient-to-r from-vedra-hunter to-vedra-calpoly text-white rounded-lg font-semibold text-lg transition-all duration-200 hover:from-vedra-calpoly hover:to-vedra-hunter transform hover:scale-105">
+                            Enquire Now
+                            <ArrowRight className="inline w-5 h-5 ml-2" />
+                          </button>
+                        </Link>
                       )}
                     </div>
                   </div>

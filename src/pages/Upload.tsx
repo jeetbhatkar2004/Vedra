@@ -88,6 +88,7 @@ interface AwardItem {
 interface ReferenceItem {
   id: string;
   reference: string;
+  doi?: string;
 }
 
 interface FormData {
@@ -159,7 +160,10 @@ const Upload: React.FC = () => {
     basicInformation: {
       doi: { hasExisting: false, value: '' },
       resourceType: 'Dataset',
-      titles: [{ id: '1', title: '', type: 'main', language: 'eng' }],
+      titles: [
+        { id: '1', title: '', type: 'main', language: 'English' },
+        { id: '2', title: '', type: 'translated', language: 'Hindi' }
+      ],
       publicationDate: '',
       creators: [{ id: '1', name: '' }],
       descriptions: [{ id: '1', text: '', type: 'abstract' }],
@@ -175,7 +179,7 @@ const Upload: React.FC = () => {
     recommendedInformation: {
       contributors: [],
       keywords: [],
-      languages: ['eng'],
+      languages: ['English'],
       dates: [],
       version: '',
       publisher: ''
@@ -218,7 +222,7 @@ const Upload: React.FC = () => {
   });
 
   // Section states
-  const [openSections, setOpenSections] = useState<Set<string>>(new Set(['basic', 'recommended', 'funding', 'references', 'publishing']));
+  const [openSections, setOpenSections] = useState<Set<string>>(new Set(['files', 'basic', 'recommended', 'funding', 'references', 'publishing']));
   const [isDragOver, setIsDragOver] = useState<boolean>(false);
   const [showPreview, setShowPreview] = useState(false);
   const [showPayment, setShowPayment] = useState(false);
@@ -404,7 +408,7 @@ const Upload: React.FC = () => {
     
     // Validate basic information
     if (!formData.basicInformation.titles.some(t => t.title.trim())) {
-      errors.push('At least one title is required');
+      errors.push('At least one title is required (English or regional language)');
     }
     
     if (!formData.basicInformation.creators.some(c => c.name.trim())) {
@@ -450,13 +454,13 @@ const Upload: React.FC = () => {
             id: '1', 
             title: 'Survey on Prevalence and Awareness of Gynecological Disorders among Rural Women of Gautam Buddha Nagar, Uttar Pradesh', 
             type: 'main', 
-            language: 'eng' 
+            language: 'English' 
           },
           { 
             id: '2', 
             title: 'गौतम बुद्ध नगर, उत्तर प्रदेश की ग्रामीण महिलाओं में स्त्री रोग संबंधी विकारों की व्यापकता और जागरूकता पर सर्वेक्षण', 
             type: 'translated', 
-            language: 'hin' 
+            language: 'Hindi' 
           }
         ],
         publicationDate: '30-Jul-2022',
@@ -488,14 +492,14 @@ const Upload: React.FC = () => {
             id: '1',
             text: 'Polycystic ovarian disease and cancers of the ovaries and uterus are common gynecological diseases, increasingly affecting even rural communities. These conditions pose significant challenges in rural India due to a lack of awareness, high screening costs, and ignorance of symptoms. This cross-sectional, community-based study assessed the prevalence of gynecological disorders and awareness among women aged 18–55 years in Lal Kuan, Badalpur, and Achheja, Gautam Buddha Nagar, Uttar Pradesh, India. The study revealed a gynecological disturbance prevalence of 31.7%. Menstrual irregularities affected 28.6% of participants, and 12% reported polycystic ovary syndrome. Alarmingly, 73% of women did not seek medical care for such issues due to hesitation and various sociocultural barriers. This highlights the urgent need for awareness programs and affordable healthcare interventions in rural communities.',
             type: 'abstract',
-            language: 'eng'
+            language: 'English'
           }
         ]
       },
       recommendedInformation: {
         ...prev.recommendedInformation,
         keywords: ['Gynecological disorders', 'Polycystic ovarian disease', 'Irregular periods', 'Menstrual cycle irregularities', 'Rural health awareness'],
-        languages: ['eng'],
+        languages: ['English'],
         publisher: 'Connect Journals'
       },
       funding: {
@@ -513,15 +517,18 @@ const Upload: React.FC = () => {
       references: [
         {
           id: '1',
-          reference: 'Antonio, A., Sandro, L.V., Rocco, R., Alessandra, G., Rossella, E.N., Aldo, E. and Alberto, F. (2020) Fundamental concepts and novel aspects of polycystic ovarian syndrome: Expert consensus resolution. Front. Endocrinol. (Lausanne), 11, 516.'
+          reference: 'Antonio, A., Sandro, L.V., Rocco, R., Alessandra, G., Rossella, E.N., Aldo, E. and Alberto, F. (2020) Fundamental concepts and novel aspects of polycystic ovarian syndrome: Expert consensus resolution. Front. Endocrinol. (Lausanne), 11, 516.',
+          doi: '10.3389/fendo.2020.00516'
         },
         {
           id: '2',
-          reference: 'Balarajan, Y., Selvaraj, S. and Subramanian, S.V. (2011) Health care and equity in India. Lancet, 377, 505–515.'
+          reference: 'Balarajan, Y., Selvaraj, S. and Subramanian, S.V. (2011) Health care and equity in India. Lancet, 377, 505–515.',
+          doi: '10.1016/S0140-6736(10)61894-6'
         },
         {
           id: '3',
-          reference: 'Ferguson, H.B., Bovaird, S. and Muller, M.P. (2007) The impact of poverty on educational outcomes for children. Paediatr. Child Health, 12, 701–706.'
+          reference: 'Ferguson, H.B., Bovaird, S. and Muller, M.P. (2007) The impact of poverty on educational outcomes for children. Paediatr. Child Health, 12, 701–706.',
+          doi: '10.1093/pch/12.8.701'
         }
       ],
       publishingInformation: {

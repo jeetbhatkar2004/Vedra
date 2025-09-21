@@ -4,6 +4,7 @@ import { Plus, Trash2 } from 'lucide-react';
 interface ReferenceItem {
   id: string;
   reference: string;
+  doi?: string;
 }
 
 interface ReferencesData {
@@ -56,15 +57,33 @@ const ReferencesSection: React.FC<ReferencesSectionProps> = ({
                 </button>
               </div>
               
-              <textarea
-                placeholder="Doe, J. (2020). Title. Journal, 10(2), 100–110. https://doi.org/10.1234/example"
-                value={reference.reference}
-                onChange={(e) => updateArrayItem('references', reference.id, {
-                  reference: e.target.value
-                })}
-                rows={3}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-vedra-hunter focus:border-transparent"
-              />
+              <div className="space-y-3">
+                <div>
+                  <label className="block text-xs font-medium text-gray-600 mb-1">Reference</label>
+                  <textarea
+                    placeholder="Doe, J. (2020). Title. Journal, 10(2), 100–110. https://doi.org/10.1234/example"
+                    value={reference.reference}
+                    onChange={(e) => updateArrayItem('references', reference.id, {
+                      reference: e.target.value
+                    })}
+                    rows={3}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-vedra-hunter focus:border-transparent"
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs font-medium text-gray-600 mb-1">DOI (Optional)</label>
+                  <input
+                    type="text"
+                    placeholder="10.1234/example"
+                    value={reference.doi || ''}
+                    onChange={(e) => updateArrayItem('references', reference.id, {
+                      doi: e.target.value
+                    })}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-vedra-hunter focus:border-transparent"
+                  />
+                  <p className="text-xs text-gray-500 mt-1">Format: 10.xxxx/xxxxx</p>
+                </div>
+              </div>
             </div>
           ))}
         </div>

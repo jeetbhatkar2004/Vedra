@@ -92,8 +92,29 @@ const BasicInfoSection: React.FC<BasicInfoSectionProps> = ({
 
   const titleTypes = ['Main', 'Alternative', 'Subtitle', 'Translated', 'Other'];
   const languages = [
-    { code: 'eng', name: 'English' },
-    { code: 'hin', name: 'Hindi' },
+    'English',
+    'Assamese',
+    'Bengali',
+    'Gujarati',
+    'Hindi',
+    'Kannada',
+    'Kashmiri',
+    'Konkani',
+    'Malayalam',
+    'Manipuri',
+    'Marathi',
+    'Nepali',
+    'Oriya',
+    'Punjabi',
+    'Sanskrit',
+    'Sindhi',
+    'Tamil',
+    'Telugu',
+    'Urdu',
+    'Bodo',
+    'Santhali',
+    'Maithili',
+    'Dogri'
   ];
 
   const getResourceTypeOptions = () => {
@@ -183,19 +204,22 @@ const BasicInfoSection: React.FC<BasicInfoSectionProps> = ({
       {/* Titles */}
       <div>
         <div className="flex items-center justify-between mb-3">
-          <label className="block text-sm font-medium text-gray-700">
-            Titles
-          </label>
+          <div>
+            <label className="block text-sm font-medium text-gray-700">
+              Titles
+            </label>
+            <p className="text-xs text-gray-500 mt-1">At least one title is required (English or regional language)</p>
+          </div>
           <button
             onClick={() => addArrayItem('basicInformation.titles', {
               title: '',
-              type: 'main',
-              language: 'eng'
+              type: 'translated',
+              language: 'English'
             })}
             className="flex items-center space-x-1 text-sm text-vedra-hunter hover:text-vedra-hunter/80"
           >
             <Plus className="w-4 h-4" />
-            <span>Add Title</span>
+            <span>Add Additional Title</span>
           </button>
         </div>
         
@@ -203,8 +227,10 @@ const BasicInfoSection: React.FC<BasicInfoSectionProps> = ({
           {data.titles.map((title, index) => (
             <div key={title.id} className="border border-gray-200 rounded-lg p-4">
               <div className="flex items-center justify-between mb-3">
-                <span className="text-sm font-medium text-gray-700">Title {index + 1}</span>
-                {data.titles.length > 1 && (
+                <span className="text-sm font-medium text-gray-700">
+                  {index === 0 ? 'Title (English)' : index === 1 ? 'Title (Regional Language)' : `Title ${index + 1}`}
+                </span>
+                {data.titles.length > 2 && (
                   <button
                     onClick={() => removeArrayItem('basicInformation.titles', title.id)}
                     className="text-red-500 hover:text-red-700"
@@ -246,15 +272,15 @@ const BasicInfoSection: React.FC<BasicInfoSectionProps> = ({
                 <div>
                   <label className="block text-xs font-medium text-gray-600 mb-1">Language</label>
                   <select
-                    value={title.language || 'eng'}
+                    value={title.language || 'English'}
                     onChange={(e) => updateArrayItem('basicInformation.titles', title.id, {
                       language: e.target.value
                     })}
                     className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-vedra-hunter focus:border-transparent"
                   >
                     {languages.map((lang) => (
-                      <option key={lang.code} value={lang.code}>
-                        {lang.name}
+                      <option key={lang} value={lang}>
+                        {lang}
                       </option>
                     ))}
                   </select>
@@ -380,7 +406,7 @@ const BasicInfoSection: React.FC<BasicInfoSectionProps> = ({
             onClick={() => addArrayItem('basicInformation.descriptions', {
               text: '',
               type: 'abstract',
-              language: 'eng'
+              language: 'English'
             })}
             className="flex items-center space-x-1 text-sm text-vedra-hunter hover:text-vedra-hunter/80"
           >

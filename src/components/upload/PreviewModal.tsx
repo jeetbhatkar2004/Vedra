@@ -196,7 +196,12 @@ const PreviewModal: React.FC<PreviewModalProps> = ({ data, onClose, formatFileSi
                 <div className="space-y-2">
                   {data.references.map((reference, index) => (
                     <div key={index} className="text-sm p-2 bg-gray-50 rounded text-gray-700">
-                      {reference.reference}
+                      <div>{reference.reference}</div>
+                      {reference.doi && (
+                        <div className="mt-1 text-xs text-blue-600 font-medium">
+                          DOI: {reference.doi}
+                        </div>
+                      )}
                     </div>
                   ))}
                 </div>

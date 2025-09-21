@@ -29,12 +29,12 @@ const Resource: React.FC = () => {
       { 
         title: 'Survey on Prevalence and Awareness of Gynecological Disorders among Rural Women of Gautam Buddha Nagar, Uttar Pradesh', 
         type: 'main', 
-        language: 'eng' 
+        language: 'English' 
       },
       { 
         title: 'गौतम बुद्ध नगर, उत्तर प्रदेश की ग्रामीण महिलाओं में स्त्री रोग संबंधी विकारों की व्यापकता और जागरूकता पर सर्वेक्षण', 
         type: 'translated', 
-        language: 'hin' 
+        language: 'Hindi' 
       }
     ],
     publicationDate: '30-Jul-2022',
@@ -111,13 +111,24 @@ const Resource: React.FC = () => {
       <div className="bg-white border-b border-gray-200 px-6 py-4">
         <div className="max-w-7xl mx-auto">
           <div className="flex items-center justify-between">
-            <button
-              onClick={() => navigate('/upload')}
-              className="flex items-center space-x-2 text-gray-600 hover:text-gray-900 transition-colors"
-            >
-              <ArrowLeft className="w-5 h-5" />
-              <span>Back to Upload</span>
-            </button>
+            <div className="flex items-center space-x-6">
+              <button
+                onClick={() => navigate('/upload')}
+                className="flex items-center space-x-1 text-sm text-gray-600 hover:text-gray-900 transition-colors"
+              >
+                <ArrowLeft className="w-4 h-4" />
+                <span>Back</span>
+              </button>
+              {/* WJASR Logo */}
+              <div className="flex items-center">
+                <img 
+                  src="/logo-wjasr.webp" 
+                  alt="WJASR Journal Logo" 
+                  className="h-24 w-auto"
+                />
+                <span className="ml-4 text-gray-600 text-2xl font-bold">World Journal of Applied Sciences & Research (WJASR)</span>
+              </div>
+            </div>
             <button
               onClick={handleShare}
               className="flex items-center space-x-2 px-4 py-2 bg-vedra-hunter text-white rounded-lg hover:bg-vedra-hunter/90 transition-colors"
