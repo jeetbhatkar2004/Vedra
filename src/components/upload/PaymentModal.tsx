@@ -1,31 +1,39 @@
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { X, Clock, Smartphone } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { X, Smartphone } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 interface PaymentModalProps {
   isOpen: boolean;
   onClose: () => void;
   amount: number;
+  resourceType?: "journal" | "dissertation";
 }
 
-const PaymentModal: React.FC<PaymentModalProps> = ({ isOpen, onClose, amount }) => {
+const PaymentModal: React.FC<PaymentModalProps> = ({
+  isOpen,
+  onClose,
+  amount,
+  resourceType = "journal",
+}) => {
   const navigate = useNavigate();
-  const [selectedMethod, setSelectedMethod] = useState<'qr' | 'upi'>('qr');
-  const [upiId, setUpiId] = useState('');
+  const [selectedMethod, setSelectedMethod] = useState<"qr" | "upi">("qr");
+  const [upiId, setUpiId] = useState("");
   const [isProcessing, setIsProcessing] = useState(false);
 
   const handleContinue = async () => {
     setIsProcessing(true);
-    
+
     // Simulate payment processing
-    await new Promise(resolve => setTimeout(resolve, 2000));
-    
+    await new Promise((resolve) => setTimeout(resolve, 2000));
+
     setIsProcessing(false);
     onClose();
-    
-    // Navigate to the resource page
-    navigate('/resource');
+
+    // Navigate to the appropriate resource page
+    navigate(
+      resourceType === "dissertation" ? "/resource-dissertation" : "/resource"
+    );
   };
 
   return (
@@ -50,10 +58,14 @@ const PaymentModal: React.FC<PaymentModalProps> = ({ isOpen, onClose, amount }) 
                   <span className="text-white font-bold text-sm">V</span>
                 </div>
                 <div>
-                  <h2 className="text-lg font-semibold text-gray-900">mVedra</h2>
+                  <h2 className="text-lg font-semibold text-gray-900">
+                    mVedra
+                  </h2>
                   <div className="flex items-center space-x-1 mt-1">
                     <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                    <span className="text-xs text-green-600 font-medium">Trusted Business</span>
+                    <span className="text-xs text-green-600 font-medium">
+                      Trusted Business
+                    </span>
                   </div>
                 </div>
               </div>
@@ -78,21 +90,21 @@ const PaymentModal: React.FC<PaymentModalProps> = ({ isOpen, onClose, amount }) 
               {/* Payment Method Tabs */}
               <div className="flex space-x-4 mb-6">
                 <button
-                  onClick={() => setSelectedMethod('qr')}
+                  onClick={() => setSelectedMethod("qr")}
                   className={`flex-1 py-3 px-4 rounded-lg font-medium transition-colors ${
-                    selectedMethod === 'qr'
-                      ? 'bg-vedra-hunter text-white'
-                      : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                    selectedMethod === "qr"
+                      ? "bg-vedra-hunter text-white"
+                      : "bg-gray-100 text-gray-700 hover:bg-gray-200"
                   }`}
                 >
                   UPI QR
                 </button>
                 <button
-                  onClick={() => setSelectedMethod('upi')}
+                  onClick={() => setSelectedMethod("upi")}
                   className={`flex-1 py-3 px-4 rounded-lg font-medium transition-colors ${
-                    selectedMethod === 'upi'
-                      ? 'bg-vedra-hunter text-white'
-                      : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                    selectedMethod === "upi"
+                      ? "bg-vedra-hunter text-white"
+                      : "bg-gray-100 text-gray-700 hover:bg-gray-200"
                   }`}
                 >
                   UPI ID
@@ -100,7 +112,7 @@ const PaymentModal: React.FC<PaymentModalProps> = ({ isOpen, onClose, amount }) 
               </div>
 
               {/* UPI QR Section */}
-              {selectedMethod === 'qr' && (
+              {selectedMethod === "qr" && (
                 <div className="space-y-6">
                   <div className="text-center">
                     <div className="inline-block p-4 bg-white border-2 border-gray-200 rounded-lg">
@@ -111,46 +123,58 @@ const PaymentModal: React.FC<PaymentModalProps> = ({ isOpen, onClose, amount }) 
                         className="w-48 h-48"
                       />
                     </div>
-                    
+
                     <div className="mt-4">
-                      <p className="text-sm text-gray-600 mb-2">Scan the QR using any UPI App</p>
-                      
+                      <p className="text-sm text-gray-600 mb-2">
+                        Scan the QR using any UPI App
+                      </p>
+
                       {/* UPI App Logos */}
                       <div className="flex justify-center space-x-3 mb-4">
                         <div className="flex items-center space-x-1 text-xs text-gray-500">
                           <div className="w-6 h-6 bg-blue-500 rounded flex items-center justify-center">
-                            <span className="text-white text-xs font-bold">P</span>
+                            <span className="text-white text-xs font-bold">
+                              P
+                            </span>
                           </div>
                           <span>Paytm</span>
                         </div>
                         <div className="flex items-center space-x-1 text-xs text-gray-500">
                           <div className="w-6 h-6 bg-blue-600 rounded flex items-center justify-center">
-                            <span className="text-white text-xs font-bold">G</span>
+                            <span className="text-white text-xs font-bold">
+                              G
+                            </span>
                           </div>
                           <span>Google Pay</span>
                         </div>
                         <div className="flex items-center space-x-1 text-xs text-gray-500">
                           <div className="w-6 h-6 bg-orange-500 rounded flex items-center justify-center">
-                            <span className="text-white text-xs font-bold">B</span>
+                            <span className="text-white text-xs font-bold">
+                              B
+                            </span>
                           </div>
                           <span>BHIM</span>
                         </div>
                         <div className="flex items-center space-x-1 text-xs text-gray-500">
                           <div className="w-6 h-6 bg-purple-500 rounded flex items-center justify-center">
-                            <span className="text-white text-xs font-bold">P</span>
+                            <span className="text-white text-xs font-bold">
+                              P
+                            </span>
                           </div>
                           <span>PhonePe</span>
                         </div>
                         <div className="flex items-center space-x-1 text-xs text-gray-500">
                           <div className="w-6 h-6 bg-orange-400 rounded flex items-center justify-center">
-                            <span className="text-white text-xs font-bold">A</span>
+                            <span className="text-white text-xs font-bold">
+                              A
+                            </span>
                           </div>
                           <span>Amazon Pay</span>
                         </div>
                       </div>
                     </div>
                   </div>
-                  
+
                   {/* Timer
                   <div className="flex items-center justify-center space-x-2 text-sm text-gray-500">
                     <Clock className="w-4 h-4" />
@@ -160,7 +184,7 @@ const PaymentModal: React.FC<PaymentModalProps> = ({ isOpen, onClose, amount }) 
               )}
 
               {/* UPI ID Section */}
-              {selectedMethod === 'upi' && (
+              {selectedMethod === "upi" && (
                 <div className="space-y-4">
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -189,7 +213,9 @@ const PaymentModal: React.FC<PaymentModalProps> = ({ isOpen, onClose, amount }) 
             <div className="border-t border-gray-200 p-6">
               <div className="flex items-center justify-between">
                 <div className="text-left">
-                  <p className="text-lg font-semibold text-gray-900">₹{amount}</p>
+                  <p className="text-lg font-semibold text-gray-900">
+                    ₹{amount}
+                  </p>
                   <button className="text-sm text-vedra-hunter hover:underline">
                     View Details
                   </button>

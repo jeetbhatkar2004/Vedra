@@ -1,34 +1,34 @@
-import React, { useState, useCallback, useRef } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { 
-  ChevronDown, 
-  ChevronUp, 
-  Upload as UploadIcon, 
-  X, 
-  CheckCircle, 
+import React, { useState, useCallback, useRef } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import {
+  ChevronDown,
+  ChevronUp,
+  Upload as UploadIcon,
+  X,
+  CheckCircle,
   AlertCircle,
   FileText,
   Users,
   Tag,
   Award,
   BookOpen,
-  Settings
-} from 'lucide-react';
-import BasicInfoSection from '../components/upload/BasicInfoSection';
-import RecommendedInfoSection from '../components/upload/RecommendedInfoSection';
-import FundingSection from '../components/upload/FundingSection';
-import ReferencesSection from '../components/upload/ReferencesSection';
-import PublishingInfoSection from '../components/upload/PublishingInfoSection';
-import FooterActionBar from '../components/upload/FooterActionBar';
-import PreviewModal from '../components/upload/PreviewModal';
-import PaymentModal from '../components/upload/PaymentModal';
+  Settings,
+} from "lucide-react";
+import BasicInfoSection from "../components/upload/BasicInfoSection";
+import RecommendedInfoSection from "../components/upload/RecommendedInfoSection";
+import FundingSection from "../components/upload/FundingSection";
+import ReferencesSection from "../components/upload/ReferencesSection";
+import PublishingInfoSection from "../components/upload/PublishingInfoSection";
+import FooterActionBar from "../components/upload/FooterActionBar";
+import PreviewModal from "../components/upload/PreviewModal";
+import PaymentModal from "../components/upload/PaymentModal";
 
 // Types
 interface FileItem {
   id: string;
   name: string;
   size: number;
-  status: 'queued' | 'uploading' | 'done' | 'error';
+  status: "queued" | "uploading" | "done" | "error";
   progress: number;
 }
 
@@ -78,7 +78,7 @@ interface DateItem {
 
 interface AwardItem {
   id: string;
-  mode: 'standard' | 'custom';
+  mode: "standard" | "custom";
   funderName?: string;
   awardNumber?: string;
   awardTitle?: string;
@@ -153,87 +153,101 @@ interface FormData {
 
 const Upload: React.FC = () => {
   const fileInputRef = useRef<HTMLInputElement>(null);
-  
+
   // Initialize form data
   const [formData, setFormData] = useState<FormData>({
     files: [],
     basicInformation: {
-      doi: { hasExisting: false, value: '' },
-      resourceType: 'Dataset',
+      doi: { hasExisting: false, value: "" },
+      resourceType: "Dataset",
       titles: [
-        { id: '1', title: '', type: 'main', language: 'English' },
-        { id: '2', title: '', type: 'translated', language: 'Hindi' }
+        { id: "1", title: "", type: "main", language: "English" },
+        { id: "2", title: "", type: "translated", language: "Hindi" },
       ],
-      publicationDate: '',
-      creators: [{ id: '1', name: '' }],
-      descriptions: [{ id: '1', text: '', type: 'abstract' }],
-      licenses: [{
-        id: '1',
-        scheme: 'spdx',
-        id_license: 'CC-BY-4.0',
-        name: 'Creative Commons Attribution 4.0 International',
-        url: 'https://creativecommons.org/licenses/by/4.0/'
-      }],
-      copyright: ''
+      publicationDate: "",
+      creators: [{ id: "1", name: "" }],
+      descriptions: [{ id: "1", text: "", type: "abstract" }],
+      licenses: [
+        {
+          id: "1",
+          scheme: "spdx",
+          id_license: "CC-BY-4.0",
+          name: "Creative Commons Attribution 4.0 International",
+          url: "https://creativecommons.org/licenses/by/4.0/",
+        },
+      ],
+      copyright: "",
     },
     recommendedInformation: {
       contributors: [],
       keywords: [],
-      languages: ['English'],
+      languages: ["English"],
       dates: [],
-      version: '',
-      publisher: ''
+      version: "",
+      publisher: "",
     },
     funding: {
-      awards: []
+      awards: [],
     },
     references: [],
     publishingInformation: {
       journal: {
-        title: '',
-        issn: '',
-        volume: '',
-        issue: '',
-        pagesOrArticleNumber: ''
+        title: "",
+        issn: "",
+        volume: "",
+        issue: "",
+        pagesOrArticleNumber: "",
       },
       imprint: {
-        title: '',
-        isbn: '',
-        place: '',
-        pagination: '',
-        edition: ''
+        title: "",
+        isbn: "",
+        place: "",
+        pagination: "",
+        edition: "",
       },
       thesis: {
-        awardingUniversity: '',
-        awardingDepartment: '',
-        type: '',
-        submissionDate: '',
-        defenseDate: ''
-      }
+        awardingUniversity: "",
+        awardingDepartment: "",
+        type: "",
+        submissionDate: "",
+        defenseDate: "",
+      },
     },
     visibility: {
-      level: 'Public',
+      level: "Public",
       embargo: {
         enabled: false,
-        until: '',
-        reason: ''
-      }
-    }
+        until: "",
+        reason: "",
+      },
+    },
   });
 
   // Section states
-  const [openSections, setOpenSections] = useState<Set<string>>(new Set(['files', 'basic', 'recommended', 'funding', 'references', 'publishing']));
+  const [openSections, setOpenSections] = useState<Set<string>>(
+    new Set([
+      "files",
+      "basic",
+      "recommended",
+      "funding",
+      "references",
+      "publishing",
+    ])
+  );
   const [isDragOver, setIsDragOver] = useState<boolean>(false);
   const [showPreview, setShowPreview] = useState(false);
   const [showPayment, setShowPayment] = useState(false);
+  const [paymentResourceType, setPaymentResourceType] = useState<
+    "journal" | "dissertation"
+  >("journal");
 
   // Helper functions
   const formatFileSize = (bytes: number): string => {
-    if (bytes === 0) return '0 Bytes';
+    if (bytes === 0) return "0 Bytes";
     const k = 1024;
-    const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+    const sizes = ["Bytes", "KB", "MB", "GB"];
     const i = Math.floor(Math.log(bytes) / Math.log(k));
-    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + " " + sizes[i];
   };
 
   const generateId = (): string => {
@@ -252,11 +266,14 @@ const Upload: React.FC = () => {
 
   const isSectionComplete = (section: string): boolean => {
     switch (section) {
-      case 'basic':
+      case "basic":
         return (
           formData.basicInformation.titles.some((t: any) => !!t.title.trim()) &&
-          formData.basicInformation.creators.some((c: any) => !!c.name.trim()) &&
-          (!formData.basicInformation.doi.hasExisting || !!formData.basicInformation.doi.value.trim())
+          formData.basicInformation.creators.some(
+            (c: any) => !!c.name.trim()
+          ) &&
+          (!formData.basicInformation.doi.hasExisting ||
+            !!formData.basicInformation.doi.value.trim())
         );
       default:
         return true;
@@ -264,50 +281,57 @@ const Upload: React.FC = () => {
   };
 
   // File handling
-  const addFiles = useCallback((files: File[]) => {
-    const newFiles: FileItem[] = files.map(file => ({
-      id: generateId(),
-      name: file.name,
-      size: file.size,
-      status: 'queued' as const,
-      progress: 0
-    }));
+  const addFiles = useCallback(
+    (files: File[]) => {
+      const newFiles: FileItem[] = files.map((file) => ({
+        id: generateId(),
+        name: file.name,
+        size: file.size,
+        status: "queued" as const,
+        progress: 0,
+      }));
 
-    const updatedFiles = [...formData.files, ...newFiles];
-    
-    // Check limits
-    const totalFiles = updatedFiles.length;
-    const totalSize = updatedFiles.reduce((sum, file) => sum + file.size, 0);
-    
-    if (totalFiles > 100) {
-      alert('Maximum 100 files allowed');
-      return;
-    }
-    
-    if (totalSize > 50 * 1024 * 1024 * 1024) { // 50GB
-      alert('Maximum 50GB storage exceeded');
-      return;
-    }
+      const updatedFiles = [...formData.files, ...newFiles];
 
-    setFormData(prev => ({
-      ...prev,
-      files: updatedFiles
-    }));
-  }, [formData.files]);
+      // Check limits
+      const totalFiles = updatedFiles.length;
+      const totalSize = updatedFiles.reduce((sum, file) => sum + file.size, 0);
+
+      if (totalFiles > 100) {
+        alert("Maximum 100 files allowed");
+        return;
+      }
+
+      if (totalSize > 50 * 1024 * 1024 * 1024) {
+        // 50GB
+        alert("Maximum 50GB storage exceeded");
+        return;
+      }
+
+      setFormData((prev) => ({
+        ...prev,
+        files: updatedFiles,
+      }));
+    },
+    [formData.files]
+  );
 
   const removeFile = (fileId: string) => {
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      files: prev.files.filter(f => f.id !== fileId)
+      files: prev.files.filter((f) => f.id !== fileId),
     }));
   };
 
-  const handleDrop = useCallback((e: React.DragEvent) => {
-    e.preventDefault();
-    setIsDragOver(false);
-    const files = Array.from(e.dataTransfer.files);
-    addFiles(files);
-  }, [addFiles]);
+  const handleDrop = useCallback(
+    (e: React.DragEvent) => {
+      e.preventDefault();
+      setIsDragOver(false);
+      const files = Array.from(e.dataTransfer.files);
+      addFiles(files);
+    },
+    [addFiles]
+  );
 
   const handleDragOver = useCallback((e: React.DragEvent) => {
     e.preventDefault();
@@ -330,60 +354,65 @@ const Upload: React.FC = () => {
 
   // Form handlers
   const updateFormData = (path: string, value: any) => {
-    setFormData(prev => {
+    setFormData((prev) => {
       const newData = { ...prev };
-      const keys = path.split('.');
+      const keys = path.split(".");
       let current: any = newData;
-      
+
       for (let i = 0; i < keys.length - 1; i++) {
         current = current[keys[i]];
       }
-      
+
       current[keys[keys.length - 1]] = value;
       return newData;
     });
   };
 
   const addArrayItem = (path: string, item: any) => {
-    setFormData(prev => {
+    setFormData((prev) => {
       const newData = { ...prev };
-      const keys = path.split('.');
+      const keys = path.split(".");
       let current: any = newData;
-      
+
       for (let i = 0; i < keys.length - 1; i++) {
         current = current[keys[i]];
       }
-      
-      current[keys[keys.length - 1]] = [...current[keys[keys.length - 1]], { ...item, id: generateId() }];
+
+      current[keys[keys.length - 1]] = [
+        ...current[keys[keys.length - 1]],
+        { ...item, id: generateId() },
+      ];
       return newData;
     });
   };
 
   const removeArrayItem = (path: string, id: string) => {
-    setFormData(prev => {
+    setFormData((prev) => {
       const newData = { ...prev };
-      const keys = path.split('.');
+      const keys = path.split(".");
       let current: any = newData;
-      
+
       for (let i = 0; i < keys.length - 1; i++) {
         current = current[keys[i]];
       }
-      
-      current[keys[keys.length - 1]] = current[keys[keys.length - 1]].filter((item: any) => item.id !== id);
+
+      current[keys[keys.length - 1]] = current[keys[keys.length - 1]].filter(
+        (item: any) => item.id !== id
+      );
       return newData;
     });
   };
 
   const updateArrayItem = (path: string, id: string, updates: any) => {
-    setFormData(prev => {
+    setFormData((prev) => {
       const newData = { ...prev };
-      const keys = path.split('.');
+      const keys = path.split(".");
       let current: any = newData;
-      
+
       for (let i = 0; i < keys.length - 1; i++) {
         current = current[keys[i]];
       }
-      
+
       const array = current[keys[keys.length - 1]];
       const index = array.findIndex((item: any) => item.id === id);
       if (index !== -1) {
@@ -396,7 +425,7 @@ const Upload: React.FC = () => {
   // Action handlers
   const handleSaveDraft = () => {
     // Demo: show toast
-    alert('Draft saved (demo)');
+    alert("Draft saved (demo)");
   };
 
   const handlePreview = () => {
@@ -405,155 +434,280 @@ const Upload: React.FC = () => {
 
   const handlePublish = () => {
     const errors: string[] = [];
-    
+
     // Validate basic information
-    if (!formData.basicInformation.titles.some(t => t.title.trim())) {
-      errors.push('At least one title is required (English or regional language)');
+    if (!formData.basicInformation.titles.some((t) => t.title.trim())) {
+      errors.push(
+        "At least one title is required (English or regional language)"
+      );
     }
-    
-    if (!formData.basicInformation.creators.some(c => c.name.trim())) {
-      errors.push('At least one creator is required');
+
+    if (!formData.basicInformation.creators.some((c) => c.name.trim())) {
+      errors.push("At least one creator is required");
     }
-    
-    if (formData.basicInformation.doi.hasExisting && !formData.basicInformation.doi.value.trim()) {
+
+    if (
+      formData.basicInformation.doi.hasExisting &&
+      !formData.basicInformation.doi.value.trim()
+    ) {
       errors.push('DOI is required when "Yes, I already have one" is selected');
     }
-    
+
     if (errors.length > 0) {
-      alert('Validation errors:\n' + errors.join('\n'));
+      alert("Validation errors:\n" + errors.join("\n"));
       return;
     }
-    
-    // Show payment modal
+
+    // Determine resource type and show payment modal
+    const resourceType = formData.basicInformation.resourceType
+      .toLowerCase()
+      .includes("dissertation")
+      ? "dissertation"
+      : "journal";
+    setPaymentResourceType(resourceType);
     setShowPayment(true);
   };
 
   const handleShare = () => {
-    navigator.clipboard.writeText('https://vedra.com/publication/demo-link');
-    alert('Share link copied to clipboard (demo)');
+    navigator.clipboard.writeText("https://vedra.com/publication/demo-link");
+    alert("Share link copied to clipboard (demo)");
   };
 
   const handleVisibilityChange = (level: string) => {
-    updateFormData('visibility.level', level);
-    if (level !== 'Restricted') {
-      updateFormData('visibility.embargo.enabled', false);
-      updateFormData('visibility.embargo.until', '');
-      updateFormData('visibility.embargo.reason', '');
+    updateFormData("visibility.level", level);
+    if (level !== "Restricted") {
+      updateFormData("visibility.embargo.enabled", false);
+      updateFormData("visibility.embargo.until", "");
+      updateFormData("visibility.embargo.reason", "");
     }
   };
 
   const handleDemoFill = () => {
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
       basicInformation: {
         ...prev.basicInformation,
-        doi: { hasExisting: true, value: 'doi.org/10.59467/WJASR.2022-23.12-13.11' },
-        resourceType: 'Publication: Journal article',
+        doi: {
+          hasExisting: true,
+          value: "doi.org/10.59467/WJASR.2022-23.12-13.11",
+        },
+        resourceType: "Publication: Journal article",
         titles: [
-          { 
-            id: '1', 
-            title: 'Survey on Prevalence and Awareness of Gynecological Disorders among Rural Women of Gautam Buddha Nagar, Uttar Pradesh', 
-            type: 'main', 
-            language: 'English' 
+          {
+            id: "1",
+            title:
+              "Survey on Prevalence and Awareness of Gynecological Disorders among Rural Women of Gautam Buddha Nagar, Uttar Pradesh",
+            type: "main",
+            language: "English",
           },
-          { 
-            id: '2', 
-            title: 'गौतम बुद्ध नगर, उत्तर प्रदेश की ग्रामीण महिलाओं में स्त्री रोग संबंधी विकारों की व्यापकता और जागरूकता पर सर्वेक्षण', 
-            type: 'translated', 
-            language: 'Hindi' 
-          }
+          {
+            id: "2",
+            title:
+              "गौतम बुद्ध नगर, उत्तर प्रदेश की ग्रामीण महिलाओं में स्त्री रोग संबंधी विकारों की व्यापकता और जागरूकता पर सर्वेक्षण",
+            type: "translated",
+            language: "Hindi",
+          },
         ],
-        publicationDate: '30-Jul-2022',
+        publicationDate: "30-Jul-2022",
         creators: [
           {
-            id: '1',
-            name: 'DINESH C. SHARMA',
-            affiliation: 'Km. Mayawati Government Girls PG College Badalpur',
-            orcid: '0000-0002-7447-460X',
-            role: 'Author'
+            id: "1",
+            name: "DINESH C. SHARMA",
+            affiliation: "Km. Mayawati Government Girls PG College Badalpur",
+            orcid: "0000-0002-7447-460X",
+            role: "Author",
           },
           {
-            id: '2',
-            name: 'AZMI NAQVI',
-            affiliation: 'Km. Mayawati Government Girls PG College Badalpur',
-            orcid: '',
-            role: 'Co-Author'
+            id: "2",
+            name: "AZMI NAQVI",
+            affiliation: "Km. Mayawati Government Girls PG College Badalpur",
+            orcid: "",
+            role: "Co-Author",
           },
           {
-            id: '3',
-            name: 'ARPANA RATHOUR',
-            affiliation: 'Km. Mayawati Government Girls PG College Badalpur',
-            orcid: '',
-            role: 'Co-Author'
-          }
+            id: "3",
+            name: "ARPANA RATHOUR",
+            affiliation: "Km. Mayawati Government Girls PG College Badalpur",
+            orcid: "",
+            role: "Co-Author",
+          },
         ],
         descriptions: [
           {
-            id: '1',
-            text: 'Polycystic ovarian disease and cancers of the ovaries and uterus are common gynecological diseases, increasingly affecting even rural communities. These conditions pose significant challenges in rural India due to a lack of awareness, high screening costs, and ignorance of symptoms. This cross-sectional, community-based study assessed the prevalence of gynecological disorders and awareness among women aged 18–55 years in Lal Kuan, Badalpur, and Achheja, Gautam Buddha Nagar, Uttar Pradesh, India. The study revealed a gynecological disturbance prevalence of 31.7%. Menstrual irregularities affected 28.6% of participants, and 12% reported polycystic ovary syndrome. Alarmingly, 73% of women did not seek medical care for such issues due to hesitation and various sociocultural barriers. This highlights the urgent need for awareness programs and affordable healthcare interventions in rural communities.',
-            type: 'abstract',
-            language: 'English'
-          }
-        ]
+            id: "1",
+            text: "Polycystic ovarian disease and cancers of the ovaries and uterus are common gynecological diseases, increasingly affecting even rural communities. These conditions pose significant challenges in rural India due to a lack of awareness, high screening costs, and ignorance of symptoms. This cross-sectional, community-based study assessed the prevalence of gynecological disorders and awareness among women aged 18–55 years in Lal Kuan, Badalpur, and Achheja, Gautam Buddha Nagar, Uttar Pradesh, India. The study revealed a gynecological disturbance prevalence of 31.7%. Menstrual irregularities affected 28.6% of participants, and 12% reported polycystic ovary syndrome. Alarmingly, 73% of women did not seek medical care for such issues due to hesitation and various sociocultural barriers. This highlights the urgent need for awareness programs and affordable healthcare interventions in rural communities.",
+            type: "abstract",
+            language: "English",
+          },
+        ],
       },
       recommendedInformation: {
         ...prev.recommendedInformation,
-        keywords: ['Gynecological disorders', 'Polycystic ovarian disease', 'Irregular periods', 'Menstrual cycle irregularities', 'Rural health awareness'],
-        languages: ['English'],
-        publisher: 'Connect Journals'
+        keywords: [
+          "Gynecological disorders",
+          "Polycystic ovarian disease",
+          "Irregular periods",
+          "Menstrual cycle irregularities",
+          "Rural health awareness",
+        ],
+        languages: ["English"],
+        publisher: "Connect Journals",
       },
       funding: {
         awards: [
           {
-            id: '1',
-            mode: 'standard',
-            funderName: 'DST-CURIE',
-            awardTitle: 'Women Scientists\' Grant 2023',
-            awardNumber: '',
-            text: ''
-          }
-        ]
+            id: "1",
+            mode: "standard",
+            funderName: "DST-CURIE",
+            awardTitle: "Women Scientists' Grant 2023",
+            awardNumber: "",
+            text: "",
+          },
+        ],
       },
       references: [
         {
-          id: '1',
-          reference: 'Antonio, A., Sandro, L.V., Rocco, R., Alessandra, G., Rossella, E.N., Aldo, E. and Alberto, F. (2020) Fundamental concepts and novel aspects of polycystic ovarian syndrome: Expert consensus resolution. Front. Endocrinol. (Lausanne), 11, 516.',
-          doi: '10.3389/fendo.2020.00516'
+          id: "1",
+          reference:
+            "Antonio, A., Sandro, L.V., Rocco, R., Alessandra, G., Rossella, E.N., Aldo, E. and Alberto, F. (2020) Fundamental concepts and novel aspects of polycystic ovarian syndrome: Expert consensus resolution. Front. Endocrinol. (Lausanne), 11, 516.",
+          doi: "10.3389/fendo.2020.00516",
         },
         {
-          id: '2',
-          reference: 'Balarajan, Y., Selvaraj, S. and Subramanian, S.V. (2011) Health care and equity in India. Lancet, 377, 505–515.',
-          doi: '10.1016/S0140-6736(10)61894-6'
+          id: "2",
+          reference:
+            "Balarajan, Y., Selvaraj, S. and Subramanian, S.V. (2011) Health care and equity in India. Lancet, 377, 505–515.",
+          doi: "10.1016/S0140-6736(10)61894-6",
         },
         {
-          id: '3',
-          reference: 'Ferguson, H.B., Bovaird, S. and Muller, M.P. (2007) The impact of poverty on educational outcomes for children. Paediatr. Child Health, 12, 701–706.',
-          doi: '10.1093/pch/12.8.701'
-        }
+          id: "3",
+          reference:
+            "Ferguson, H.B., Bovaird, S. and Muller, M.P. (2007) The impact of poverty on educational outcomes for children. Paediatr. Child Health, 12, 701–706.",
+          doi: "10.1093/pch/12.8.701",
+        },
       ],
       publishingInformation: {
         journal: {
-          title: 'World Journal of Applied Sciences & Research (WJASR)',
-          issn: '2249-4197',
-          volume: '2022-23, 12-13',
-          issue: '01-02',
-          pagesOrArticleNumber: '11'
+          title: "World Journal of Applied Sciences & Research (WJASR)",
+          issn: "2249-4197",
+          volume: "2022-23, 12-13",
+          issue: "01-02",
+          pagesOrArticleNumber: "11",
         },
         imprint: {
-          title: '',
-          isbn: '',
-          place: '',
-          pagination: '',
-          edition: ''
+          title: "",
+          isbn: "",
+          place: "",
+          pagination: "",
+          edition: "",
         },
         thesis: {
-          awardingUniversity: '',
-          awardingDepartment: '',
-          type: '',
-          submissionDate: '',
-          defenseDate: ''
-        }
-      }
+          awardingUniversity: "",
+          awardingDepartment: "",
+          type: "",
+          submissionDate: "",
+          defenseDate: "",
+        },
+      },
+    }));
+  };
+
+  const handleDissertationDemoFill = () => {
+    setFormData((prev) => ({
+      ...prev,
+      basicInformation: {
+        ...prev.basicInformation,
+        doi: {
+          hasExisting: false,
+          value: "doi.org/10.59467/WJASR.2022-23.12-13.11",
+        },
+        resourceType: "Dissertation",
+        titles: [
+          {
+            id: "1",
+            title:
+              "Critical Study of Directors: Shaunak Sen, Zoya Akhtar & James Cameron",
+            type: "main",
+            language: "English",
+          },
+          {
+            id: "2",
+            title:
+              "निर्देशकों का आलोचनात्मक अध्ययन: शौनक सेन, ज़ोया अख्तर और जेम्स कैमरन",
+            type: "translated",
+            language: "Hindi",
+          },
+        ],
+        publicationDate: "19-Jun-2025",
+        creators: [
+          {
+            id: "1",
+            name: "Ajeant Sharma",
+            affiliation:
+              "Tilak School of Mass Communication, Ch. Charan Singh University, Meerut",
+            orcid: "",
+            role: "Author",
+          },
+          {
+            id: "2",
+            name: "Dr. Manoj Kumar Srivastava",
+            affiliation:
+              "Tilak School of Mass Communication, Ch. Charan Singh University, Meerut",
+            orcid: "",
+            role: "Guide",
+          },
+        ],
+        descriptions: [
+          {
+            id: "1",
+            text: "This dissertation presents a comparative critical study of the directorial styles of Shaunak Sen, Zoya Akhtar, and James Cameron, examining their work as distinct paradigms of regional, national, and international filmmaking. Employing a qualitative methodology, the research conducts an in-depth analysis of the directors' most significant films – including All That Breathes, Zindagi Na Milegi Dobara, Dil Dhadakne Do, and Avatar – by focusing on narrative structure, cinematographic language, thematic concerns, and socio-industrial positioning.",
+            type: "abstract",
+            language: "English",
+          },
+        ],
+      },
+      recommendedInformation: {
+        ...prev.recommendedInformation,
+        keywords: [
+          "Film",
+          "Critical Study",
+          "Director",
+          "Filmmaking",
+          "narrative structure",
+          "cinematographic language",
+          "thematic concerns",
+          "socio-industrial positioning",
+        ],
+        languages: ["English"],
+        publisher: "",
+      },
+      funding: {
+        awards: [],
+      },
+      references: [],
+      publishingInformation: {
+        journal: {
+          title: "",
+          issn: "",
+          volume: "",
+          issue: "",
+          pagesOrArticleNumber: "",
+        },
+        imprint: {
+          title: "",
+          isbn: "",
+          place: "",
+          pagination: "",
+          edition: "",
+        },
+        thesis: {
+          awardingUniversity: "Ch. Charan Singh University",
+          awardingDepartment:
+            "Tilak School of Mass Communication and Journalism",
+          type: "Bachelors",
+          submissionDate: "19-Jun-2025",
+          defenseDate: "",
+        },
+      },
     }));
   };
 
@@ -567,15 +721,27 @@ const Upload: React.FC = () => {
       <div className="bg-white border-b border-gray-200 px-6 py-4">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           <div>
-            <h1 className="text-2xl font-bold text-gray-900">Upload New Publication</h1>
-            <p className="text-gray-600 mt-1">Create and manage your research publications</p>
+            <h1 className="text-2xl font-bold text-gray-900">
+              Upload New Publication
+            </h1>
+            <p className="text-gray-600 mt-1">
+              Create and manage your research publications
+            </p>
           </div>
-          <button
-            onClick={handleDemoFill}
-            className="px-4 py-2 bg-vedra-hunter text-white rounded-lg hover:bg-vedra-hunter/90 transition-colors font-medium"
-          >
-            Demo
-          </button>
+          <div className="flex space-x-3">
+            <button
+              onClick={handleDemoFill}
+              className="px-4 py-2 bg-vedra-hunter text-white rounded-lg hover:bg-vedra-hunter/90 transition-colors font-medium"
+            >
+              Demo (Journal)
+            </button>
+            <button
+              onClick={handleDissertationDemoFill}
+              className="px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors font-medium"
+            >
+              Demo (Dissertation)
+            </button>
+          </div>
         </div>
       </div>
 
@@ -585,7 +751,9 @@ const Upload: React.FC = () => {
           <div className="bg-white rounded-lg border border-gray-200 p-4">
             <div className="flex items-center space-x-3">
               <Users className="w-5 h-5 text-gray-400" />
-              <span className="text-gray-500">Community: Default Community (placeholder)</span>
+              <span className="text-gray-500">
+                Community: Default Community (placeholder)
+              </span>
             </div>
           </div>
         </div>
@@ -599,9 +767,9 @@ const Upload: React.FC = () => {
               <SectionAccordion
                 title="Basic Information"
                 icon={<FileText className="w-5 h-5" />}
-                isOpen={openSections.has('basic')}
-                onToggle={() => toggleSection('basic')}
-                isComplete={isSectionComplete('basic')}
+                isOpen={openSections.has("basic")}
+                onToggle={() => toggleSection("basic")}
+                isComplete={isSectionComplete("basic")}
               >
                 <BasicInfoSection
                   data={formData.basicInformation}
@@ -617,8 +785,8 @@ const Upload: React.FC = () => {
               <SectionAccordion
                 title="Recommended Information"
                 icon={<Tag className="w-5 h-5" />}
-                isOpen={openSections.has('recommended')}
-                onToggle={() => toggleSection('recommended')}
+                isOpen={openSections.has("recommended")}
+                onToggle={() => toggleSection("recommended")}
                 isComplete={true}
               >
                 <RecommendedInfoSection
@@ -635,8 +803,8 @@ const Upload: React.FC = () => {
               <SectionAccordion
                 title="Funding"
                 icon={<Award className="w-5 h-5" />}
-                isOpen={openSections.has('funding')}
-                onToggle={() => toggleSection('funding')}
+                isOpen={openSections.has("funding")}
+                onToggle={() => toggleSection("funding")}
                 isComplete={true}
               >
                 <FundingSection
@@ -653,8 +821,8 @@ const Upload: React.FC = () => {
               <SectionAccordion
                 title="References"
                 icon={<BookOpen className="w-5 h-5" />}
-                isOpen={openSections.has('references')}
-                onToggle={() => toggleSection('references')}
+                isOpen={openSections.has("references")}
+                onToggle={() => toggleSection("references")}
                 isComplete={true}
               >
                 <ReferencesSection
@@ -670,8 +838,8 @@ const Upload: React.FC = () => {
               <SectionAccordion
                 title="Publishing Information"
                 icon={<Settings className="w-5 h-5" />}
-                isOpen={openSections.has('publishing')}
-                onToggle={() => toggleSection('publishing')}
+                isOpen={openSections.has("publishing")}
+                onToggle={() => toggleSection("publishing")}
                 isComplete={true}
               >
                 <PublishingInfoSection
@@ -688,8 +856,8 @@ const Upload: React.FC = () => {
               <SectionAccordion
                 title="Files"
                 icon={<FileText className="w-5 h-5" />}
-                isOpen={openSections.has('files')}
-                onToggle={() => toggleSection('files')}
+                isOpen={openSections.has("files")}
+                onToggle={() => toggleSection("files")}
                 isComplete={true}
               >
                 <FilesSection
@@ -748,6 +916,7 @@ const Upload: React.FC = () => {
         isOpen={showPayment}
         onClose={() => setShowPayment(false)}
         amount={60}
+        resourceType={paymentResourceType}
       />
     </div>
   );
@@ -769,7 +938,7 @@ const SectionAccordion: React.FC<SectionAccordionProps> = ({
   isOpen,
   onToggle,
   isComplete,
-  children
+  children,
 }) => {
   return (
     <div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
@@ -788,8 +957,12 @@ const SectionAccordion: React.FC<SectionAccordionProps> = ({
             ) : (
               <AlertCircle className="w-4 h-4 text-amber-500" />
             )}
-            <span className={`text-sm ${isComplete ? 'text-green-600' : 'text-amber-600'}`}>
-              {isComplete ? 'Complete' : 'Incomplete'}
+            <span
+              className={`text-sm ${
+                isComplete ? "text-green-600" : "text-amber-600"
+              }`}
+            >
+              {isComplete ? "Complete" : "Incomplete"}
             </span>
           </div>
         </div>
@@ -799,19 +972,17 @@ const SectionAccordion: React.FC<SectionAccordionProps> = ({
           <ChevronDown className="w-5 h-5 text-gray-500" />
         )}
       </button>
-      
+
       <AnimatePresence>
         {isOpen && (
           <motion.div
             initial={{ height: 0, opacity: 0 }}
-            animate={{ height: 'auto', opacity: 1 }}
+            animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.2 }}
             className="overflow-hidden"
           >
-            <div className="px-6 py-6 border-t border-gray-100">
-              {children}
-            </div>
+            <div className="px-6 py-6 border-t border-gray-100">{children}</div>
           </motion.div>
         )}
       </AnimatePresence>
@@ -847,7 +1018,7 @@ const FilesSection: React.FC<FilesSectionProps> = ({
   onRemoveFile,
   totalFiles,
   totalSize,
-  formatFileSize
+  formatFileSize,
 }) => {
   return (
     <div>
@@ -855,11 +1026,15 @@ const FilesSection: React.FC<FilesSectionProps> = ({
       <div className="grid grid-cols-2 gap-4 mb-6">
         <div className="bg-gray-50 rounded-lg p-4">
           <div className="text-sm text-gray-600">Files</div>
-          <div className="text-2xl font-semibold text-gray-900">{totalFiles} / 100</div>
+          <div className="text-2xl font-semibold text-gray-900">
+            {totalFiles} / 100
+          </div>
         </div>
         <div className="bg-gray-50 rounded-lg p-4">
           <div className="text-sm text-gray-600">Storage</div>
-          <div className="text-2xl font-semibold text-gray-900">{formatFileSize(totalSize)} / 50.00 GB</div>
+          <div className="text-2xl font-semibold text-gray-900">
+            {formatFileSize(totalSize)} / 50.00 GB
+          </div>
         </div>
       </div>
 
@@ -870,12 +1045,14 @@ const FilesSection: React.FC<FilesSectionProps> = ({
         onDragLeave={onDragLeave}
         className={`border-2 border-dashed rounded-lg p-8 text-center transition-colors ${
           isDragOver
-            ? 'border-vedra-hunter bg-vedra-hunter/5'
-            : 'border-gray-300 hover:border-gray-400'
+            ? "border-vedra-hunter bg-vedra-hunter/5"
+            : "border-gray-300 hover:border-gray-400"
         }`}
       >
         <UploadIcon className="w-12 h-12 mx-auto text-gray-400 mb-4" />
-        <p className="text-lg font-medium text-gray-900 mb-2">Drop files here</p>
+        <p className="text-lg font-medium text-gray-900 mb-2">
+          Drop files here
+        </p>
         <p className="text-gray-500 mb-4">or</p>
         <button
           onClick={onFileInput}
@@ -888,7 +1065,9 @@ const FilesSection: React.FC<FilesSectionProps> = ({
       {/* File List */}
       {files.length > 0 && (
         <div className="mt-6">
-          <h3 className="text-lg font-semibold text-gray-900 mb-4">Uploaded Files</h3>
+          <h3 className="text-lg font-semibold text-gray-900 mb-4">
+            Uploaded Files
+          </h3>
           <div className="space-y-2">
             {files.map((file) => (
               <FileListItem
@@ -912,22 +1091,36 @@ interface FileListItemProps {
   formatFileSize: (bytes: number) => string;
 }
 
-const FileListItem: React.FC<FileListItemProps> = ({ file, onRemove, formatFileSize }) => {
+const FileListItem: React.FC<FileListItemProps> = ({
+  file,
+  onRemove,
+  formatFileSize,
+}) => {
   const getStatusColor = () => {
     switch (file.status) {
-      case 'done': return 'text-green-600';
-      case 'error': return 'text-red-600';
-      case 'uploading': return 'text-blue-600';
-      default: return 'text-gray-600';
+      case "done":
+        return "text-green-600";
+      case "error":
+        return "text-red-600";
+      case "uploading":
+        return "text-blue-600";
+      default:
+        return "text-gray-600";
     }
   };
 
   const getStatusIcon = () => {
     switch (file.status) {
-      case 'done': return <CheckCircle className="w-4 h-4 text-green-500" />;
-      case 'error': return <AlertCircle className="w-4 h-4 text-red-500" />;
-      case 'uploading': return <div className="w-4 h-4 border-2 border-blue-500 border-t-transparent rounded-full animate-spin" />;
-      default: return <div className="w-4 h-4 bg-gray-300 rounded-full" />;
+      case "done":
+        return <CheckCircle className="w-4 h-4 text-green-500" />;
+      case "error":
+        return <AlertCircle className="w-4 h-4 text-red-500" />;
+      case "uploading":
+        return (
+          <div className="w-4 h-4 border-2 border-blue-500 border-t-transparent rounded-full animate-spin" />
+        );
+      default:
+        return <div className="w-4 h-4 bg-gray-300 rounded-full" />;
     }
   };
 
@@ -937,26 +1130,28 @@ const FileListItem: React.FC<FileListItemProps> = ({ file, onRemove, formatFileS
         {getStatusIcon()}
         <div>
           <div className="font-medium text-gray-900">{file.name}</div>
-          <div className="text-sm text-gray-500">{formatFileSize(file.size)}</div>
+          <div className="text-sm text-gray-500">
+            {formatFileSize(file.size)}
+          </div>
         </div>
       </div>
-      
+
       <div className="flex items-center space-x-3">
-        {file.status === 'uploading' && (
+        {file.status === "uploading" && (
           <div className="w-20">
             <div className="bg-gray-200 rounded-full h-2">
-              <div 
+              <div
                 className="bg-blue-500 h-2 rounded-full transition-all duration-300"
                 style={{ width: `${file.progress}%` }}
               />
             </div>
           </div>
         )}
-        
+
         <span className={`text-sm ${getStatusColor()}`}>
           {file.status.charAt(0).toUpperCase() + file.status.slice(1)}
         </span>
-        
+
         <button
           onClick={onRemove}
           className="text-red-500 hover:text-red-700 transition-colors"
