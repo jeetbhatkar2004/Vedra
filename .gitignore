@@ -24,3 +24,26 @@ yarn-debug.log*
 yarn-error.log*
 server/app/__pycache__/
 
+# InvenioRDM backend files
+invenio/data/
+invenio/.env
+invenio/.env.local
+invenio/*.pyc
+invenio/__pycache__/
+invenio/**/__pycache__/
+invenio/**/*.pyc
+invenio/**/*.pyo
+invenio/**/*.pyd
+invenio/.Python
+invenio/**/*.so
+invenio/**/*.egg
+invenio/**/*.egg-info/
+invenio/dist/
+invenio/build/
+invenio/.coverage
+invenio/htmlcov/
+invenio/.tox/
+invenio/.pytest_cache/
+invenio/.mypy_cache/
+invenio/.dmypy.json
+invenio/dmypy.json
