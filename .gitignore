@@ -28,6 +28,8 @@ server/app/__pycache__/
 invenio/data/
 invenio/.env
 invenio/.env.local
+invenio/.env.*.backup
+invenio/.env.*.bak
 invenio/*.pyc
 invenio/__pycache__/
 invenio/**/__pycache__/
@@ -47,3 +49,79 @@ invenio/.pytest_cache/
 invenio/.mypy_cache/
 invenio/.dmypy.json
 invenio/dmypy.json
+
+# Docker and container files
+invenio/docker-compose.override.yml
+invenio/.dockerignore
+
+# Logs and temporary files
+invenio/*.log
+invenio/logs/
+invenio/tmp/
+invenio/temp/
+invenio/**/*.tmp
+invenio/**/*.bak
+invenio/**/*~
+invenio/**/*.swp
+invenio/**/*.swo
+
+# IDE and editor files
+invenio/.vscode/
+invenio/.idea/
+invenio/*.sublime-*
+invenio/.spyderproject
+invenio/.spyproject
+
+# OS generated files
+invenio/.DS_Store
+invenio/.DS_Store?
+invenio/._*
+invenio/.Spotlight-V100
+invenio/.Trashes
+invenio/ehthumbs.db
+invenio/Thumbs.db
+
+# Virtual environments
+invenio/venv/
+invenio/env/
+invenio/.venv/
+invenio/.env/
+invenio/.conda/
+invenio/.conda-env/
+
+# Jupyter Notebook
+invenio/.ipynb_checkpoints
+
+# pyenv
+invenio/.python-version
+
+# pipenv
+invenio/Pipfile.lock
+
+# PEP 582
+invenio/__pypackages__/
+
+# Celery
+invenio/celerybeat-schedule
+invenio/celerybeat.pid
+
+# SageMath parsed files
+invenio/*.sage.py
+
+# Spyder project settings
+invenio/.spyderproject
+invenio/.spyproject
+
+# Rope project settings
+invenio/.ropeproject
+
+# mkdocs documentation
+invenio/site/
+
+# mypy
+invenio/.mypy_cache/
+invenio/.dmypy.json
+invenio/dmypy.json
+
+# Pyre type checker
+invenio/.pyre/

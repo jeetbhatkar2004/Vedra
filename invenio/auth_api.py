@@ -38,7 +38,7 @@ def get_db_connection():
         port=os.getenv("POSTGRES_PORT", "5432"),
         database=os.getenv("POSTGRES_DB", "invenio"),
         user=os.getenv("POSTGRES_USER", "invenio"),
-        password=os.getenv("POSTGRES_PASSWORD", "invenio"),
+        password=os.getenv("POSTGRES_PASSWORD"),
         cursor_factory=RealDictCursor,
     )
 
