@@ -1,0 +1,24 @@
+# Production-ish compose override for EC2 deployment
+version: "3.9"
+
+services:
+  web:
+    environment:
+      # Override for production
+      SITE_HOST: ${INVENIO_SITE_HOST:-https://your-domain.com}
+      SECRET_KEY: ${INVENIO_SECRET_KEY}
+    # Remove port exposure for ALB (ALB will target internal port 8080)
+    ports: []
+    # Add health check for ALB
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/ping"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  worker:
+    environment:
+      SECRET_KEY: ${INVENIO_SECRET_KEY}
+    # Scale workers as needed
+    deploy:
+      replicas: 2

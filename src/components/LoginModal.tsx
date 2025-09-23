@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { X, Mail, Lock, Eye, EyeOff, LogIn } from 'lucide-react';
-import { useAuth } from '../contexts/AuthContext';
+import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { X, Mail, Lock, Eye, EyeOff, LogIn } from "lucide-react";
+import { useAuth } from "../contexts/AuthContext";
 
 interface LoginModalProps {
   isOpen: boolean;
@@ -9,44 +9,69 @@ interface LoginModalProps {
   onSwitchToSignup: () => void;
 }
 
-const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose, onSwitchToSignup }) => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+const LoginModal: React.FC<LoginModalProps> = ({
+  isOpen,
+  onClose,
+  onSwitchToSignup,
+}) => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
   const { login } = useAuth();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
-    setError('');
+    setError("");
 
     try {
-      const response = await fetch(`${process.env.REACT_APP_API_URL || 'http://localhost:8000'}/auth/login`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          email,
-          password,
-        }),
-      });
+      // For InvenioRDM, we'll use session-based authentication
+      // This is a simplified implementation - in production you'd integrate with OAuth/OIDC
+      const response = await fetch(
+        `${
+          (import.meta as any).env?.VITE_RDM_API_BASE || "http://localhost:8080"
+        }/api/login`,
+        {
+          method: "POST",
+          credentials: "include", // Include cookies for session auth
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email,
+            password,
+          }),
+        }
+      );
 
       if (response.ok) {
-        const data = await response.json();
-        await login(data.access_token);
+        // For session-based auth, we don't need to store a token
+        // The session cookie will be handled automatically
+        await login("session-based"); // Dummy token for compatibility
         onClose();
-        setEmail('');
-        setPassword('');
+        setEmail("");
+        setPassword("");
       } else {
         const errorData = await response.json();
-        setError(errorData.detail || 'Login failed. Please try again.');
+        // Handle validation errors array
+        if (Array.isArray(errorData.detail)) {
+          const errorMessages = errorData.detail
+            .map((err: any) => err.msg)
+            .join(", ");
+          setError(errorMessages);
+        } else {
+          setError(
+            errorData.detail ||
+              errorData.message ||
+              "Login failed. Please try again."
+          );
+        }
       }
     } catch (err) {
-      console.error('Login error:', err);
-      setError('Login failed. Please check your connection and try again.');
+      console.error("Login error:", err);
+      setError("Login failed. Please check your connection and try again.");
     } finally {
       setIsLoading(false);
     }
@@ -64,7 +89,9 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose, onSwitchToSign
           >
             <div className="p-6">
               <div className="flex items-center justify-between mb-6">
-                <h2 className="text-2xl font-bold text-vedra-night font-ibm-plex">Welcome Back</h2>
+                <h2 className="text-2xl font-bold text-vedra-night font-ibm-plex">
+                  Welcome Back
+                </h2>
                 <button
                   onClick={onClose}
                   className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
@@ -98,7 +125,7 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose, onSwitchToSign
                   <div className="relative">
                     <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
                     <input
-                      type={showPassword ? 'text' : 'password'}
+                      type={showPassword ? "text" : "password"}
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
                       className="w-full pl-10 pr-12 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-vedra-hunter focus:border-transparent"
@@ -110,7 +137,11 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose, onSwitchToSign
                       onClick={() => setShowPassword(!showPassword)}
                       className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
                     >
-                      {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+                      {showPassword ? (
+                        <EyeOff className="w-5 h-5" />
+                      ) : (
+                        <Eye className="w-5 h-5" />
+                      )}
                     </button>
                   </div>
                 </div>
@@ -139,7 +170,7 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose, onSwitchToSign
 
               <div className="mt-6 text-center">
                 <p className="text-gray-600">
-                  Don't have an account?{' '}
+                  Don't have an account?{" "}
                   <button
                     onClick={onSwitchToSignup}
                     className="text-vedra-hunter hover:text-vedra-calpoly font-medium"
@@ -148,7 +179,6 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose, onSwitchToSign
                   </button>
                 </p>
               </div>
-
             </div>
           </motion.div>
         </div>

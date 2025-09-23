@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { X, Mail, Lock, Eye, EyeOff, User, UserPlus } from 'lucide-react';
-import { useAuth } from '../contexts/AuthContext';
+import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { X, Mail, Lock, Eye, EyeOff, User, UserPlus } from "lucide-react";
+import { useAuth } from "../contexts/AuthContext";
 
 interface SignupModalProps {
   isOpen: boolean;
@@ -9,77 +9,104 @@ interface SignupModalProps {
   onSwitchToLogin: () => void;
 }
 
-const SignupModal: React.FC<SignupModalProps> = ({ isOpen, onClose, onSwitchToLogin }) => {
+const SignupModal: React.FC<SignupModalProps> = ({
+  isOpen,
+  onClose,
+  onSwitchToLogin,
+}) => {
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    password: '',
-    confirmPassword: '',
-    role: 'individual'
+    name: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+    role: "individual",
   });
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
   const { login } = useAuth();
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
-    setError('');
+    setError("");
 
     if (formData.password !== formData.confirmPassword) {
-      setError('Passwords do not match');
+      setError("Passwords do not match");
       setIsLoading(false);
       return;
     }
 
     if (formData.password.length < 6) {
-      setError('Password must be at least 6 characters long');
+      setError("Password must be at least 6 characters long");
       setIsLoading(false);
       return;
     }
 
     try {
-      const response = await fetch(`${process.env.REACT_APP_API_URL || 'http://localhost:8000'}/auth/register`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          name: formData.name,
-          email: formData.email,
-          password: formData.password,
-          role: formData.role,
-          scope_code: null,
-        }),
-      });
+      // For InvenioRDM, we'll use session-based authentication
+      // This is a simplified implementation - in production you'd integrate with OAuth/OIDC
+      const response = await fetch(
+        `${
+          (import.meta as any).env?.VITE_RDM_API_BASE || "http://localhost:8080"
+        }/api/register`,
+        {
+          method: "POST",
+          credentials: "include", // Include cookies for session auth
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            name: formData.name,
+            email: formData.email,
+            password: formData.password,
+            role: formData.role,
+            scope_code: null,
+          }),
+        }
+      );
 
       if (response.ok) {
-        const data = await response.json();
-        await login(data.access_token);
+        // For session-based auth, we don't need to store a token
+        // The session cookie will be handled automatically
+        await login("session-based"); // Dummy token for compatibility
         onClose();
         setFormData({
-          name: '',
-          email: '',
-          password: '',
-          confirmPassword: '',
-          role: 'individual'
+          name: "",
+          email: "",
+          password: "",
+          confirmPassword: "",
+          role: "individual",
         });
       } else {
         const errorData = await response.json();
-        setError(errorData.detail || 'Signup failed. Please try again.');
+        // Handle validation errors array
+        if (Array.isArray(errorData.detail)) {
+          const errorMessages = errorData.detail
+            .map((err: any) => err.msg)
+            .join(", ");
+          setError(errorMessages);
+        } else {
+          setError(
+            errorData.detail ||
+              errorData.message ||
+              "Signup failed. Please try again."
+          );
+        }
       }
     } catch (err) {
-      console.error('Signup error:', err);
-      setError('Signup failed. Please check your connection and try again.');
+      console.error("Signup error:", err);
+      setError("Signup failed. Please check your connection and try again.");
     } finally {
       setIsLoading(false);
     }
@@ -97,7 +124,9 @@ const SignupModal: React.FC<SignupModalProps> = ({ isOpen, onClose, onSwitchToLo
           >
             <div className="p-6">
               <div className="flex items-center justify-between mb-6">
-                <h2 className="text-2xl font-bold text-vedra-night font-ibm-plex">Create Account</h2>
+                <h2 className="text-2xl font-bold text-vedra-night font-ibm-plex">
+                  Create Account
+                </h2>
                 <button
                   onClick={onClose}
                   className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
@@ -155,9 +184,15 @@ const SignupModal: React.FC<SignupModalProps> = ({ isOpen, onClose, onSwitchToLo
                   >
                     <option value="individual">Individual Researcher</option>
                     <option value="institution_student">Student</option>
-                    <option value="institution_admin_department">Department Admin</option>
-                    <option value="institution_admin_college">College Admin</option>
-                    <option value="institution_admin_university">University Admin</option>
+                    <option value="institution_admin_department">
+                      Department Admin
+                    </option>
+                    <option value="institution_admin_college">
+                      College Admin
+                    </option>
+                    <option value="institution_admin_university">
+                      University Admin
+                    </option>
                     <option value="publisher">Publisher</option>
                     <option value="founder">Founder</option>
                   </select>
@@ -170,7 +205,7 @@ const SignupModal: React.FC<SignupModalProps> = ({ isOpen, onClose, onSwitchToLo
                   <div className="relative">
                     <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
                     <input
-                      type={showPassword ? 'text' : 'password'}
+                      type={showPassword ? "text" : "password"}
                       name="password"
                       value={formData.password}
                       onChange={handleChange}
@@ -183,7 +218,11 @@ const SignupModal: React.FC<SignupModalProps> = ({ isOpen, onClose, onSwitchToLo
                       onClick={() => setShowPassword(!showPassword)}
                       className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
                     >
-                      {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+                      {showPassword ? (
+                        <EyeOff className="w-5 h-5" />
+                      ) : (
+                        <Eye className="w-5 h-5" />
+                      )}
                     </button>
                   </div>
                 </div>
@@ -195,7 +234,7 @@ const SignupModal: React.FC<SignupModalProps> = ({ isOpen, onClose, onSwitchToLo
                   <div className="relative">
                     <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
                     <input
-                      type={showConfirmPassword ? 'text' : 'password'}
+                      type={showConfirmPassword ? "text" : "password"}
                       name="confirmPassword"
                       value={formData.confirmPassword}
                       onChange={handleChange}
@@ -205,10 +244,16 @@ const SignupModal: React.FC<SignupModalProps> = ({ isOpen, onClose, onSwitchToLo
                     />
                     <button
                       type="button"
-                      onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                      onClick={() =>
+                        setShowConfirmPassword(!showConfirmPassword)
+                      }
                       className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
                     >
-                      {showConfirmPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+                      {showConfirmPassword ? (
+                        <EyeOff className="w-5 h-5" />
+                      ) : (
+                        <Eye className="w-5 h-5" />
+                      )}
                     </button>
                   </div>
                 </div>
@@ -237,7 +282,7 @@ const SignupModal: React.FC<SignupModalProps> = ({ isOpen, onClose, onSwitchToLo
 
               <div className="mt-6 text-center">
                 <p className="text-gray-600">
-                  Already have an account?{' '}
+                  Already have an account?{" "}
                   <button
                     onClick={onSwitchToLogin}
                     className="text-vedra-hunter hover:text-vedra-calpoly font-medium"
@@ -246,7 +291,6 @@ const SignupModal: React.FC<SignupModalProps> = ({ isOpen, onClose, onSwitchToLo
                   </button>
                 </p>
               </div>
-
             </div>
           </motion.div>
         </div>

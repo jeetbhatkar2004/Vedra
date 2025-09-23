@@ -1,0 +1,10 @@
+[project]
+name = "invenio-vedra"
+version = "0.1.0"
+description = "Vedra custom roles & permission policies for InvenioRDM"
+requires-python = ">=3.10"
+dependencies = ["invenio-app-rdm>=12,<13"]
+
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"

@@ -1,12 +1,19 @@
-import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import React, {
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  ReactNode,
+} from "react";
 
 interface User {
   id: number;
   name: string;
   email: string;
   role: string;
-  scope_code: string | null;
-  is_active: boolean;
+  scope_code?: string | null;
+  is_active?: boolean;
+  created_at?: string;
 }
 
 interface AuthContextType {
@@ -23,7 +30,7 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 export const useAuth = () => {
   const context = useContext(AuthContext);
   if (context === undefined) {
-    throw new Error('useAuth must be used within an AuthProvider');
+    throw new Error("useAuth must be used within an AuthProvider");
   }
   return context;
 };
@@ -32,7 +39,8 @@ interface AuthProviderProps {
   children: ReactNode;
 }
 
-const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:8000';
+const API_BASE_URL =
+  (import.meta as any).env?.VITE_RDM_API_BASE || "http://localhost:8080";
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
@@ -41,15 +49,15 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const isAuthenticated = !!user;
 
   const getAuthToken = () => {
-    return localStorage.getItem('auth_token');
+    return localStorage.getItem("auth_token");
   };
 
   const setAuthToken = (token: string) => {
-    localStorage.setItem('auth_token', token);
+    localStorage.setItem("auth_token", token);
   };
 
   const removeAuthToken = () => {
-    localStorage.removeItem('auth_token');
+    localStorage.removeItem("auth_token");
   };
 
   const checkAuth = async () => {
@@ -60,23 +68,27 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     }
 
     try {
-      const response = await fetch(`${API_BASE_URL}/auth/me`, {
+      // For InvenioRDM, we'll use session-based authentication
+      // This is a simplified implementation - in production you'd integrate with OAuth/OIDC
+      const response = await fetch(`${API_BASE_URL}/api/user`, {
+        credentials: "include", // Include cookies for session auth
         headers: {
-          'Authorization': `Bearer ${token}`,
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
       });
 
       if (response.ok) {
-        const userData = await response.json();
+        const responseData = await response.json();
+        // Handle both direct user response and wrapped response
+        const userData = responseData.user || responseData;
         setUser(userData);
       } else {
-        // Token is invalid, remove it
+        // Session is invalid, remove any stored token
         removeAuthToken();
         setUser(null);
       }
     } catch (error) {
-      console.error('Auth check failed:', error);
+      console.error("Auth check failed:", error);
       removeAuthToken();
       setUser(null);
     } finally {
@@ -89,7 +101,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       setAuthToken(token);
       await checkAuth();
     } catch (error) {
-      console.error('Login failed:', error);
+      console.error("Login failed:", error);
       removeAuthToken();
       throw error;
     }
@@ -113,9 +125,5 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     checkAuth,
   };
 
-  return (
-    <AuthContext.Provider value={value}>
-      {children}
-    </AuthContext.Provider>
-  );
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };

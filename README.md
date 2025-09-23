@@ -23,10 +23,13 @@ A modern web application for academic paper management and DOI registration.
 
 ### Backend
 
-- **FastAPI** (Python) for API server
+- **InvenioRDM** for research data management platform
 - **PostgreSQL** for database
-- **JWT** for authentication
-- **Docker** for containerization
+- **OpenSearch** for search functionality
+- **Redis** for caching and message queuing
+- **Docker Compose** for containerization
+
+**Note**: Backend is now InvenioRDM under `/invenio`. Legacy FastAPI backend has been archived.
 
 ## Quick Start
 
@@ -43,51 +46,33 @@ git clone <repository-url>
 cd Vedra
 ```
 
-### 2. Configure Environment Variables
-
-**First-time setup:**
+### 2. Start InvenioRDM Backend
 
 ```bash
-cd server
-cp .env.example .env
+cd invenio
+
+# Copy environment template (you'll need to create .env manually)
+cp .env.local.template .env
+
+# Bootstrap the entire stack
+./bootstrap.sh
 ```
 
-**Edit the `.env` file with your configuration:**
+This will:
+
+- Start PostgreSQL, OpenSearch, Redis, and InvenioRDM services
+- Initialize the database and search indices
+- Create custom Vedra roles and permissions
+- Bootstrap an admin user (admin@local.test / admin123)
+
+**InvenioRDM will be available at:** http://localhost:8080
+
+### 3. Configure Frontend Environment
+
+Create a `.env.local` file in the project root:
 
 ```bash
-# Database Configuration
-DATABASE_URL=postgresql+psycopg://postgres:postgres@localhost:5432/vedra
-
-# JWT Configuration (change this to a secure random string)
-JWT_SECRET=your-secret-key-here
-
-# Frontend Configuration
-FRONTEND_ORIGIN=http://localhost:3000
-```
-
-### 3. Start the Backend
-
-#### Option A: Using Docker Compose (Recommended)
-
-```bash
-# From the project root
-docker-compose up -d
-```
-
-#### Option B: Manual Setup
-
-```bash
-cd server
-
-# Start PostgreSQL
-docker run -d --name vedra-pg -e POSTGRES_PASSWORD=postgres -p 5432:5432 postgres:16
-
-# Create database
-docker exec vedra-pg psql -U postgres -c "CREATE DATABASE vedra;"
-
-# Build and run the server
-docker build -t vedra-server .
-docker run --rm -p 8000:8000 --env-file .env vedra-server
+VITE_RDM_API_BASE=http://localhost:8080
 ```
 
 ### 4. Start the Frontend
@@ -101,49 +86,67 @@ npm start
 The application will be available at:
 
 - Frontend: http://localhost:3000
-- Backend API: http://localhost:8000
-- API Documentation: http://localhost:8000/docs
+- InvenioRDM API: http://localhost:8080
+- InvenioRDM UI: http://localhost:8080 (admin interface)
 
 ## Development
 
-### Backend Development
+### InvenioRDM Backend
 
-The backend is a FastAPI application with the following structure:
+The backend uses InvenioRDM with custom Vedra roles and permissions:
 
 ```
-server/
-├── app/
-│   ├── models.py          # Database models
-│   ├── routes/            # API routes
-│   ├── auth_utils.py      # Authentication utilities
-│   ├── deps.py           # Dependencies
-│   └── main.py           # FastAPI app
-├── .env                  # Environment variables (create from .env.example)
-├── .env.example          # Environment template (safe to share)
-└── pyproject.toml        # Python dependencies
+invenio/
+├── docker-compose.yml     # Service orchestration
+├── .env                   # Environment variables
+├── Makefile              # Development commands
+├── bootstrap.sh          # Initial setup script
+├── app.yaml              # Production overrides
+└── invenio-vedra/        # Custom extension
+    └── invenio_vedra/
+        ├── permissions.py # Custom role-based permissions
+        ├── identities.py  # Identity management
+        ├── config.py      # Extension configuration
+        └── ext.py         # Extension entry point
 ```
 
-#### Environment Variables
+#### Custom Roles and Permissions
 
-**Setup:**
+Vedra implements a hierarchical institutional access model:
 
-1. Copy the example file: `cp .env.example .env`
-2. Edit `.env` with your actual values
-3. **Never commit `.env` to version control**
+**Institution Admin Accounts:**
 
-**Required Variables:**
+- `institution_admin_university` - Monitor all for university; create college accounts; create/approve DOIs
+- `institution_admin_college` - Monitor all for college; create department accounts; create/approve DOIs
+- `institution_admin_department` - Monitor dept; approve student DOIs; create DOIs
 
-```env
-DATABASE_URL=postgresql+psycopg://postgres:postgres@localhost:5432/vedra
-JWT_SECRET=your-secret-key-here
-FRONTEND_ORIGIN=http://localhost:3000
+**Institution Student Account:**
+
+- `institution_student` - Submit drafts/requests; cannot publish
+
+**Individual & Publisher Accounts:**
+
+- `individual` - Can create & publish their own
+- `publisher` - Can create & publish their own
+- `founder` - Can create & publish their own (special pricing)
+
+#### Development Commands
+
+```bash
+cd invenio
+
+# Start services
+make up
+
+# Initialize database and create roles
+make init roles users
+
+# View logs
+make logs
+
+# Reset everything
+make reset
 ```
-
-**Security Notes:**
-
-- Use a strong, random JWT secret in production
-- The `.env.example` file is safe to share and commit
-- The actual `.env` file is ignored by Git for security
 
 ### Frontend Development
 
@@ -157,77 +160,80 @@ The frontend is a React TypeScript application with:
 #### Key Components
 
 - `src/contexts/AuthContext.tsx` - Authentication state management
-- `src/components/LoginModal.tsx` - Login form
-- `src/components/SignupModal.tsx` - Registration form
+- `src/contexts/LanguageContext.tsx` - Multi-language support
+- `src/lib/rdm.ts` - InvenioRDM API client
 - `src/pages/Dashboard.tsx` - Main dashboard
 - `src/pages/Home.tsx` - Landing page
+- `src/pages/Upload.tsx` - Publication upload interface
+- `src/pages/Resource.tsx` - Publication detail view
 
-## API Endpoints
+## InvenioRDM API Integration
+
+The frontend integrates with InvenioRDM's REST APIs:
+
+### Records API
+
+- `GET /api/records` - Search and list records
+- `GET /api/records/{id}` - Get specific record
+- `POST /api/records` - Create new record (authenticated)
+- `PUT /api/records/{id}` - Update record (authenticated)
+- `DELETE /api/records/{id}` - Delete record (authenticated)
+
+### Files API
+
+- `GET /api/records/{id}/files` - List record files
+- `GET /api/records/{id}/files/{filename}/content` - Download file
 
 ### Authentication
 
-- `POST /auth/register` - Register a new user
-- `POST /auth/login` - Login user
-- `GET /auth/me` - Get current user info
+InvenioRDM uses session-based authentication. The frontend can integrate with:
 
-### Papers
+- Local accounts (email/password)
+- OAuth providers (Google, GitHub, etc.)
+- SAML/OIDC for institutional SSO
 
-- `POST /papers/uploads` - Create upload session (mock)
+### Custom Headers for Role Assignment
 
-## User Roles
+For development, you can set custom headers:
 
-- **individual**: Basic user access
-- **student**: Student-level access
-- **admin**: Administrative access
-- **institution**: Institution-level access
-
-## Database Schema
-
-### Users Table
-
-- `id`: Primary key
-- `email`: Unique email address
-- `name`: User's full name
-- `password_hash`: Hashed password
-- `role`: User role
-- `scope_code`: Institution/organization code
-- `is_active`: Account status
-- `created_at`: Account creation timestamp
-- `updated_at`: Last update timestamp
-
-### Papers Table
-
-- `id`: Primary key
-- `title`: Paper title
-- `authors_json`: JSON array of authors
-- `checksum`: File checksum
-- `size_bytes`: File size
-- `bucket_key`: Storage key
-- `status`: Paper status (DRAFT/READY/PUBLISHED)
-- `owner_id`: Foreign key to users table
-- `scope_code`: Institution code
-- `created_at`: Creation timestamp
+- `X-Vedra-Role`: Role name (e.g., "institution_admin_university")
+- `X-Vedra-Scope`: Organization scope (e.g., "UNI:ENG:CS")
 
 ## Deployment
+
+### AWS EC2 + ALB Deployment
+
+1. **Launch EC2 Instance** (t3.medium recommended)
+2. **Install Docker and Docker Compose**
+3. **Create ACM Certificate** for your domain
+4. **Set up Application Load Balancer** with target group pointing to EC2:8080
+5. **Deploy using the same docker-compose.yml**:
+
+```bash
+# On EC2 instance
+git clone <your-repo>
+cd Vedra/invenio
+
+# Copy production environment
+cp .env.local.template .env
+# Edit .env with production values
+
+# Use production override
+docker-compose -f docker-compose.yml -f app.yaml up -d
+```
+
+6. **Configure DNS** to point to ALB
+7. **Set up SSL termination** on ALB (no nginx needed)
 
 ### Production Build
 
 ```bash
-npm run build
-```
-
-### Docker Deployment
-
-```bash
-# Build frontend
+# Frontend
 npm run build
 
-# Build backend
-cd server
-docker build -t vedra-server .
-
-# Run with docker-compose (create docker-compose.yml)
-docker-compose up -d
+# Backend (InvenioRDM is already containerized)
+cd invenio
+make up
 ```
 
 ## Team Collaboration
