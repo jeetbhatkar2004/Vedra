@@ -1,135 +1,115 @@
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
-import { 
-  BookOpen, 
-  FileText, 
-  Image, 
-  Music, 
+import React from "react";
+import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
+import {
+  BookOpen,
+  FileText,
+  Image,
+  Music,
   Database,
-  Users,
-  Building,
-  Globe,
+  // Users and Building icons are not used currently
   Shield,
   Zap,
   Search,
-  Newspaper
-} from 'lucide-react';
-import DataCiteLogo from '../Logo_Schwoop-grey-light.svg';
+  Newspaper,
+} from "lucide-react";
+import DataCiteLogo from "../Logo_Schwoop-grey-light.svg";
 
 const Services: React.FC = () => {
-  const [activeTab, setActiveTab] = useState('individual');
-
-  const serviceTypes = [
-    {
-      id: 'individual',
-      title: 'Individual Researchers',
-      icon: <Users className="w-6 h-6" />,
-      description: 'Perfect for individual researchers and academicians'
-    },
-    {
-      id: 'institution',
-      title: 'Institutions & Universities',
-      icon: <Building className="w-6 h-6" />,
-      description: 'Bulk DOI generation for universities and research institutions'
-    },
-    {
-      id: 'publisher',
-      title: 'Publishers & Journals',
-      icon: <BookOpen className="w-6 h-6" />,
-      description: 'Professional DOI services for publishers and academic journals'
-    }
-  ];
+  // (serviceTypes tabs were unused and removed for clarity)
 
   const contentTypes = [
     {
       icon: <FileText className="w-8 h-8" />,
       title: "Research Papers",
-      description: "Academic papers, journal articles, and scholarly publications"
+      description:
+        "Academic papers, journal articles, and scholarly publications",
     },
     {
       icon: <BookOpen className="w-8 h-8" />,
       title: "Book Chapters",
-      description: "Individual chapters from books and\nedited volumes"
+      description: "Individual chapters from books and\nedited volumes",
     },
     {
       icon: <Newspaper className="w-8 h-8" />,
       title: "Grey Research",
-      description: "Dissertations, thesis, and projects\nby students"
+      description: "Dissertations, thesis, and projects\nby students",
     },
     {
       icon: <Image className="w-8 h-8" />,
       title: "Audio Visuals",
-      description: "Educational videos, charts, diagrams, photographs, documentaries"
+      description:
+        "Educational videos, charts, diagrams, photographs, documentaries",
     },
     {
       icon: <Music className="w-8 h-8" />,
       title: "Audio Content",
-      description: "Research interviews, lectures, and audio materials"
+      description: "Research interviews, lectures, and audio materials",
     },
     {
       icon: <Database className="w-8 h-8" />,
       title: "Datasets",
-      description: "Research datasets, surveys, and statistical data"
-    }
+      description: "Research datasets, surveys, and statistical data",
+    },
   ];
 
   const features = [
     {
       icon: <Zap className="w-6 h-6" />,
       title: "Advanced Metadata",
-      description: "Adopt Open Metadata Standards and track citation metrics"
+      description: "Adopt Open Metadata Standards and track citation metrics",
     },
     {
       icon: <Shield className="w-6 h-6" />,
       title: "Secure Storage",
-      description: "Your research is safely archived and protected"
+      description: "Your research is safely archived and protected",
     },
     {
       icon: <img src={DataCiteLogo} alt="DataCite" className="w-8 h-8" />,
       title: "Global Discovery",
       description: (
         <>
-          Make your work discoverable worldwide through{' '}
-          <a 
-            href="https://commons.datacite.org/" 
-            target="_blank" 
-            rel="noopener noreferrer" 
+          Make your work discoverable worldwide through{" "}
+          <a
+            href="https://commons.datacite.org/"
+            target="_blank"
+            rel="noopener noreferrer"
             className="text-vedra-calpoly hover:underline font-semibold"
           >
             DataCite Commons
           </a>
         </>
-      )
+      ),
     },
     {
       icon: <Search className="w-6 h-6" />,
       title: "AI Powered Search",
-      description: "Powerful search and indexing capabilities"
-    }
+      description: "Powerful search and indexing capabilities",
+    },
   ];
 
   const processSteps = [
     {
       step: "01",
       title: "Upload Content",
-      description: "Upload your research paper, dataset, or any academic content"
+      description:
+        "Upload your research paper, dataset, or any academic content",
     },
     {
       step: "02",
       title: "Fill Metadata",
-      description: "Provide basic information about your research and authors"
+      description: "Provide basic information about your research and authors",
     },
     {
       step: "03",
       title: "Review & Submit",
-      description: "Review the information and submit for DOI generation"
+      description: "Review the information and submit for DOI generation",
     },
     {
       step: "04",
       title: "Get DOI",
-      description: "Receive your unique DOI within minutes"
-    }
+      description: "Receive your unique DOI within minutes",
+    },
   ];
 
   return (
@@ -144,10 +124,12 @@ const Services: React.FC = () => {
             className="text-center max-w-4xl mx-auto"
           >
             <h1 className="text-5xl lg:text-6xl font-bold text-vedra-night mb-6 mt-12 font-ibm-plex">
-              Solutions for <span className="text-gradient">Indian Research</span>
+              Solutions for{" "}
+              <span className="text-gradient">Indian Research</span>
             </h1>
             <p className="text-xl text-vedra-night leading-relaxed mb-8 font-inter">
-              Comprehensive DOI generation and indexing services tailored towards the{' '}
+              Comprehensive DOI generation and indexing services tailored
+              towards the{" "}
               <a
                 href="https://www.unesco.org/en/open-science/about?hub=686"
                 target="_blank"
@@ -158,6 +140,40 @@ const Services: React.FC = () => {
               </a>
               .
             </p>
+            {/* Direct membership options */}
+            <div className="mt-2 grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-3xl mx-auto">
+              <a
+                href="https://rzp.io/rzp/mvedra-govt"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group block rounded-lg bg-vedra-hunter text-white hover:bg-vedra-calpoly transition-colors shadow focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-vedra-hunter"
+              >
+                <div className="px-6 py-4 text-center">
+                  <div className="text-lg font-semibold">
+                    Public Institute Membership
+                  </div>
+                  <div className="text-sm text-white/90">
+                    For government universities and publicly funded institutions
+                  </div>
+                </div>
+              </a>
+              <a
+                href="https://rzp.io/rzp/mvedra-pvt"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group block rounded-lg bg-vedra-hunter text-white hover:bg-vedra-calpoly transition-colors shadow focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-vedra-hunter"
+              >
+                <div className="px-6 py-4 text-center">
+                  <div className="text-lg font-semibold">
+                    Private Institute Membership
+                  </div>
+                  <div className="text-sm text-white/90">
+                    For private universities, colleges, and autonomous
+                    institutes
+                  </div>
+                </div>
+              </a>
+            </div>
           </motion.div>
         </div>
       </section>
@@ -166,7 +182,7 @@ const Services: React.FC = () => {
       <section className="section-padding relative bg-neutral-200 overflow-hidden">
         {/* Decorative gradient overlay */}
         <div className="absolute inset-0 z-0"></div>
-        
+
         <div className="container-custom relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -224,7 +240,8 @@ const Services: React.FC = () => {
               Supported Content Types
             </h2>
             <p className="text-xl text-vedra-night max-w-3xl mx-auto font-inter">
-              We support a wide range of academic and research content for DOI generation.
+              We support a wide range of academic and research content for DOI
+              generation.
             </p>
           </motion.div>
 
@@ -249,13 +266,13 @@ const Services: React.FC = () => {
               </motion.div>
             ))}
           </div>
-          
+
           <div className="text-left mt-8">
             <span className="relative group">
               <span className="text-vedra-night italic  text-lg leading-relaxed font-inter cursor-help">
                 And 24 more content types...
               </span>
-                <div className="absolute bottom-full left-0 mb-2 px-4 py-3 bg-vedra-night text-white text-sm rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none z-10 w-96">
+              <div className="absolute bottom-full left-0 mb-2 px-4 py-3 bg-vedra-night text-white text-sm rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none z-10 w-96">
                 <div className="grid grid-cols-2 gap-2 text-xs">
                   <div>Audiovisual</div>
                   <div>Award</div>
@@ -310,7 +327,8 @@ const Services: React.FC = () => {
               Why Choose Our Services?
             </h2>
             <p className="text-xl text-vedra-night max-w-3xl mx-auto font-inter">
-              We provide the best DOI services with features designed specifically for Indian researchers.
+              We provide the best DOI services with features designed
+              specifically for Indian researchers.
             </p>
           </motion.div>
 
@@ -348,34 +366,53 @@ const Services: React.FC = () => {
             className="max-w-4xl mx-auto"
           >
             <h2 className="text-4xl font-bold text-white/90 mb-6 font-ibm-plex">
-            Ready to Make Your Research Global?
+              Ready to Make Your Research Global?
             </h2>
             <p className="text-xl text-white/80 mb-8 font-inter">
-            We’re preparing to launch mVedra in the coming months to help researchers make their work globally discoverable. Be among the first to transform your research with open metadata and global indexing.
+              We’re preparing to launch mVedra in the coming months to help
+              researchers make their work globally discoverable. Be among the
+              first to transform your research with open metadata and global
+              indexing.
             </p>
             <div className="grid grid-cols-2 lg:grid-cols-4 mb-10">
               <div className="text-center">
-                <div className="text-3xl lg:text-4xl font-bold text-white/90 mb-2 font-ibm-plex">₹2.5L+</div>
+                <div className="text-3xl lg:text-4xl font-bold text-white/90 mb-2 font-ibm-plex">
+                  ₹2.5L+
+                </div>
                 <div className="text-white/70 font-inter">Cost Savings</div>
               </div>
               <div className="text-center">
-                <div className="text-3xl lg:text-4xl font-bold text-white/90 mb-2 font-ibm-plex">1000+</div>
-                <div className="text-white/70 font-inter">Researchers Served</div>
+                <div className="text-3xl lg:text-4xl font-bold text-white/90 mb-2 font-ibm-plex">
+                  1000+
+                </div>
+                <div className="text-white/70 font-inter">
+                  Researchers Served
+                </div>
               </div>
               <div className="text-center">
-                <div className="text-3xl lg:text-4xl font-bold text-white/90 mb-2 font-ibm-plex">50+</div>
+                <div className="text-3xl lg:text-4xl font-bold text-white/90 mb-2 font-ibm-plex">
+                  50+
+                </div>
                 <div className="text-white/70 font-inter">Institutions</div>
               </div>
               <div className="text-center">
-                <div className="text-3xl lg:text-4xl font-bold text-white/90 mb-2 font-ibm-plex">2400+</div>
+                <div className="text-3xl lg:text-4xl font-bold text-white/90 mb-2 font-ibm-plex">
+                  2400+
+                </div>
                 <div className="text-white/70 font-inter">Hours Saved</div>
               </div>
             </div>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link to="/contact" className="bg-neutral-100 text-vedra-hunter hover:bg-neutral-200 font-semibold py-3 px-8 rounded-lg transition-all duration-200 transform hover:scale-105 font-inter">
+              <Link
+                to="/contact"
+                className="bg-neutral-100 text-vedra-hunter hover:bg-neutral-200 font-semibold py-3 px-8 rounded-lg transition-all duration-200 transform hover:scale-105 font-inter"
+              >
                 Join the Waitlist
               </Link>
-              <Link to="/pricing" className="bg-neutral-100 text-vedra-hunter hover:bg-neutral-200 font-semibold py-3 px-8 rounded-lg transition-all duration-200 transform hover:scale-105 font-inter">
+              <Link
+                to="/pricing"
+                className="bg-neutral-100 text-vedra-hunter hover:bg-neutral-200 font-semibold py-3 px-8 rounded-lg transition-all duration-200 transform hover:scale-105 font-inter"
+              >
                 View Pricing
               </Link>
             </div>
@@ -386,4 +423,4 @@ const Services: React.FC = () => {
   );
 };
 
-export default Services; 
+export default Services;

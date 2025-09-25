@@ -47,3 +47,4 @@ invenio/.pytest_cache/
 invenio/.mypy_cache/
 invenio/.dmypy.json
 invenio/dmypy.json
+invenio/.env.local.template.backup
